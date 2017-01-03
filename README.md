@@ -8,19 +8,37 @@ FIND the KEY.  Then open the DOOR at the SPAWN POINT.
 [HTML Preview](http://htmlpreview.github.io/?https://github.com/davidjmerritt/Him/blob/master/index.html)
 
 
-PROBLEMS TO SOLVE
-* WHEN WORLD IS CREATED LIKE WALLS ARE JOINED TOGETHER
-  - IF LEFT IS CLOSED on 0-0 then RIGHT IS CLOSED ON 0-1
-  - IF BOTTOM IS WIDE OPEN in 0-0 TOP IS WIDE OPEN in 1-0
+# PROBLEMS TO SOLVE
+* WORLD CREATION INTELLEGENCE
+  - ADD DETECTION TO INSURE THAT WALLS MATCH FROM ZONE TO ZONE
+    - IF LEFT IS CLOSED on 0-0 then RIGHT IS CLOSED ON 0-1
+    - IF BOTTOM IS WIDE OPEN in 0-0 TOP IS WIDE OPEN in 1-0
 
-* MOVEMENT FOR CHARACTERS NEED TO SNAP TO GRID
+* CHARACTER MOVEMENT
+  - WHEN KEY IS RELEASED IT SHOULDN'T STOP CHARACTER
+  - SNAP TO GRID
 
-* MOVEMENT OF CHARACTER CONTINUES AFTER SWORD SWIPE
+* MAP ZOOM 
+  - Change Icon to Bracket Around Coords
+  - Map stays same pixel dims user icon gets smaller as levels get bigger
+  - When they get below a resonalble threshold the map add interaction 
 
-* MAP ZOOM is relative to the charater... Map stays same dims user icon (bracket) gets bigger
+* DEFINE STATES
+  - INTRO SCREEN
+  - OVERWORLD
+  - CHARACTER CREATION
+  - INTO ANIMATION (STORY)
+  - BUYING/TRADNING
+  - CRAFTING
+  - NPC CONVERSAION
+  - BOSS BATTLE
+  - LEVEL (DUNGEON)
+  - GET SPECIAL ITEM
 
+# USER FEEDBACK
+- CHANGE COINS FOR HEARTS
 
-IDEAS
+# IDEAS
 OVER ALL QUEST
 - GET ALL 16 PARTS of a thing and return to your home
 
@@ -56,3 +74,10 @@ DAY CYCLE
 - THERE SHOULD BE A 20 MIN or SO DAY CYCLE or DAY ?
 - OR A FULL DAY CYCLE MATCHED TO YOUR GEO location
 - NIGHT TIME MONSTERS ARE TOUGHER
+
+ENEMIES
+
+MAIN MENU
+
+MAP
+- Add Teleporting
