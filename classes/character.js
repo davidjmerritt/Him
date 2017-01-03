@@ -5,7 +5,7 @@ function Character() {
   this.d = 'STILL';
   this.last_d = 'DOWN';
   this.vel = 5;
-  this.health = [];
+  this.health = 0;
   this.isAlive = true;
   this.coins = 0;
   this.keys = 0;
@@ -22,6 +22,12 @@ function Character() {
   this.burndownCount = 0;
   this.canDig = false;
   this.canPush = false;
+
+  this.damageDelt = function() {
+    var damage = character.weapon.damage*character.power();
+    console.log(damage,character.weapon.damage,character.power());
+    return damage;
+  }
 
   this.look = function() {
     noStroke();
@@ -143,6 +149,7 @@ function Character() {
     }
     character.burndownBar.percent = this.burndownCount;
     character.burndownBar.render();
+    character.burndownBar.update(character.burndownBar.percent);
   }
 
   this.hits = function(entity) {
@@ -188,21 +195,19 @@ var character;
 
 function createCharacter() {
   character = new Character();
-  for (var i=0; i<startHealth; i++) {
-    character.health.push(new Health(i));
-  }
+  character.healthBar = new Progressbar(appWidth-progressBarWidth*2+5, 15,progressBarWidth,blockSize/1.176);
+  character.healthBar.fillCol = RED;
+  character.health = startHealth;
   character.weapon = createItem(startingSword);
-  character.burndownBar = new Progressbar();
-  character.burndownBar.h = 5;
+  character.burndownBar = new Progressbar(appWidth-progressBarWidth*2+5, blockSize+7.5,progressBarWidth,pixelSize/2);
+  character.burndownBar.fillCol = BLUE;
+  character.burndownBar.backCol = (0, 0, 0, 75);
   console.log(character);
 }
 
 
 function resetCharacter() {
-  character.health = [];
-  for (var i=0; i<startHealth/2; i++) {
-    character.health.push(new Health(i));
-  }
+  character.health = startHealth/2;
   if (character.coins > 0) { character.coins = round(character.coins/2); }
   character.last_d = 'DOWN';
   character.d = 'STILL';
@@ -222,6 +227,12 @@ function drawCharacter() {
   character.update();
   character.edges();
 
+  character.healthBar.render();
+  character.healthBar.update((character.health/totalHealth)*100);
+  if (character.health <= 0) {
+    character.isAlive = false;
+  }
+
   character.weapon.d = character.last_d;
   if (character.weaponUsed) {
     character.weapon.render();
@@ -235,18 +246,10 @@ function drawCharacter() {
     for (var b=0;b<blocks.length;b++) {
       var block = blocks[b];
       if (character.hits(block)) {
-        if (!character.isInvincible) {
-          if (block.type == "hole") { // HOLE
-            loadZone(defaultCoords);
-            character.pos = createVector(width/2,height/2);
-            character.health.splice(0,1);
-            character.isInvincible = true;
-          }
-        }
         if (block.type == "heart") {
           blocks.splice(b,1);
-          if (character.health.length < healthMax) {
-            character.health.push(new Health(character.health.length));
+          if (character.health < totalHealth) {
+            character.health += 1;
           }
         } else if (block.type == "coin") {
           blocks.splice(b,1);
@@ -277,15 +280,13 @@ function drawCharacter() {
         if (character.weapon != {}) {
           if (!enemy.isInvincible) {
             if (character.weapon.hits(enemy)) {
-              var damageDelt = character.weapon.damage*character.power();
-              enemy.health -= damageDelt;
+              enemy.health -= character.damageDelt();
               enemy.isInvincible = true;
             }
             for (var m=0;m<loadedZone.missiles.weapon.length;m++) {
               var weaponMissile = loadedZone.missiles.weapon[m];
               if (weaponMissile.hits(enemy)) {
-                var damageDelt = character.weapon.damage*character.power();
-                enemy.health -= damageDelt/2;
+                enemy.health -= round(character.damageDelt()/2);
                 enemy.isInvincible = true;
                 weaponMissile.explode();
               }
@@ -300,10 +301,8 @@ function drawCharacter() {
         if (!character.isInvincible) {
           if (character.hits(enemy)) {
             character.pos = createVector(character.pos.x-blockSize,character.pos.y-blockSize);
-            character.health.splice(
-              (character.ac+enemy.damage)*-1,
-              character.ac+enemy.damage
-            );
+            var damageTaken = character.ac+enemy.damage
+            character.health -= damageTaken;
             // console.log(character.ac+enemy.damage)
             character.isInvincible = true;
             entityPush(character,enemy);

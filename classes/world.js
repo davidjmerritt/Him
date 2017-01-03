@@ -22,8 +22,11 @@ function World(w,h) {
 
     this.zones[world.matrix[randomInt(0,world.matrix.length)].toString().replace(',','-')].blocks.items.push(createItem(3,"CENTER")); // KEY
     this.zones[defaultCoords.toString().replace(',','-')].blocks.items.push(createItem(1,"CENTER")); // DOOR
-    this.zones[defaultCoords.toString().replace(',','-')].blocks.items.push(createItem(5)); // HEART
-    // this.zones["0-0"].blocks.items.push(createItem(3));
+
+    // CREATE ITEMS AT START
+    for (var i=0;i<startItems.length;i++) {
+      this.zones[defaultCoords.toString().replace(',','-')].blocks.items.push(createItem(startItems[i]));
+    }
     console.log(world);
   }
 }

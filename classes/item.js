@@ -1,5 +1,5 @@
 var itemTypes = [
-  {"_id":0, "type":"coin","innerColor": YELLOW,"secondaryColor":ORANGE,"movable": false,"solid": false, "damage":0,"rarity":2,"value":1},
+  {"_id":0, "type":"coin","innerColor": LIGHT_GREEN,"secondaryColor":GREEN,"movable": false,"solid": false, "damage":0,"rarity":2,"value":1},
   {"_id":1, "type":"door","innerColor": DARK_BROWN,"secondaryColor":BLACK,"movable": false,"solid": false, "damage":0,"rarity":"unique","value":0},
   {"_id":2, "type":"hole","innerColor": BLACK,"movable": false,"solid": false, "damage":0,"rarity":"unique","value":0},
   {"_id":3, "type":"key","innerColor": ORANGE,"secondaryColor":YELLOW,"movable": true,"solid": true, "damage":0,"rarity":"unique","value":20},
@@ -8,6 +8,8 @@ var itemTypes = [
   {"_id":6, "type":"coin","innerColor": LIGHT_BLUE,"secondaryColor":BLUE,"movable": false,"solid": false, "damage":0,"rarity":3,"value":5},
   {"_id":7, "type":"sword","innerColor": WHITE,"secondaryColor": DARK_BLUE,"movable": false,"solid": true, "damage":2,"rarity":"unique","value":0},
   {"_id":8, "type":"sword","innerColor": GOLD,"secondaryColor": DARKER_RED,"movable": false,"solid": true, "damage":4,"rarity":"unique","value":0},
+  {"_id":9, "type":"coin","innerColor": YELLOW,"secondaryColor":ORANGE,"movable": false,"solid": false, "damage":0,"rarity":5,"value":10},
+  {"_id":10, "type":"coin","innerColor": PINK,"secondaryColor":DARK_RED,"movable": false,"solid": false, "damage":0,"rarity":10,"value":20},
 ];
 
 function Item(_id) {

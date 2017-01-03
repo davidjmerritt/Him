@@ -18,7 +18,9 @@ var WOOD_BROWN = [150, 120, 70];
 var DARK_BROWN = [100, 70, 50];
 var LIGHT_BLUE = [50, 200, 255];
 var GOLD = [255,230,100];
-var COLORS = [BLUE,WHITE,BROWN,GREEN,GRAY,TAN,BLACK,RED,ORANGE,YELLOW,WOOD_BROWN,DARK_GRAY,LIGHT_BLUE,LIGHT_TAN,DARK_RED,DARK_BLUE,GOLD,DARK_GREEN,DARKER_RED];
+var PINK = [255,0,100];
+var LIGHT_GREEN = [100,255,100];
+var COLORS = [LIGHT_GREEN,PINK,BLUE,WHITE,BROWN,GREEN,GRAY,TAN,BLACK,RED,ORANGE,YELLOW,WOOD_BROWN,DARK_GRAY,LIGHT_BLUE,LIGHT_TAN,DARK_RED,DARK_BLUE,GOLD,DARK_GREEN,DARKER_RED];
 
 
 var pixelSize = 12.5;
@@ -36,14 +38,15 @@ var defaultCoords = [0,0]; // [world.matrixWidth/2,world.matrixHeight-1];
 var loadedZone;
 
 var startingSword = 4; // 4=WOOD, 7=WHITE, 8=MASTER
+var startItems = [0,5,6,9,10];
 
 var gameWon = false;
 var matrixTest = [];
 
 var startHealth = 12;
-var healthMax = 12;
+var totalHealth = 12;
 
-var progressBarWidth = appWidth-495;
+var progressBarWidth = 200;
 
 var defaultFont = "Helvetica";
 

@@ -81,7 +81,7 @@ function Hud() {
     var info = character.coins;
     text(info, appWidth-160, 45);
 
-    // SWORD
+    // PRIMARY WEAPON
     var x_offset = appWidth-blockSize*2-25;
     c = color(50, 50, 50, 100)
     fill(c);
@@ -102,7 +102,7 @@ function Hud() {
     rect(this.pos.x+pixelSize+(x_offset-pixelSize/1.5),this.pos.y+pixelSize*4+y_offset+5,pixelSize,pixelSize*1.6);
     rect(this.pos.x+(x_offset-pixelSize/1.5),this.pos.y+pixelSize*3+y_offset+5,pixelSize*3,pixelSize);
 
-    // SECONDARY
+    // SECONDARY ITEM
     c = color(50, 50, 50, 100)
     fill(c);
     rect(
@@ -114,26 +114,14 @@ function Hud() {
     value = alpha(c);
     fill(value);
 
-    // TIERTIARY
+    // TIERTIARY ITEM
     c = color(50, 50, 50, 100)
     fill(c);
     rect(
       x_offset+10+blockSize,
-      75+blockSize+10,
+      70+blockSize+this.offset,
       blockSize,
       blockSize
-    );
-    value = alpha(c);
-    fill(value);
-
-    // HEALTH BG
-    c = color(50, 50, 50, 100);
-    fill(c);
-    rect(
-      progressBarWidth,
-      this.offset,
-      (blockSize/2)*healthMax,
-      blockSize/2
     );
     value = alpha(c);
     fill(value);

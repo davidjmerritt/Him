@@ -1,8 +1,8 @@
 var enemyTypes = [
-  {"_id":0, "type":"red-bloog","innerColor": RED,"secondaryColor": BLACK,"movable": true,"solid": true, "damage":1,"health":1,"speed":2,"rarity":2,"digger":false,"pusher":false},
-  {"_id":1, "type":"blue-bloog","innerColor": BLUE,"secondaryColor": BLACK,"movable": true,"solid": true, "damage":2,"health":2,"speed":4,"rarity":3,"digger":false,"pusher":false},
-  {"_id":2, "type":"green-bloog","innerColor": GREEN,"secondaryColor": BLACK,"movable": true,"solid": true, "damage":3,"health":2,"speed":1,"rarity":5,"digger":false,"pusher":true},
-  {"_id":3, "type":"black-bloog","innerColor": BLACK,"secondaryColor": WHITE,"movable": true,"solid": true, "damage":5,"health":3,"speed":3,"rarity":10,"digger":true,"pusher":false}
+  {"_id":0, "type":"red-bloog","innerColor": RED,"secondaryColor": BLACK,"movable": true,"solid": true, "damage":1,"health":1,"speed":2,"rarity":2,"digger":false,"pusher":false,"size":[1,1]},
+  {"_id":1, "type":"blue-bloog","innerColor": BLUE,"secondaryColor": BLACK,"movable": true,"solid": true, "damage":2,"health":2,"speed":4,"rarity":3,"digger":false,"pusher":false,"size":[1,1]},
+  {"_id":2, "type":"green-bloog","innerColor": GREEN,"secondaryColor": BLACK,"movable": true,"solid": true, "damage":3,"health":2,"speed":1,"rarity":5,"digger":false,"pusher":true,"size":[1,1]},
+  {"_id":3, "type":"black-bloog","innerColor": BLACK,"secondaryColor": WHITE,"movable": true,"solid": true, "damage":5,"health":3,"speed":3,"rarity":10,"digger":true,"pusher":false,"size":[1,1]}
 ];
 
 function Enemy(_id,_index) {

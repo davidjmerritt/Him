@@ -17,7 +17,7 @@ PROBLEMS TO SOLVE
 
 * MOVEMENT OF CHARACTER CONTINUES AFTER SWORD SWIPE
 
-*
+* MAP ZOOM is relative to the charater... Map stays same dims user icon (bracket) gets bigger
 
 
 IDEAS

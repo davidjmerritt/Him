@@ -37,7 +37,6 @@ function draw() {
   if (gameWon) { drawMenu("WIN"); reset(); loadedZone.enemies = [] } else { gameCheck(); }
 
   hud.render();
-  drawHealth();
   checkIdle();
 }
 
