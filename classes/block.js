@@ -2,15 +2,14 @@ var blockDefaultRadius = blockSize/2;
 var blockDefaultWidth = blockDefaultRadius*2;
 var blockDefaultHeight = blockDefaultWidth;
 var blockTypes = [
-  {"_id":0, "type": "block","innerColor": GRAY,"movable": false,"solid": true},
-  {"_id":1, "type": "block","innerColor": BLUE,"movable": false,"solid": true},
-  {"_id":2, "type": "block","innerColor": BROWN,"movable": false,"solid": true},
-  {"_id":3, "type": "block","innerColor": GREEN,"movable": false,"solid": false},
-  {"_id":4, "type": "block","innerColor": WHITE,"movable": false,"solid": true},
-  {"_id":5, "type": "block","innerColor": TAN,"movable": false,"solid": false},
-  {"_id":6, "type": "block","innerColor": BLACK,"movable": false,"solid": false},
-  {"_id":7, "type": "block","innerColor": RED,"movable": false,"solid": true},
-  {"_id":8, "type": "block","innerColor": ORANGE,"movable": false,"solid": true}
+  {"_id":0, "type": "block","innerColor": GRAY,"movable": false,"solid": true,"diggable": false},
+  {"_id":1, "type": "block","innerColor": BLUE,"movable": false,"solid": true,"diggable": false},
+  {"_id":2, "type": "block","innerColor": BROWN,"movable": false,"solid": true,"diggable": true},
+  {"_id":3, "type": "block","innerColor": GREEN,"movable": false,"solid": true,"diggable": true},
+  {"_id":4, "type": "block","innerColor": WHITE,"movable": true,"solid": true,"diggable": false},
+  {"_id":5, "type": "block","innerColor": TAN,"movable": false,"solid": true,"diggable": true},
+  {"_id":6, "type": "block","innerColor": RED,"movable": false,"solid": true,"diggable": false},
+  {"_id":7, "type": "block","innerColor": ORANGE,"movable": false,"solid": true,"diggable": false}
 ];
 
 
@@ -21,8 +20,9 @@ function Block(_id) {
   this.isMoving = false;
   this.d = null;
   this.vel = 4;
-  this.isMovable = false;
-  this.isSolid = false;
+  this.isMovable = blockTypes[this._id].moveable;
+  this.isSolid = blockTypes[this._id].solid;
+  this.isDiggable = blockTypes[this._id].diggable;
 
   this.look = function() {
     fill(blockTypes[this._id].innerColor);
@@ -85,8 +85,8 @@ function createBlockBorderTop(block_id) {
     blocks.push(new Block(block_id));
     blocks[i].pos.x = blockDefaultWidth * i;
     blocks[i].pos.y = 0;
-    blocks[i].isMovable = blockTypes[blocks[i]._id].movable;
-    blocks[i].isSolid = blockTypes[blocks[i]._id].solid;
+    blocks[i].isMovable = false;
+    blocks[i].isSolid = true;
   }
   return blocks;
 }
@@ -98,8 +98,8 @@ function createBlockBorderBottom(block_id) {
     blocks.push(new Block(block_id));
     blocks[i].pos.x = blockDefaultWidth * i;
     blocks[i].pos.y = height-blockDefaultHeight;
-    blocks[i].isMovable = blockTypes[blocks[i]._id].movable;
-    blocks[i].isSolid = blockTypes[blocks[i]._id].solid;
+    blocks[i].isMovable = false;
+    blocks[i].isSolid = true;
   }
   return blocks;
 }
@@ -111,6 +111,8 @@ function createBlockBorderLeft(block_id) {
     blocks.push(new Block(block_id));
     blocks[i].pos.x = 0;
     blocks[i].pos.y = blockDefaultHeight * i;
+    blocks[i].isMovable = false;
+    blocks[i].isSolid = true;
   }
   return blocks;
 }
@@ -122,8 +124,8 @@ function createBlockBorderRight(block_id) {
     blocks.push(new Block(block_id));
     blocks[i].pos.x = width-blockDefaultWidth;
     blocks[i].pos.y = blockDefaultHeight * i;
-    blocks[i].isMovable = blockTypes[blocks[i]._id].movable;
-    blocks[i].isSolid = blockTypes[blocks[i]._id].solid;
+    blocks[i].isMovable = false;
+    blocks[i].isSolid = true;
   }
   return blocks;
 }
@@ -132,18 +134,16 @@ function createBlockBorderRight(block_id) {
 function createBlockCluster(x,y,w,h,b) {
   var blocks = [];
   var matrix = createMatrix(w,h);
+  var blockTypeID = b;
+  if (b == "random") { blockTypeID = randomInt(0,blockTypes.length); }
   for (var i=0;i<matrix.length;i++) {
     var _x = matrix[i][0];
     var _y = matrix[i][1];
-    // if (x > 6 && x < 10 & y > 6 && y < 10) {
-      var blockTypeID = b;
-      if (b == "random") { blockTypeID = randomInt(0,blockTypes.length); }
-      blocks.push(new Block(blockTypeID));
-      blocks[i].pos.x = (_x * blockDefaultWidth) + (x*blockDefaultWidth);
-      blocks[i].pos.y = (_y * blockDefaultHeight) + (y*blockDefaultHeight);
-      blocks[i].isMovable = blockTypes[blocks[i]._id].movable;
-      blocks[i].isSolid = blockTypes[blocks[i]._id].solid;
-    // }
+    blocks.push(new Block(blockTypeID));
+    blocks[i].pos.x = (_x * blockDefaultWidth) + (x*blockDefaultWidth);
+    blocks[i].pos.y = (_y * blockDefaultHeight) + (y*blockDefaultHeight);
+    blocks[i].isMovable = blockTypes[blocks[i]._id].movable;
+    blocks[i].isSolid = blockTypes[blocks[i]._id].solid;
   }
   return blocks;
 }

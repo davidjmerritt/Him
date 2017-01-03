@@ -11,6 +11,7 @@ function World(w,h) {
 
   this.create = function() {
     this.matrix = createMatrix(this.matrixWidth,this.matrixHeight);
+    defaultCoords = [world.matrixWidth/2,world.matrixHeight-1];
     for (var i=0;i<this.matrix.length;i++) {
       var zone = new Zone();
       var coordinates = this.matrix[i];
@@ -18,9 +19,12 @@ function World(w,h) {
       this._index.push(zone._id);
       this.zones[zone._id] = zone;
     }
-    this.zones[world.matrix[randomInt(0,world.matrix.length)].toString().replace(',','-')].blocks.items.push(createItem(0));
-    this.zones[world.matrix[randomInt(0,world.matrix.length)].toString().replace(',','-')].blocks.items.push(createItem(1));
-    p(world);
+
+    this.zones[world.matrix[randomInt(0,world.matrix.length)].toString().replace(',','-')].blocks.items.push(createItem(3,"CENTER")); // KEY
+    this.zones[defaultCoords.toString().replace(',','-')].blocks.items.push(createItem(1,"CENTER")); // DOOR
+    this.zones[defaultCoords.toString().replace(',','-')].blocks.items.push(createItem(5)); // HEART
+    // this.zones["0-0"].blocks.items.push(createItem(3));
+    console.log(world);
   }
 }
 
@@ -28,6 +32,8 @@ function World(w,h) {
 function drawZone() {
   background(loadedZone.backgroundColor);
   drawBlocks();
+  drawDebris();
+  drawMissiles();
 }
 
 

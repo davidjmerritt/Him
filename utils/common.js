@@ -10,15 +10,19 @@ Array.prototype.remove = function() {
 };
 
 
+Array.prototype.has = function(i) {
+  if (this.indexOf(i) === -1) {
+    return false;
+  } else {
+    return true;
+  }
+};
+
+
 function randomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min;
-}
-
-
-function p(m) {
-  console.log(m);
 }
 
 

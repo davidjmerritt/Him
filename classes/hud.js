@@ -4,9 +4,11 @@ function Hud() {
   this.pos = createVector(this.offset, this.offset);
   this.w = world.matrixWidth*this.blockWidth ;
   this.h = world.matrixHeight*this.blockWidth ;
-  this.characterIconColor = GRAY;
+  this.characterIconColor = BLACK;
 
   this.look = function() {
+    textFont(defaultFont);
+    // MINI-MAP
     noStroke();
     c = color(50, 50, 50, 100);
     fill(c);
@@ -27,26 +29,114 @@ function Hud() {
       this.blockWidth
     );
 
-    noStroke();
+    // COORDS
     c = color(50, 50, 50, 100);
     fill(c);
     rect(
-      appWidth-90,
+      appWidth-65,
       this.pos.y,
-      45+30,
-      45
+      blockSize,
+      blockSize
     );
     value = alpha(c);
     fill(value);
 
     fill(255, 255, 255);
+    textAlign(CENTER);
+    textSize(16);
+    var info = loadedZone.coordinates[0]+'-'+loadedZone.coordinates[1];
+    text(info, appWidth-40, 45);
+
+    // LEVEL
+    c = color(50, 50, 50, 100);
+    fill(c);
+    rect(
+      appWidth-125,
+      this.pos.y,
+      blockSize,
+      blockSize
+    );
+    value = alpha(c);
+    fill(value);
+    fill(255, 255, 255);
     textSize(16);
     textAlign(CENTER);
-    // textSize(20);
-    // var info = numberToAlpha(loadedZone.coordinates[0])+'-'+loadedZone.coordinates[1];
-    // var info = matrixTest.length+"/"+world.matrix.length;
-    var info = level;
-    text(info, appWidth-55, 45);
+    var info = "L-"+level;
+    text(info, appWidth-100, 45);
+
+    // COINS
+    c = color(50, 50, 50, 100)
+    fill(c);
+    rect(
+      appWidth-185,
+      this.pos.y,
+      blockSize,
+      blockSize
+    );
+    value = alpha(c);
+    fill(value);
+    fill(255, 255, 255);
+    textSize(16);
+    textAlign(CENTER);
+    var info = character.coins;
+    text(info, appWidth-160, 45);
+
+    // SWORD
+    var x_offset = appWidth-blockSize*2-25;
+    c = color(50, 50, 50, 100)
+    fill(c);
+    rect(
+      x_offset,
+      75,
+      blockSize,
+      blockSize*2+10
+    );
+    value = alpha(c);
+    fill(value);
+    fill(character.weapon.innerColor);
+    var y_offset = 80;
+    // rect(this.pos.x+pixelSize+(x_offset-pixelSize/1.5),this.pos.y+pixelSize*2+y_offset,pixelSize,pixelSize);
+    // rect(this.pos.x+pixelSize+(x_offset-pixelSize/1.5),this.pos.y+pixelSize+y_offset,pixelSize,pixelSize);
+    rect(this.pos.x+pixelSize+(x_offset-pixelSize/1.5),this.pos.y+y_offset-pixelSize+10,pixelSize,pixelSize*4);
+    fill(character.weapon.secondaryColor);
+    rect(this.pos.x+pixelSize+(x_offset-pixelSize/1.5),this.pos.y+pixelSize*4+y_offset+5,pixelSize,pixelSize*1.6);
+    rect(this.pos.x+(x_offset-pixelSize/1.5),this.pos.y+pixelSize*3+y_offset+5,pixelSize*3,pixelSize);
+
+    // SECONDARY
+    c = color(50, 50, 50, 100)
+    fill(c);
+    rect(
+      x_offset+10+blockSize,
+      75,
+      blockSize,
+      blockSize
+    );
+    value = alpha(c);
+    fill(value);
+
+    // TIERTIARY
+    c = color(50, 50, 50, 100)
+    fill(c);
+    rect(
+      x_offset+10+blockSize,
+      75+blockSize+10,
+      blockSize,
+      blockSize
+    );
+    value = alpha(c);
+    fill(value);
+
+    // HEALTH BG
+    c = color(50, 50, 50, 100);
+    fill(c);
+    rect(
+      progressBarWidth,
+      this.offset,
+      (blockSize/2)*healthMax,
+      blockSize/2
+    );
+    value = alpha(c);
+    fill(value);
 
   }
 

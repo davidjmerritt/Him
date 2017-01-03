@@ -2,7 +2,7 @@ function Health(index) {
   this._index = index;
   this.offset = 15;
   this.r = blockSize/2;
-  this.pos = createVector((appWidth-230+this.offset*1.5)+((this.r+this.offset/2)*this._index+1), this.offset);
+  this.pos = createVector(character.health.length*blockSize/2+progressBarWidth, this.offset);
 
   this.look = function() {
     noStroke();
