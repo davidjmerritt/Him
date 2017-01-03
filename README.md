@@ -2,6 +2,8 @@
 
 Zelda influenced game developed using ps5.js
 
+FIND the KEY.  Then open the DOOR at the SPAWN POINT.
+
 
 [HTML Preview](http://htmlpreview.github.io/?https://github.com/davidjmerritt/Him/blob/master/index.html)
 
@@ -15,7 +17,7 @@ PROBLEMS TO SOLVE
 
 * MOVEMENT OF CHARACTER CONTINUES AFTER SWORD SWIPE
 
-* 
+*
 
 
 IDEAS
