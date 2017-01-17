@@ -4,7 +4,7 @@ function Progressbar(x,y,w,h) {
   this.percent = 50;
   this.w = w;
   this.h = h;
-  this.fillCol = BLUE;
+  this.fillCol = [50, 50, 255, 100];
   this.backCol = [50, 50, 50, 100];
   this.d = -1;
 
@@ -14,6 +14,7 @@ function Progressbar(x,y,w,h) {
 
   this.look = function() {
     noStroke();
+
     // BACKGROUND
     c = color(this.backCol);
     fill(c);
@@ -25,15 +26,19 @@ function Progressbar(x,y,w,h) {
     );
     value = alpha(c);
     fill(value);
+
     // FILL
-    fill(this.fillCol);
+    c = color(this.fillCol);
+    fill(c);
     rect(
       this.pos.x,
       this.pos.y,
-      (this.w/100)*this.percent, //this.percent*(progressBarWidth*.00645),
+      (this.w/100)*this.percent,
       this.h
     );
-    // console.log(this.percent)
+    value = alpha(c);
+    fill(value);
+
   }
 
   this.render = function() {

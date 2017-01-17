@@ -3,6 +3,8 @@ function Debris(pos, vel, col) {
   this.vel = vel;
   this.col = col;
   this.offset = 10;
+  this.w = pixelSize;
+  this.h = pixelSize;
   this.transparency = randomInt(5, 10);
 
   this.update = function() {
@@ -21,8 +23,8 @@ function Debris(pos, vel, col) {
     rect(
       this.pos.x,
       this.pos.y,
-      pixelSize,
-      pixelSize
+      this.w,
+      this.h
     );
   }
 }
@@ -39,6 +41,5 @@ function drawDebris() {
 function createDebris(pos, vel, n, col) {
   for (var i = 0; i < n; i++) {
     loadedZone.debris.push(new Debris(pos, vel, col));
-
   }
 }

@@ -6,104 +6,110 @@ function Zone() {
   this.enemies = [];
   this.debris = [];
   this.missiles = {"enemy":[],"weapon":[]};
+  this.walls = [];
+  this.items = [];
+  this.hasShop = false;
+  this.npcs = [];
+  this.type = "overworld";
+  this.secretSoundPlayed = false;
+  this.lastShrubGrowth = 0;
 
-  this.create = function(coordinates) {
+  this.create = function(coordinates,walls) {
     this._id = coordinates.toString().replace(',','-');
     this.coordinates = coordinates;
-    var newZone = createZone(coordinates);
+    this.walls = walls;
+    var newZone = createZone(coordinates,walls);
     this.blocks = newZone.blocks;
     this.backgroundColor = newZone.backgroundColor;
-    this.doorMap = newZone.doorMap;
-    if (this._id != defaultCoords.toString().replace(',','-')) { this.enemies = createEnemies(randomInt(0,6)); }
+    this.hasShop = newZone.hasShop;
+    // closeWallsToNoWhere(coordinates,walls)
+    if (this._id != defaultCoords.toString().replace(',','-')) { this.enemies = createEnemies(randomInt(0,8)+level); }
   }
 }
 
+function closeWallsToNoWhere(coordinates,walls) {
+  console.log(coordinates,walls);
+}
 
-function createZone(coordinates) {
-  var doorMap = {};
-  doorMap[coordinates] = {};
+
+function createZone(coordinates,walls) {
   var blocks = {};
-  var blockColorChoiceArr = [4,2,3,0];
-  var block_id = blockColorChoiceArr[randomInt(0,blockColorChoiceArr.length)];
-  var backgroundColor = TAN;
+  var block_id;
+  var backgroundColor;
+  var hasShop = false;
+  var shopZones = [];
 
-  // RANGES (BIOMES)
-  // if (coordinates[0] < 3 && coordinates[1] < 3) { block_id = 4; backgroundColor = GRAY; }
-  // if (coordinates[0] > 6 && coordinates[1] > 6) { block_id = 2; }
-
-  var oddsForOpen = 1;
-  // LEFT
-  if (coordinates[0] == 0) {
-    blocks["leftBorder"] = createBlockBorderLeft(block_id);
-    doorMap[coordinates]["LEFT"] = "CLOSED";
-  } else {
-    if (randomInt(0,oddsForOpen) == 0) {
-      blocks["leftBorder"] = createBlockBorderLeftOpen(block_id);
-      doorMap[coordinates]["LEFT"] = "OPEN";
-    } else {
-      blocks["leftBorder"] = createBlockBorderLeft(block_id);
-      doorMap[coordinates]["LEFT"] = "CLOSED";
-    }
+  // RANDOM BLOCK CHOICE
+  var blockColorChoiceArr = [];
+  for (var i=0;i<blockTypes.length;i++) {
+      if (blockTypes[i].solid && !blockTypes[i].moveable && !blockTypes[i].diggable && blockTypes[i].rarity != "unique") {
+        blockColorChoiceArr.push(i);
+      }
   }
+  var randomBlockID = randomInt(0,blockColorChoiceArr.length);
+  block_id = blockColorChoiceArr[randomBlockID];
+  backgroundColor = blockTypes[randomBlockID].backColor;
 
-  // TOP
-  if (coordinates[1] == 0) {
-    blocks["topBorder"] = createBlockBorderTop(block_id);
-    doorMap[coordinates]["TOP"] = "CLOSED";
-  } else {
-    if (randomInt(0,oddsForOpen) == 0) {
-      blocks["topBorder"] = createBlockBorderTopOpen(block_id);
-      doorMap[coordinates]["TOP"] = "OPEN";
-    } else {
-      blocks["topBorder"] = createBlockBorderTop(block_id);
-      doorMap[coordinates]["TOP"] = "CLOSED";
-    }
-  }
+  // RANGES (BIOMES) / CHOOSE BLOCK COLOR ** THESE OVERRIDE RANDOM CHOICES MADE **
+  if (coordinates[0] >= 5 && coordinates[1] >= 5) { block_id = 3; backgroundColor = blockTypes[block_id].backColor; } // FORREST
+  if (coordinates[0] >= appBlockWidth-1 && coordinates[1] >= appBlockHeght-1) { block_id = 1; backgroundColor = blockTypes[block_id].backColor; } // COAST
+  if (coordinates[0] <= 5 && coordinates[1] <= 7 && coordinates[0] > 2 && coordinates[1] > 2) { block_id = 2; backgroundColor = blockTypes[block_id].backColor; } // DESERT
+  if (coordinates[0] <= 2 && coordinates[1] <= 2) { block_id = 4; backgroundColor = blockTypes[block_id].backColor; } // GAVE YARD
 
-  // RIGHT
+  // RIGHT WALL
   if (coordinates[0] == world.matrixWidth-1) {
     blocks["rightBorder"] = createBlockBorderRight(block_id);
-    doorMap[coordinates]["RIGHT"] = "CLOSED";
   } else {
-    if (randomInt(0,oddsForOpen) == 0) {
+    if (!walls[1]) {
       blocks["rightBorder"] = createBlockBorderRightOpen(block_id);
-      doorMap[coordinates]["OPEN"] = "CLOSED";
     } else {
       blocks["rightBorder"] = createBlockBorderRight(block_id);
-      doorMap[coordinates]["RIGHT"] = "CLOSED";
     }
   }
 
-  // BOTTOM
+  // BOTTOM WALL
   if (coordinates[1] == world.matrixHeight-1) {
     blocks["bottomBorder"] = createBlockBorderBottom(block_id);
-    doorMap[coordinates]["BOTTOM"] = "CLOSED";
   } else {
-    if (randomInt(0,oddsForOpen) == 0) {
+    if (!walls[2]) {
       blocks["bottomBorder"] = createBlockBorderBottomOpen(block_id);
-      doorMap[coordinates]["BOTTOM"] = "OPEN";
     } else {
       blocks["bottomBorder"] = createBlockBorderBottom(block_id);
-      doorMap[coordinates]["BOTTOM"] = "CLOSED";
     }
   }
 
-  for (var i=0;i<randomInt(0,10);i++){ // NUMBER OF CLUSTERS
-    blocks[guid()] = createBlockCluster(
-      randomInt(2,appBlockWidth-5), // X
-      randomInt(2,appBlockHeight-5), // Y
-      randomInt(2,5), // W
-      randomInt(2,5), // H
-      "random"
-    );
+  // LEFT WALL
+  if (coordinates[0] == 0) {
+    blocks["leftBorder"] = createBlockBorderLeft(block_id);
+  } else {
+    if (!walls[3]) {
+      blocks["leftBorder"] = createBlockBorderLeftOpen(block_id);
+    } else {
+      blocks["leftBorder"] = createBlockBorderLeft(block_id);
+    }
   }
 
-  blocks["temporary"] = [];
-  blocks["items"] = [];
+  // TOP WALL
+  if (coordinates[1] == 0) {
+    blocks["topBorder"] = createBlockBorderTop(block_id);
+  } else {
+    if (!walls[0]) {
+        blocks["topBorder"] = createBlockBorderTopOpen(block_id);
+    } else {
+      blocks["topBorder"] = createBlockBorderTop(block_id);
+    }
+  }
 
-  return {
+  // CREATE RANDOM CUSTOM CLUSTERS
+  var layouts = clusterLayout(clusterTypesIndex[randomInt(0,clusterTypesIndex.length)]);
+  for (var i=0;i<layouts.length;i++){
+    blocks[guid()] = layouts[i];
+  }
+
+  var results = {
     "blocks":blocks,
     "backgroundColor":backgroundColor,
-    "doorMap":doorMap
-  }
+    "hasShop": hasShop
+  };
+  return results;
 }

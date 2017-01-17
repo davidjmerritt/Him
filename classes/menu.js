@@ -4,7 +4,7 @@ function Menu() {
   this.gameOver = function() {
     textFont(defaultFont);
     noStroke();
-    c = color(255, 0, 0, 50);
+    c = color(255, 0, 0, 150);
     fill(c);
     rect(
       0,
@@ -24,14 +24,37 @@ function Menu() {
     fill(250, 250, 250);
     textSize(28);
     textAlign(CENTER);
-    text("GAME OVER\n\nPress SPACEBAR to CONTINUE", width/2,height/2-25);
+    text("GAME OVER\n\nPress the ACTION button to CONTINUE", width/2,height/2-25);
   }
 
   this.win = function() {
-    fill(255, 255, 255);
+    textFont(defaultFont);
+    noStroke();
+    c = color(255, 255, 255, 200);
+    fill(c);
+    rect(
+      0,
+      0,
+      width,
+      height
+    );
+    value = alpha(c);
+    fill(value);
+    fill(BLACK);
+    rect(
+      width/2-640/2,
+      height/2-240/2,
+      640,
+      240
+    );
+    fill(250, 250, 250);
     textSize(28);
     textAlign(CENTER);
-    text("YOU WIN!\nPress SPACEBAR to try the NEXT LEVEL.", width/2,height/2);
+    if (level < 3) {
+      text("WAY TO GO!\n\nPress the ACTION button to try a NEW LEVEL", width/2,height/2-25);
+    } else if (level == 3) {
+      text("THANKS FOR PLAYING!\n\nMore LEVELS coming soon!", width/2,height/2-25);
+    }
   }
 
   this.render = function(m) {

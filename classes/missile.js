@@ -1,9 +1,11 @@
-function Missile(pos, d) {
+function Missile(pos, d, origin, sizeOffset) {
   this._id = 0;
   this.pos = pos.copy();
   this.vel = 10;
   this.d = d;
   this.r = pixelSize*3;
+  this.origin = origin;
+  this.sizeOffset = sizeOffset;
 
   this.update = function(d) {
     if (this.d == 'RIGHT') {
@@ -18,7 +20,9 @@ function Missile(pos, d) {
   }
 
   this.explode = function() {
-    loadedZone.missiles.weapon.splice(this._id,1);
+    var index = loadedZone.missiles[this.origin].indexOf(this);
+    loadedZone.missiles[this.origin].splice(index,1);
+    // createDebris(this.pos, 10, 10, GREEN);
   }
 
   this.hits = function(entity) {
@@ -31,14 +35,15 @@ function Missile(pos, d) {
   }
 
   this.edges = function() {
+    var index = loadedZone.missiles[this.origin].indexOf(this);
     if (this.pos.x > appWidth + this.r) { // RIGHT
-      loadedZone.missiles.weapon.splice(this._id,1);
+      loadedZone.missiles[this.origin].splice(index,1);
     } else if (this.pos.x < -this.r) { // LEFT
-      loadedZone.missiles.weapon.splice(this._id,1);
+      loadedZone.missiles[this.origin].splice(index,1);
     } else if (this.pos.y > appHeight + this.r) { // BOTTOM
-      loadedZone.missiles.weapon.splice(this._id,1);
+      loadedZone.missiles[this.origin].splice(index,1);
     } else if (this.pos.y < -this.r) { // TOP
-      loadedZone.missiles.weapon.splice(this._id,1);
+      loadedZone.missiles[this.origin].splice(index,1);
     }
   }
 
@@ -49,15 +54,15 @@ function Missile(pos, d) {
       rect(
         this.pos.x,
         this.pos.y+pixelSize*1.5,
-        this.r,
-        pixelSize
+        (this.r)*this.sizeOffset[0],
+        (pixelSize)*this.sizeOffset[1]
       );
     } else {
       rect(
         this.pos.x+pixelSize*1.5,
         this.pos.y,
-        pixelSize,
-        this.r
+        (pixelSize)*this.sizeOffset[0],
+        (this.r)*this.sizeOffset[1]
       );
     }
   }
@@ -75,5 +80,10 @@ function drawMissiles() {
     loadedZone.missiles.weapon[i].render();
     loadedZone.missiles.weapon[i].update();
     loadedZone.missiles.weapon[i].edges();
+  }
+  for (var i=0; i < loadedZone.missiles.enemy.length; i++) {
+    loadedZone.missiles.enemy[i].render();
+    loadedZone.missiles.enemy[i].update();
+    loadedZone.missiles.enemy[i].edges();
   }
 }

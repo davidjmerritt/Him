@@ -39,5 +39,44 @@ function guid() {
 
 function numberToAlpha(n) {
   return ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','AA','BB','CC','DD','EE','FF','GG','HH','II','JJ','KK','LL'][n];
+}
 
+
+function findInArray(arr,item) {
+  for (var i=0;i<arr.length;i++) {
+    if (arr[i] === item) {
+      return true;
+      break;
+    }
+  }
+  return false;
+}
+
+
+function createMatrix(w,h) {
+  var matrix = [];
+  for (r=0;r<w;r++) {
+    for (c=0;c<h;c++) {
+      matrix.push([r, c]);
+    }
+  }
+  return matrix;
+}
+
+
+function createMatrixString(w,h) {
+  var matrix = [];
+  for (r=0;r<w;r++) {
+    for (c=0;c<h;c++) {
+      matrix.push(r+"-"+c);
+    }
+  }
+  return matrix;
+}
+
+
+function epoch() {
+  var d = new Date();
+  var n = d.getTime();
+  return n/1000;
 }
