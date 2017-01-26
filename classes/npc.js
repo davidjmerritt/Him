@@ -1,13 +1,16 @@
 var npcTypes = [
-  {"_id":0, "type":"ollie","primeColor": DARK_BLUE,"secondaryColor": DARK_BROWN ,"tertiaryColor": LIGHT_YELLOW,"movable": false,"solid": true, "damage":1,"health":.9,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["Hello! My name is Ollie.","I hear there is a sword for sale in the {CUSTOM}.","Did you meet my sister Jolly?","I ate beans for lunch...\nWatch out!"]},
-  {"_id":1, "type":"whiteswordmaster","primeColor": DARK_BLUE,"secondaryColor": OFF_WHITE,"tertiaryColor": DARK_BROWN,"movable": false,"solid": true, "damage":1,"health":.9,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["Buy a White Sword? Only. 250 Coins.","I made it myself.","I hear there that Boss Bloog has a key."]},
-  {"_id":2, "type":"goldswordmaster","primeColor": DARK_BROWN,"secondaryColor": DARK_RED,"tertiaryColor": LIGHT_TAN,"movable": false,"solid": true, "damage":1,"health":.9,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["Buy a Gold Sword? Only 500 Coins.","Do you smell gas?","These are rare."]},
-  {"_id":3, "type":"coinmaster","primeColor": DARK_GREEN,"secondaryColor": DARK_GRAY,"tertiaryColor": DARK_BROWN,"movable": false,"solid": true, "damage":1,"health":.9,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["Take this and tell no one.","I have been seeing a lot more bloogs around here."]},
-  {"_id":4, "type":"jolly","primeColor": DARK_RED,"secondaryColor": BLACK,"tertiaryColor": LIGHT_TAN,"movable": false,"solid": true, "damage":1,"health":.9,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["Hiya. I'm Jolly!\nMy brother is Ollie.", "A special weapon can be used to defeat the Boss Bloog.","Beware the ides of... shh... do you smell something?"]},
-  {"_id":5, "type":"woodenswordmaster","primeColor": DARK_RED,"secondaryColor": LIGHT_TAN,"tertiaryColor": LIGHT_YELLOW,"movable": false,"solid": true, "damage":1,"health":.9,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["It's a dangerous to go alone.  Take this.","Use it to fight the bloogs.","If you remove all bloogs in an area you will be rewarded.","Thanks for not killing me."]},
+  {"_id":0, "type":"ollie","primeColor": DARK_BLUE,"secondaryColor": DARK_BROWN ,"tertiaryColor": LIGHT_YELLOW,"movable": false,"solid": true, "damage":1,"health":0,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["Hello! My name is Ollie.","I hear there is a sword for sale in the {CUSTOM}.","Did you meet my sister Jolly?","I ate beans for lunch... Watch out!"]},
+  {"_id":1, "type":"whiteswordmaster","primeColor": DARK_BLUE,"secondaryColor": OFF_WHITE,"tertiaryColor": DARK_BROWN,"movable": false,"solid": true, "damage":1,"health":0,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["Buy a White Sword? Only. 250 Coins.","I made it myself.","I hear there that Boss Bloog has a key."]},
+  {"_id":2, "type":"goldswordmaster","primeColor": DARK_BROWN,"secondaryColor": DARK_RED,"tertiaryColor": LIGHT_TAN,"movable": false,"solid": true, "damage":1,"health":0,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["Buy a Gold Sword? Only 500 Coins.","Do you smell gas?","These are rare."]},
+  {"_id":3, "type":"coinmaster","primeColor": DARK_GREEN,"secondaryColor": DARK_GRAY,"tertiaryColor": DARK_BROWN,"movable": false,"solid": true, "damage":1,"health":0,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["Take this and tell no one.","I have been seeing a lot more bloogs around here."]},
+  {"_id":4, "type":"jolly","primeColor": DARK_RED,"secondaryColor": BLACK,"tertiaryColor": LIGHT_TAN,"movable": false,"solid": true, "damage":1,"health":0,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["Hiya. I'm Jolly! My brother is Ollie.", "I hear there is an old rich man giving away coins in the {CUSTOM}.","Beware the ides of... shh... do you smell something?"]},
+  {"_id":5, "type":"woodenswordmaster","primeColor": DARK_RED,"secondaryColor": LIGHT_TAN,"tertiaryColor": LIGHT_YELLOW,"movable": false,"solid": true, "damage":1,"health":0,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["It's a dangerous to go alone... Take this.","Use it to fight the bloogs and trim the hedges.","If you remove all bloogs in an area you will be rewarded.","Thanks for not killing me..."]},
+  {"_id":6, "type":"george","primeColor": BLACK,"secondaryColor": DARK_GRAY,"tertiaryColor": LIGHT_YELLOW,"movable": false,"solid": true, "damage":1,"health":.1,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["George is my name. Jokes are my game."]},
+  {"_id":7, "type":"guy","primeColor": DARK_BROWN,"secondaryColor": YELLOW,"tertiaryColor": OFF_WHITE,"movable": false,"solid": true, "damage":1,"health":0,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["Oh hey. Wuz up guy?","You will need a really special weapon to defeat the Boss Bloog.","He's tough... you feel me?"]},
+  {"_id":8, "type":"boomerangmaster","primeColor": COOL_BLUE,"secondaryColor": DARK_RED,"tertiaryColor": DARK_BROWN,"movable": false,"solid": true, "damage":1,"health":0,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["G'day! Fancy a Boomerang? Only 100 Coins.","Use it to stun enemies and fetch out of reach objects.","I am a lazily designed character... just sayin'."]},
 ];
 
-var overworldNPCs = [0,4];
+var overworldNPCs = [0,4,7];
 
 function Npc(_id,pos) {
   this._id = _id;
@@ -41,6 +44,7 @@ function Npc(_id,pos) {
   this.talkingCount = 0;
   this.talkingDuration = 200;
   this.lastMessage = 0;
+  this.health = npcTypes[_id].health;
 
   this.talk = function(message) {
     textFont(defaultFont);
@@ -57,44 +61,68 @@ function Npc(_id,pos) {
 
     if (STATE == 'OVERWORLD') { fill(BLACK); } else
     if (STATE == 'SHOP') { fill(OFF_WHITE); }
-    textSize(18);
-    textAlign(LEFT);
-    if (level == 1) {
-      if (message.indexOf("{CUSTOM}") > -1) {
-        if (character.weapon._id > 4) {
-          message = 'I like your new sword!';
-        } else if (character.weapon._id <= 4) {
-          message = message.replace('{CUSTOM}',getRegionFromCoords(world.swordShop.split('-')));
-        } else {
-          message = "Dude!  You need a weapon.  It's dangerous out here.";
+
+    if (this._id == 0) {
+      if (level == 1) {
+        if (message.indexOf("{CUSTOM}") > -1) {
+          if (character.weapon._id > 4) {
+            message = 'I like your new sword!';
+          } else if (character.weapon._id <= 4) {
+            message = message.replace('{CUSTOM}',getRegionFromCoords(world.swordShop));
+          } else {
+            message = "Dude!  You need a weapon.  It's dangerous out here.";
+          }
+        }
+      } else if (level == 2) {
+        if (message.indexOf("{CUSTOM}") > -1) {
+          if (character.weapon._id > 5) {
+            message = 'I like your new sword!';
+          } else if (character.weapon._id <= 5) {
+            message = message.replace('{CUSTOM}',getRegionFromCoords(world.swordShop));
+          } else {
+            message = "Dude! You need a weapon.  It's dangerous out here.";
+          }
+        }
+      } else if (level == 3) {
+        if (message.indexOf("{CUSTOM}") > -1) {
+          if (character.weapon._id > 5) {
+            message = 'Wow sweet sword!';
+          } else {
+            message = "Dude! You need a weapon.  It's dangerous out here.";
+          }
         }
       }
-    } else if (level == 2) {
+    } else if (this._id == 4) {
       if (message.indexOf("{CUSTOM}") > -1) {
-        if (character.weapon._id > 5) {
-          message = 'I like your new sword!';
-        } else if (character.weapon._id <= 5) {
-          message = message.replace('{CUSTOM}',getRegionFromCoords(world.swordShop.split('-')));
+        var hasCoin = false;
+        var items = world.shops[world.hundredShop.toString().replace(',','-')].items;
+        for (var i=0;i<items.length;i++){ if (items[i].type == "coin") { hasCoin = true; break; } }
+        if (hasCoin) {
+          message = message.replace('{CUSTOM}',getRegionFromCoords(world.hundredShop));
         } else {
-          message = "Dude! You need a weapon.  It's dangerous out here.";
-        }
-      }
-    } else if (level == 3) {
-      if (message.indexOf("{CUSTOM}") > -1) {
-        if (character.weapon._id > 5) {
-          message = 'Wow sweet sword!';
-        } else {
-          message = "Dude! You need a weapon.  It's dangerous out here.";
+          message = "I see you found your man... wink, wink...";
         }
       }
     }
-
-    text(message,
-      this.pos.x-blockSize/2,
-      this.pos.y-(blockSize+pixelSize)-textWidth(message)/8,
-      blockSize*3,
-      blockSize*2
-    );
+    textSize(18);
+    textAlign(CENTER);
+    // textWidth(message)
+    if (STATE == 'SHOP') {
+      text(message,
+        (width/2-(blockSize*11.5)/2),
+        blockSize*2.7,
+        blockSize*12,
+        blockSize*2
+      );
+    } else
+    if (STATE == 'OVERWORLD') {
+      text(message,
+        (width/2-(blockSize*11)/2),
+        blockSize*1.7,
+        blockSize*12,
+        blockSize*2
+      );
+    }
   }
 
   this.look = function() {
@@ -297,6 +325,18 @@ function Npc(_id,pos) {
     }
   }
 
+  this.explode = function(i) {
+    this.drop();
+    loadedZone.npcs.splice(i,1);
+    createDebris(character.pos,randomInt(-5,5),100,RED);
+  }
+
+  this.drop = function() {
+    for (var i=0;i<this.items.length;i++) {
+      dropItem(this.items[i],this.pos);
+    }
+  }
+
   this.render = function() {
     push();
     this.look();
@@ -319,23 +359,37 @@ function createRandomNPC() {
 
 function drawNPCs() {
   for (var i=0;i<loadedZone.npcs.length;i++) {
-    loadedZone.npcs[i].render();
-    loadedZone.npcs[i].update();
-    loadedZone.npcs[i].edges();
+    var npc = loadedZone.npcs[i];
+    npc.render();
+    npc.update();
+    npc.edges();
+    if (character.hasWeapon) {
+      if (npc.health > 0) {
+        if (character.weapon.hits(npc)) {
+          npc.health -= character.damageDelt();
+          npc.isInvincible = true;
+          enemyHit.play();
+        }
+        if (npc.health <= 0) {
+          npc.explode(i);
+          enemyExplode.play();
+        }
+      }
+    }
   }
 }
 
 
-function createNPCs(npc_id,coordsWithOutTopPassage) {
-  var npcCoords = coordsWithOutTopPassage[randomInt(0,coordsWithOutTopPassage.length)].toString().replace(',','-');
-  for (var i=0;i<coordsWithOutTopPassage.length;i++) {
-    var coords = coordsWithOutTopPassage[i].toString().replace(',','-');
+function createNPCs(npc_id) { // THIS HAS A BUG... THE COORDS ARE NOT STRING AND ARE NOT BEING SPLICED OUT PROPERLY ALLOWING MORE THAN 1 NPC PER ZONE //
+  var npcCoords = world.coordsWithOutTopPassage[randomInt(0,world.coordsWithOutTopPassage.length)].toString().replace(',','-');
+  for (var i=0;i<world.coordsWithOutTopPassage.length;i++) {
+    var coords = world.coordsWithOutTopPassage[i].toString().replace(',','-');
     for (var j=0;j<world.zones[coords].enemies.length;j++) {
       var enemies = world.zones[coords].enemies[j];
       if (enemies.rarity == "unique") {
         if (npcCoords == coords) {
-          coordsWithOutTopPassage.splice(coordsWithOutTopPassage.indexOf(npcCoords),1);
-          var npcCoords = coordsWithOutTopPassage[randomInt(0,coordsWithOutTopPassage.length)].toString().replace(',','-');
+          world.coordsWithOutTopPassage.splice(world.coordsWithOutTopPassage.indexOf(npcCoords),1);
+          var npcCoords = world.coordsWithOutTopPassage[randomInt(0,world.coordsWithOutTopPassage.length)].toString().replace(',','-');
           break;
         }
       }
@@ -343,10 +397,10 @@ function createNPCs(npc_id,coordsWithOutTopPassage) {
   }
   world.npcs.push(npcCoords);
   world.zones[npcCoords].npcs.push(new Npc(npc_id,createVector(width/2,blockSize*3))); // NPC
+  world.coordsWithOutTopPassage.splice(world.coordsWithOutTopPassage.indexOf(npcCoords),1);
   if (world.zones[npcCoords].enemies.length > 0) {
     // console.log(npcCoords,CoordsWithOutTopPassage.length)
-    coordsWithOutTopPassage.splice(coordsWithOutTopPassage.indexOf(npcCoords),1);
-    var newEnemyCoords = coordsWithOutTopPassage[randomInt(0,coordsWithOutTopPassage.length)].toString().replace(',','-');
+    var newEnemyCoords = world.coordsWithOutTopPassage[randomInt(0,world.coordsWithOutTopPassage.length)].toString().replace(',','-');
     for (var i=0;i<world.zones[npcCoords].enemies.length;i++) {
       world.zones[newEnemyCoords].enemies.push(world.zones[npcCoords].enemies[i]);
       world.zones[npcCoords].enemies.splice(world.zones[npcCoords].enemies.indexOf(world.zones[npcCoords].enemies[i]),1);

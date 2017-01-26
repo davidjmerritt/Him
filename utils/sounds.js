@@ -5,8 +5,10 @@ var LOZOOT = 'snd/loz-oot/';
 function preload() {
   caveTrack = loadSound(LOZLTTP+'16-cave.mp3');
   overworldTrack = loadSound(LOZLTTP+'04-overworld.mp3');
+  darkworldTrack = loadSound(LOZLTTP+'12-dark-world.mp3');
   selectTrack = loadSound(LOZLTTP+'11-select-screen.mp3');
 
+  boomerang = loadSound(LOZLTTP+'LTTP_Boomerang.wav');
   burnDownPeak = loadSound(LOZLTTP+'LTTP_Menu_Cursor.wav');
   characterHit = loadSound(LOZLTTP+'LTTP_Link_Hurt.wav');
   cutGrass = loadSound(LOZLTTP+'LTTP_Grass_Cut.wav');
@@ -17,6 +19,7 @@ function preload() {
   getFairy = loadSound(LOZLTTP+'LTTP_Get_Fairy.wav');
   getHeart = loadSound(LOZLTTP+'LTTP_Get_HeartPiece.wav');
   getCoin = loadSound(LOZLTTP+'LTTP_Rupee1.wav');
+  loseCoin = loadSound(LOZLTTP+'LTTP_Rupee2.wav');
   getKey = loadSound(LOZLTTP+'LTTP_Get_Key.wav');
   lowHealth = loadSound(LOZLTTP+'LTTP_LowHealth.wav');
   pushBlock = loadSound(LOZLTTP+'LTTP_Link_Push.wav');

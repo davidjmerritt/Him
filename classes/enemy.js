@@ -1,10 +1,10 @@
 var enemyTypes = [
   {"_id":0, "type":"red-bloog","innerColor": RED,"secondaryColor": BLACK,"movable": true,"solid": true, "damage":1,"health":.9,"speed":2,"rarity":2,"digger":false,"pusher":true,"size":[1,1],"attack":null,"level":0,"exp":5,"requiredWeapons":[4,7,8]},
   {"_id":1, "type":"blue-bloog","innerColor": BLUE,"secondaryColor": BLACK,"movable": true,"solid": true, "damage":2,"health":2,"speed":4,"rarity":3,"digger":true,"pusher":false,"size":[1,1],"attack":null,"level":2,"exp":10,"requiredWeapons":[4,7,8]},
-  {"_id":2, "type":"green-bloog","innerColor": GREEN,"secondaryColor": BLACK,"movable": true,"solid": true, "damage":3,"health":2,"speed":1,"rarity":5,"digger":false,"pusher":true,"size":[1,1],"attack":null,"level":2,"exp":15,"requiredWeapons":[4,7,8]},
+  {"_id":2, "type":"green-bloog","innerColor": GREEN,"secondaryColor": BLACK,"movable": true,"solid": true, "damage":3,"health":2,"speed":1,"rarity":5,"digger":false,"pusher":true,"size":[1,1],"attack":null,"level":0,"exp":15,"requiredWeapons":[4,7,8]},
   {"_id":3, "type":"black-bloog","innerColor": BLACK,"secondaryColor": OFF_WHITE,"movable": true,"solid": true, "damage":5,"health":3,"speed":3,"rarity":10,"digger":false,"pusher":true,"size":[1,1],"attack":null,"level":3,"exp":20,"requiredWeapons":[4,7,8]},
   {"_id":4, "type":"white-bloog","innerColor": OFF_WHITE,"secondaryColor": BLACK,"movable": true,"solid": true, "damage":4,"health":5,"speed":3,"rarity":20,"digger":true,"pusher":true,"size":[1,1],"attack":"missile","level":4,"exp":30,"requiredWeapons":[4,7,8]},
-  {"_id":5, "type":"boss-bloog","innerColor": PURPLE,"secondaryColor": BLACK,"tertiaryColor": OFF_PURPLE,"movable": false,"solid": false, "damage":5,"health":20,"speed":.4,"rarity":"unique","digger":false,"pusher":false,"size":[3,3],"attack":"missile","spells":["spawner"],"requiredWeapons":[7,8],"level":0,"exp":100},
+  {"_id":5, "type":"boss-bloog","innerColor": PURPLE,"secondaryColor": BLACK,"tertiaryColor": OFF_PURPLE,"movable": false,"solid": false, "damage":5,"health":20,"speed":.4,"rarity":"unique","digger":false,"pusher":false,"size":[3,3],"attack":"missile","spells":[],"requiredWeapons":[7,8],"level":0,"exp":100},
   {"_id":6, "type":"prince-bloog","innerColor": PINK,"secondaryColor": BLACK,"tertiaryColor": OFF_PINK,"movable": false,"solid": false, "damage":8,"health":35,"speed":.6,"rarity":"unique","digger":false,"pusher":false,"size":[3,3],"attack":"missile","spells":["spawner"],"requiredWeapons":[8],"level":0,"exp":200},
   {"_id":7, "type":"king-bloog","innerColor": ORANGE,"secondaryColor": BLACK,"tertiaryColor": OFF_ORANGE,"movable": false,"solid": false, "damage":10,"health":50,"speed":.8,"rarity":"unique","digger":false,"pusher":false,"size":[3,3],"attack":"missile","spells":["spawner"],"requiredWeapons":[8],"level":0,"exp":500},
   {"_id":8, "type":"blue-flutter","innerColor": BLACK,"secondaryColor": DARK_BLUE,"movable": false,"solid": false, "damage":0.2,"health":0.2,"speed":6,"rarity":5,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":2,"exp":3,"requiredWeapons":[4,7,8]},
@@ -43,6 +43,8 @@ function Enemy(_id,_index,pos) {
   this.requiredWeapons = enemyTypes[_id].requiredWeapons;
   this.loc;
   this.locList = ["LEFT","RIGHT","UP","DOWN","STILL"];
+  this.isStunned = false;
+  this.stunnedCount = 0 ;
 
   this.look = function() {
     noStroke();
@@ -257,7 +259,7 @@ function Enemy(_id,_index,pos) {
       this.moveCount = 0;
     }
 
-    if (!this.isInvincible) {
+    if (!this.isInvincible && !this.isStunned) {
       this.move();
     }
 
@@ -273,11 +275,25 @@ function Enemy(_id,_index,pos) {
         this.tertiaryColor = enemyTypes[this._id].tertiaryColor;
       }
     }
+
+    // ENEMY IS STUNNED
+    if (this.isStunned) {
+      // this.primeColor = COLORS[randomInt(0,COLORS.length)];
+      // this.tertiaryColor = this.primeColor
+      this.stunnedCount += 1;
+      if (this.stunnedCount >= 300) {
+        this.isStunned = false;
+        this.stunnedCount = 0;
+        // this.primeColor = enemyTypes[this._id].innerColor;
+        // this.tertiaryColor = enemyTypes[this._id].tertiaryColor;
+      }
+    }
   }
 
   this.explode = function(i) {
     this.drop();
     loadedZone.enemies.splice(i,1);
+    createDebris(this.pos,randomInt(-5,5),100,RED);
     createDebris(this.pos,randomInt(-25,25),6,this.primeColor);
     if (this.type == "boss-bloog" || this.type == "prince-bloog" || this.type == "king-bloog") {
       stopLoop(bossScream,'bossScream');

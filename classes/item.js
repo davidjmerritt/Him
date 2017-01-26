@@ -17,6 +17,11 @@ var itemTypes = [
   {"_id":15, "type":"coin","innerColor": OFF_WHITE,"secondaryColor":LIGHT_BLUE,"tertiaryColor":WHITE,"movable": false,"solid": false, "damage":0,"rarity":"unique","value":100,"decays":false},
   {"_id":16, "type":"coin","innerColor": OFF_WHITE,"secondaryColor":YELLOW,"tertiaryColor":WHITE,"movable": false,"solid": false, "damage":0,"rarity":"unique","value":50,"decays":false},
   {"_id":17, "type":"shrub","innerColor": OFF_GREEN,"secondaryColor":DARK_GREEN,"tertiaryColor":DARK_BROWN,"movable": false,"solid": true, "damage":0,"rarity":"special","value":0,"decays":false},
+  {"_id":18, "type":"coin","innerColor": COOL_BLUE,"secondaryColor":PURPLE,"tertiaryColor":WHITE,"movable": false,"solid": false, "damage":0,"rarity":1,"value":-5,"decays":false},
+  {"_id":19, "type":"downstairs","innerColor": OFF_WHITE,"secondaryColor":BLACK,"tertiaryColor":DARK_GRAY,"movable": false,"solid": false, "damage":0,"rarity":"unique","value":0,"decays":false},
+  {"_id":20, "type":"upstairs","innerColor": OFF_WHITE,"secondaryColor":BLACK,"tertiaryColor":DARK_GRAY,"movable": false,"solid": false, "damage":0,"rarity":"unique","value":0,"decays":false},
+  {"_id":21, "type":"fence","innerColor": DARK_BROWN,"movable": false,"solid": true, "damage":0,"rarity":"special","value":0,"decays":false,size:[4,4],"overlay":false},
+  {"_id":22, "type":"boomerang","innerColor": YELLOW,"secondaryColor":COOL_BLUE,"tertiaryColor":DARK_RED,"movable": false,"solid": false, "damage":0,"rarity":"unique","value":100,"decays":false},
 ];
 
 function Item(_id) {
@@ -223,27 +228,27 @@ function Item(_id) {
       rect(this.pos.x+pixelSize*2,this.pos.y,pixelSize,pixelSize);
       rect(this.pos.x+pixelSize*3,this.pos.y,pixelSize,pixelSize*4);
     } else if (this.type == "key") {
-        fill([this.innerColor,this.secondaryColor][randomInt(0,2)]);
-        rect(this.pos.x,this.pos.y,pixelSize,pixelSize*3);
-        rect(this.pos.x+pixelSize,this.pos.y,pixelSize,pixelSize);
-        rect(this.pos.x+pixelSize,this.pos.y+pixelSize*2,pixelSize,pixelSize);
-        rect(this.pos.x+pixelSize*2,this.pos.y,pixelSize,pixelSize*4);
-        rect(this.pos.x+pixelSize*3,this.pos.y+pixelSize*2,pixelSize,pixelSize*2);
+      fill([this.innerColor,this.secondaryColor][randomInt(0,2)]);
+      rect(this.pos.x,this.pos.y,pixelSize,pixelSize*3);
+      rect(this.pos.x+pixelSize,this.pos.y,pixelSize,pixelSize);
+      rect(this.pos.x+pixelSize,this.pos.y+pixelSize*2,pixelSize,pixelSize);
+      rect(this.pos.x+pixelSize*2,this.pos.y,pixelSize,pixelSize*4);
+      rect(this.pos.x+pixelSize*3,this.pos.y+pixelSize*2,pixelSize,pixelSize*2);
     } else if (this.type == "fairy") {
-          fill([this.innerColor,this.secondaryColor][randomInt(0,2)]);
-          rect(this.pos.x,this.pos.y,pixelSize,pixelSize);
-          rect(this.pos.x+pixelSize*3,this.pos.y,pixelSize,pixelSize);
-          fill([this.innerColor,this.secondaryColor][randomInt(0,2)]);
-          rect(this.pos.x+pixelSize,this.pos.y+pixelSize,pixelSize,pixelSize);
-          fill([this.innerColor,this.secondaryColor][randomInt(0,2)]);
-          rect(this.pos.x+pixelSize*2,this.pos.y+pixelSize,pixelSize,pixelSize);
-          fill([this.innerColor,this.secondaryColor][randomInt(0,2)]);
-          rect(this.pos.x+pixelSize,this.pos.y+pixelSize*2,pixelSize,pixelSize);
-          fill([this.innerColor,this.secondaryColor][randomInt(0,2)]);
-          rect(this.pos.x+pixelSize*2,this.pos.y+pixelSize*2,pixelSize,pixelSize);
-          fill([this.innerColor,this.secondaryColor][randomInt(0,2)]);
-          rect(this.pos.x,this.pos.y+pixelSize*3,pixelSize,pixelSize);
-          rect(this.pos.x+pixelSize*3,this.pos.y+pixelSize*3,pixelSize,pixelSize);
+      fill([this.innerColor,this.secondaryColor][randomInt(0,2)]);
+      rect(this.pos.x,this.pos.y,pixelSize,pixelSize);
+      rect(this.pos.x+pixelSize*3,this.pos.y,pixelSize,pixelSize);
+      fill([this.innerColor,this.secondaryColor][randomInt(0,2)]);
+      rect(this.pos.x+pixelSize,this.pos.y+pixelSize,pixelSize,pixelSize);
+      fill([this.innerColor,this.secondaryColor][randomInt(0,2)]);
+      rect(this.pos.x+pixelSize*2,this.pos.y+pixelSize,pixelSize,pixelSize);
+      fill([this.innerColor,this.secondaryColor][randomInt(0,2)]);
+      rect(this.pos.x+pixelSize,this.pos.y+pixelSize*2,pixelSize,pixelSize);
+      fill([this.innerColor,this.secondaryColor][randomInt(0,2)]);
+      rect(this.pos.x+pixelSize*2,this.pos.y+pixelSize*2,pixelSize,pixelSize);
+      fill([this.innerColor,this.secondaryColor][randomInt(0,2)]);
+      rect(this.pos.x,this.pos.y+pixelSize*3,pixelSize,pixelSize);
+      rect(this.pos.x+pixelSize*3,this.pos.y+pixelSize*3,pixelSize,pixelSize);
     } else if (this.type == "shrub") {
       fill(this.secondaryColor);
       rect(this.pos.x,this.pos.y,pixelSize,pixelSize*2);
@@ -274,6 +279,35 @@ function Item(_id) {
 
       fill(this.innerColor);
       rect(this.pos.x+pixelSize*3,this.pos.y+pixelSize*3,pixelSize,pixelSize);
+    } else if (this.type == "downstairs") {
+      fill(this.secondaryColor);
+      rect(this.pos.x,this.pos.y,blockSize,blockSize);
+      stroke(this.secondaryColor);
+      strokeWeight(1)
+      fill(this.innerColor);
+      rect(this.pos.x,this.pos.y+pixelSize/2,pixelSize+pixelSize/3,pixelSize+(pixelSize*3)-pixelSize/3-2);
+      rect(this.pos.x+pixelSize+pixelSize/3,this.pos.y+pixelSize+pixelSize/2,pixelSize+pixelSize/3,pixelSize+(pixelSize*2)-pixelSize/3-2);
+      rect(this.pos.x+(pixelSize*2)+pixelSize*2/3,this.pos.y+(pixelSize*2)+pixelSize/2,pixelSize+pixelSize/3-1,pixelSize+pixelSize-pixelSize/3-2);
+    } else if (this.type == "upstairs") {
+      fill(this.secondaryColor);
+      rect(this.pos.x,this.pos.y+blockSize/2+pixelSize/2-2,blockSize+1,blockSize/2);
+      stroke(this.secondaryColor);
+      strokeWeight(1)
+      fill(this.innerColor);
+      rect(this.pos.x,this.pos.y+(pixelSize/2)*4-pixelSize-2,pixelSize,pixelSize*3);
+      rect(this.pos.x+pixelSize,this.pos.y+(pixelSize/2)*3-pixelSize-2,pixelSize,pixelSize*3);
+      rect(this.pos.x+pixelSize*2,this.pos.y+(pixelSize/2)*2-pixelSize-2,pixelSize,pixelSize*3);
+      rect(this.pos.x+pixelSize*3,this.pos.y+(pixelSize/2)-pixelSize-2,pixelSize,pixelSize*3);
+    } else if (this.type == "fence") {
+      fill(this.innerColor);
+      rect(this.pos.x-blockSize*2,this.pos.y-blockSize*1.5,blockSize*5,blockSize/2);
+      rect(this.pos.x-blockSize*2,this.pos.y+blockSize*2,blockSize*5,blockSize/2);
+      rect(this.pos.x-blockSize*1.5,this.pos.y-blockSize*2,blockSize/2,blockSize*5);
+      rect(this.pos.x+blockSize*2,this.pos.y-blockSize*2,blockSize/2,blockSize*5);
+    } else if (this.type == "boomerang") {
+      fill(this.innerColor);
+      rect(this.pos.x+pixelSize,this.pos.y+pixelSize,pixelSize*2,pixelSize);
+      rect(this.pos.x+pixelSize,this.pos.y+pixelSize,pixelSize,pixelSize*2);
     } else {
       fill(this.innerColor);
       rect(
@@ -352,6 +386,11 @@ function drawItems() {
         }
       }
     }
+    if (character.secondaryWeaponOut) {
+      if (character.secondaryWeapon.hits(item)) {
+        droppedItemsInteractions(item,b);
+      }
+    }
     if (character.hits(item)) {
       if (item.type == "key") {
         getKey.play();
@@ -366,7 +405,7 @@ function drawItems() {
         getKey.play();
         items.splice(b,1);
         character.hasMap = true;
-      } else if (item.type == "door" && character.hasMasterKey) {
+      } else if (item.type == "upstairs" && character.hasMasterKey) {
           levelComplete();
       } else if (item.type == "portal" && character.d == 'UP') {
           character.enteringPortal = true;
@@ -377,6 +416,11 @@ function drawItems() {
         character.hasWeapon = true;
         character.coins -= itemTypes[item._id].value;
         character.weapon = createItem(item._id);
+        items.splice(b,1);
+        fanfare1.play();
+      } else if (item.type == "boomerang" && character.coins >= itemTypes[item._id].value) {
+        character.hasSecondaryWeapon = true;
+        character.coins -= itemTypes[item._id].value;
         items.splice(b,1);
         fanfare1.play();
       } else {
@@ -407,7 +451,7 @@ function droppedItemsInteractions(item,b) {
       character.health = totalHealth;
       getFairy.play();
   } else if (item.type == "coin") {
-    getCoin.play();
+    if (itemTypes[item._id].value < 0) { loseCoin.play(); } else { getCoin.play(); }
     items.splice(b,1);
     if (character.coins+itemTypes[item._id].value >= maxCoins) {
       character.coins = maxCoins;
@@ -433,6 +477,12 @@ function createItem(item_id,pos) {
     item.pos = createVector(width-blockSize*4.1,blockSize);
   } else if (pos == 'TOPRIGHTWALLOVER') {
     item.pos = createVector(width-blockSize*4.1,-blockSize);
+  } else if (pos == 'UPLEFT') {
+    item.pos = createVector(width/4,height/4);
+  } else if (pos == 'UPCENTER') {
+    item.pos = createVector(width-width/2,height/4);
+  } else if (pos == 'UPRIGHT') {
+    item.pos = createVector(width-width/4,height/4);
   }
   return item;
 }

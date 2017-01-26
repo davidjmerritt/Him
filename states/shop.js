@@ -11,6 +11,7 @@ function shopReset() {
 function shopDraw() {
   background(25);
   drawBlocks();
+  drawDebris();
   drawItems();
   drawMissiles();
   if (character.isAlive) { drawCharacter(); } else { drawMenu("GAMEOVER"); }
@@ -39,8 +40,12 @@ function createShop(coordinates,item_id,npc_id) {
   world.shops[shop_id].blocks["rightBorder"] = createBlockBorderRightThick(2);
   world.shops[shop_id].blocks["leftBorder"] = createBlockBorderLeftThick(2);
   world.shops[shop_id].blocks["bottomBorder"] = createBlockBorderBottomOpenDoubleThick(2);
-  world.shops[shop_id].items.push(createItem(item_id,'CENTER')); // WOOD SWORD
-  world.shops[shop_id].npcs.push(new Npc(npc_id,createVector(width/2,height/3))); // SWORD-MASTER
+  world.shops[shop_id].items.push(createItem(item_id,'CENTER')); // ITEM
+  world.shops[shop_id].npcs.push(new Npc(npc_id,createVector(width/2,height/3))); // NPC
+  if (npcTypes[world.shops[shop_id].npcs[0]._id].type == "george") {
+    npcTypes[world.shops[shop_id].npcs[0]._id].messages = shuffleArray(jokes);
+    world.shops[shop_id].npcs[0].items.push(6);
+  }
   world.shops[shop_id].items.push(new Item(14)); // FAIRY
 
   // EXTERIOR
@@ -60,7 +65,9 @@ function createShop(coordinates,item_id,npc_id) {
 
 
 function loadShop(shopCoords) {
+  var shopCoordsString = shopCoords.toString().replace(',','-');
   overworldTrack.stop();
   caveTrack.loop(); caveTrack.setVolume(0.3);
-  loadedZone = world.shops[shopCoords.toString().replace(',','-')];
+  loadedZone = world.shops[shopCoordsString];
+  world.lastShop = shopCoordsString;
 }

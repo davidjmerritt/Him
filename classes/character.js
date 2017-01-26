@@ -31,6 +31,12 @@ function Character() {
   this.enteringPortal = false;
   this.isSolid = true;
   this.isMovable = true;
+  this.secondaryWeapon = {"type":null,"_id":null};
+  this.hasSecondaryWeapon = false;
+  this.secondaryWeaponUsed = false;
+  this.secondaryWeaponOut = false;
+  this.secondaryWeaponCount = 0;
+  this.aim;
 
   this.damageDelt = function() {
     var damage = character.weapon.damage*character.power();
@@ -114,8 +120,17 @@ function Character() {
       this.weapon.pos = this.pos.copy();
     }
 
-    this.burndown();
+    if (this.hasSecondaryWeapon && this.secondaryWeaponUsed) {
+      this.secondaryWeaponCount += 1;
+      this.moving(false);
+      if (this.secondaryWeaponCount >= 10) {
+        this.secondaryWeaponUsed = false;
+        this.secondaryWeaponCount = 0;
+        this.moving(true);
+      }
+    }
 
+    this.burndown();
   }
 
   this.moving = function(b) {
@@ -151,12 +166,42 @@ function Character() {
     } else if (this.last_d == 'UP') {
       this.weapon.pos = createVector(this.pos.x, this.pos.y - this.r*2);
     }
-
     if (!this.isBurningDown && this.health == totalHealth && character.hasWeapon) {
       swordBeam.play();
       loadedZone.missiles.weapon.push(new Missile(this.weapon.pos, this.last_d, "weapon", this.sizeOffset));
     }
+  }
 
+  this.useSecondaryWeapon = function() {
+    if (this.hasSecondaryWeapon && heatseekerTypes[this.secondaryWeapon._id].type == "boomerang") {
+      this.secondaryWeaponUsed = true;
+      if (!this.secondaryWeaponOut) {
+        startLoop(boomerang,100,'boomerang');
+        var pos = this.pos.copy();
+
+        if (this.last_d == 'RIGHT') {
+          pos.x += this.r*2;
+          pos.y += this.r-pixelSize/2;
+        } else
+        if (this.last_d == 'LEFT') {
+          pos.x -= this.r*2;
+          pos.y += this.r-pixelSize/2;
+        } else
+        if (this.last_d == 'UP') {
+          pos.x += this.r-pixelSize/2;
+          pos.y -= this.r*2;
+        } else
+        if (this.last_d == 'DOWN') {
+          pos.x += this.r-pixelSize/2;
+          pos.y += this.r*2;
+        }
+
+        var launchPos = pos.copy();
+        this.secondaryWeapon = new Heatseeker(pos, this.last_d,launchPos);
+        this.secondaryWeaponOut = true;
+      }
+
+    }
   }
 
   this.burndown = function() {;
@@ -263,7 +308,7 @@ function resetCharacter(TYPE) {
   character.primeColor = BLACK;
 
   character.pos = createVector(width/2,height/2);
-  loadZone(defaultCoords);
+  if (world.lastShop == undefined) { loadZone(defaultCoords); } else { loadZone(world.lastShop); }
 
   respawnEnemies();
   world.coinsInWorld = countCoinsInWorld();
@@ -285,6 +330,16 @@ function drawCharacter() {
     character.weapon.pos = createVector(-9999,-9999);
   }
 
+  if (character.hasSecondaryWeapon && character.secondaryWeaponOut) {
+    character.secondaryWeapon.render();
+    character.secondaryWeapon.update();
+    if (character.secondaryWeapon.hits(character)) {
+      stopLoop(boomerang,'boomerang');
+      character.secondaryWeaponOut = false;
+      character.secondaryWeapon = {"type":"boomerang","_id":0};
+    }
+  }
+
   // BLOCKS
   var clusters = loadedZone.blocks;
   for (var c in clusters) {
@@ -295,6 +350,14 @@ function drawCharacter() {
         // pushBlock.play();
         entityPush(character,block);
       }
+      if (character.secondaryWeapon != {} && character.secondaryWeaponOut) {
+        if (character.secondaryWeapon.hits(block)) {
+          // character.secondaryWeapon.returning = true;
+          // entityBounce(character.secondaryWeapon,block,1)
+          // entityHit(character.secondaryWeapon,block,1);
+
+        }
+      }
       // ENEMY
       var enemies = loadedZone.enemies;
       for (var e=0;e<enemies.length;e++) {
@@ -304,6 +367,7 @@ function drawCharacter() {
           // enemy.moveCount = 999;
           entityPush(enemy,block);
         }
+        // WEAPON
         if (character.weapon != {}) {
           if (!findInArray(enemy.requiredWeapons,character.weapon._id)) { } else {
             if (!enemy.isInvincible) {
@@ -331,6 +395,20 @@ function drawCharacter() {
                 }
               }
             }
+          }
+        }
+        // SECONDARY WEAPON
+        if (character.secondaryWeapon != {} && character.secondaryWeaponOut) {
+          if (character.secondaryWeapon.hits(enemy)) {
+            // character.secondaryWeapon.returning = true;
+            // character.secondaryWeapon.returnCount = 1;
+            // character.secondaryWeapon.apex = 0;
+            // character.secondaryWeapon.easing = 100;
+            enemy.isStunned = true;
+            enemyHit.play();
+            character.secondaryWeapon = {"type":"boomerang","_id":0};
+            character.secondaryWeaponOut = false;
+            stopLoop(boomerang,'boomerang');
           }
         }
         if (!character.isInvincible) {

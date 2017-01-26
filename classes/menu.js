@@ -24,7 +24,7 @@ function Menu() {
     fill(250, 250, 250);
     textSize(28);
     textAlign(CENTER);
-    text("GAME OVER\n\nPress the ACTION button to CONTINUE", width/2,height/2-25);
+    text("GAME OVER\n\nPress the START button to CONTINUE", width/2,height/2-25);
   }
 
   this.win = function() {
@@ -51,7 +51,7 @@ function Menu() {
     textSize(28);
     textAlign(CENTER);
     if (level < 3) {
-      text("WAY TO GO!\n\nPress the ACTION button to try a NEW LEVEL", width/2,height/2-25);
+      text("WAY TO GO!\n\nPress the START button to try a NEW LEVEL", width/2,height/2-25);
     } else if (level == 3) {
       text("THANKS FOR PLAYING!\n\nMore LEVELS coming soon!", width/2,height/2-25);
     }

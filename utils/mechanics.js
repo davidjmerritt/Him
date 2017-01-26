@@ -69,3 +69,16 @@ function getRegionFromCoords(coordinates) {
   if (x < (worldWidth/2)+(worldWidth/4) && x > (worldWidth/2)-(worldWidth/4) && y < (worldHeight/2)+(worldHeight/4) && y > (worldHeight/2)-(worldHeight/4)) { results = 'central '+results; }
   return results
 }
+
+
+function snapToGrid(coord,alignTo) {
+  var diff = coord % alignTo;
+  var halfwayPoint = (alignTo - 1)/2
+  if (diff > halfwayPoint) {
+    // console.log(diff,halfwayPoint,alignTo - diff)
+    return -diff;
+  } else {
+    // console.log(diff,halfwayPoint,-diff)
+    return alignTo - diff;
+  }
+}

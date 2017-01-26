@@ -140,11 +140,14 @@ function Hud() {
     // text(info, appWidth-100, 45);
     text(info, this.offset+25, 45);
 
+
+    var x_offset = appWidth-blockSize-15;
+
     // COINS
     c = color(50, 50, 50, 100)
     fill(c);
     rect(
-      appWidth-65, // appWidth-185,
+      x_offset, // appWidth-185,
       this.pos.y,
       blockSize,
       blockSize
@@ -160,7 +163,6 @@ function Hud() {
 
     // PRIMARY WEAPON
     if (character.hasWeapon) {
-      var x_offset = appWidth-blockSize-15; //appWidth-blockSize*2-25;
       c = color(50, 50, 50, 100)
       fill(c);
       rect(
@@ -179,30 +181,25 @@ function Hud() {
       rect(this.pos.x+(x_offset-pixelSize/1.5),this.pos.y+pixelSize*3+y_offset+5,pixelSize*3,pixelSize);
     }
 
-    // // SECONDARY ITEM
-    // c = color(50, 50, 50, 100)
-    // fill(c);
-    // rect(
-    //   x_offset+10+blockSize,
-    //   75,
-    //   blockSize,
-    //   blockSize
-    // );
-    // value = alpha(c);
-    // fill(value);
-    //
-    // // TIERTIARY ITEM
-    // c = color(50, 50, 50, 100)
-    // fill(c);
-    // rect(
-    //   x_offset+10+blockSize,
-    //   70+blockSize+this.offset,
-    //   blockSize,
-    //   blockSize
-    // );
-    // value = alpha(c);
-    // fill(value);
-
+    // SECONDARY ITEM
+    if (character.hasSecondaryWeapon) {
+      var x_offset = appWidth-blockSize-15; //appWidth-blockSize*2-25;
+      c = color(50, 50, 50, 100)
+      fill(c);
+      rect(
+        x_offset,
+        195,
+        blockSize,
+        blockSize
+      );
+      value = alpha(c);
+      fill(value);
+      if (character.secondaryWeapon.type == 'boomerang') {
+        fill(heatseekerTypes[character.secondaryWeapon._id].primaryColor);
+        rect(x_offset+pixelSize,195+pixelSize,pixelSize*2,pixelSize);
+        rect(x_offset+pixelSize,195+pixelSize,pixelSize,pixelSize*2);
+      }
+    }
   }
 
   this.render = function() {

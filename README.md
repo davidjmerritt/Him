@@ -22,24 +22,38 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 
 ## KEYBOARD
 - ARROW KEYS  = MOVEMENT
-- Y           = SPACEBAR
+- SPACEBAR    = PRIMARY WEAPON
+- F           = SECONDARY WEAPON
+- RETURN      = START/RESTART
 <br><br>
 
 
 ## 8-BITDO GAMEPAD SNES CONTROLLER
 - D-PAD       = MOVEMENT
-- Y           = ACTION
-- B           =
-- X           =
-- A           =
-- L/R         =
-- SELECT      =
-- START       =
+- B           = PRIMARY WEAPON
+- Y           = SECONDARY WEAPON
+- START       = START/RESTART
 <br><br>
 
 
 ---
 ## RELEASE FEATURES
+
+### 1.2.0
+- New NPCs
+-- Boomerang Master
+-- George
+-- Guy
+- New Items!
+-- Boomerang
+-- Stairs
+- After death character loads in front of last shop visited.
+- Blood Effect when Enemies are destroyed
+- Animations
+-- Boomerang
+- Added Green Bloogs to Level 1
+<br><br>
+
 
 ### 1.1.0
 - Improved Controls
@@ -55,16 +69,21 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 
 
 ### NEXT RELEASE
-- More and Harder enemies.
-- BOMBS!!!
-- Projectiles, enemies and items that gravitate toward character.
-- Healer NPC
-- MORE things to do in every ZONE
+-[ ] Speed Shoes
+-[ ] BOMBS!!!
+-[ ] Save Your Progress
+-[ ] WarpZones!
+-[ ] More Sounds Effects
+-[ ] MORE things to do in every ZONE
+-[ ] More and Harder Enemies
+-[ ] More Varied Zones
+-[ ] Character Movement Animations
+-[ ] Improved Character Movement (Snap to Grid)
 <br><br>
 
 
-###  BUGS
--
+### BUGS
+
 <br><br>
 
 ###  FUTURE FEATURES & IDEAS

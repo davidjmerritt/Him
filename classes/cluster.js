@@ -78,6 +78,14 @@ var clusterTypes = {
       [3,10,13,1,11],
     ]
   },
+  "BROWN_FENCE": {
+    "layout": [
+      [(appBlockWidth/2)-2,(appBlockHeight/2)-2,5,1,2],
+      [(appBlockWidth/2)-2,(appBlockHeight/2)+2,5,1,2],
+      [(appBlockWidth/2)-2,(appBlockHeight/2)-2,1,5,2],
+      [(appBlockWidth/2)+2,(appBlockHeight/2)-2,1,5,2],
+    ]
+  },
   "LARGE_WARP_STONES": {
     "layout": [
 

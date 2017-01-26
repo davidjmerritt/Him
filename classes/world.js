@@ -22,6 +22,8 @@ function World(w,h) {
   this.fiftyShop;
   this.coinsInWorld;
   this.npcs = [];
+  this.jokeShop;
+  this.lastShop;
 
   this.create = function() {
     this.matrix = maze.slice(0); //createMatrix(this.matrixWidth,this.matrixHeight);
@@ -31,7 +33,7 @@ function World(w,h) {
 
     var allCoords = [];
     var allCoordsString = [];
-    var coordsWithOutTopPassage = [];
+    this.coordsWithOutTopPassage = [];
 
     var c = 0;
     for (var i=0;i<this.matrix.length;i++) {
@@ -47,7 +49,7 @@ function World(w,h) {
       this.zones[zone._id] = zone;
 
       if (this.zones[zone._id].walls[0] == true) {
-        coordsWithOutTopPassage.push(coordinates);
+        this.coordsWithOutTopPassage.push(coordinates);
       }
 
       if (this.negativeSpace.indexOf(coordinates.toString().replace(',','-')) > -1) {
@@ -88,11 +90,30 @@ function World(w,h) {
     this.mapZone = allCoordsString[randomMapIndex];
     this.zones[this.mapZone ].items.push(createItem(12,"OFFSCREEN"));
 
-    // CREATE DOOR
+    // CREATE STAIRS
     var randomDoorIndex = randomInt(0,allCoords.length);
     this.doorZone = allCoordsString[randomDoorIndex];
-    this.zones[this.doorZone].items.push(createItem(1,"OFFSCREEN"));
+    this.zones[this.doorZone].items.push(createItem(20,"OFFSCREEN"));
 
+    // CREATE BLOCKADE AROUND STAIRS
+    // var doorCluster = clusterLayout("WARP_STONES");
+    // for (var i=0;i<doorCluster.length;i++){
+    //   this.zones[this.doorZone].blocks[guid()] = doorCluster[i];
+    // }
+
+
+    // CREATE UPSTAIRS @ START
+    // this.zones[defaultCoords.toString().replace(',','-')].items.push(createItem(20,"UPLEFT"));
+
+    // CREATE DOWNSTAIRS @ START
+    // this.zones[defaultCoords.toString().replace(',','-')].items.push(createItem(19,"UPRIGHT"));
+
+    // CREATE FENCE @ START
+    // this.zones[defaultCoords.toString().replace(',','-')].items.push(createItem(21,"CENTER"));
+    // var fenceCluster = clusterLayout("BROWN_FENCE");
+    // for (var i=0;i<fenceCluster.length;i++){
+    //   this.zones[defaultCoords.toString().replace(',','-')].blocks[guid()] = fenceCluster[i];
+    // }
 
     // SWORD SHOPS
     if (level == 1) {
@@ -114,14 +135,23 @@ function World(w,h) {
     this.hundredShop = this.zonesWithoutShop[randomInt(0,this.zonesWithoutShop.length).toString().replace(',','-')].split('-');
     createShop(this.hundredShop,15,3);
 
-     // 50 COINS SHOP
+    // 50 COINS SHOP
     this.fiftyShop = this.zonesWithoutShop[randomInt(0,this.zonesWithoutShop.length).toString().replace(',','-')].split('-');
     createShop(this.fiftyShop,16,3);
 
+    // BOOMERANG SHOP
+    if (level == 1) {
+      this.boomerangShop = this.zonesWithoutShop[randomInt(0,this.zonesWithoutShop.length).toString().replace(',','-')].split('-');
+      createShop(this.boomerangShop,22,8);
+    }
+
+    // JOKE SHOP
+    this.jokeShop = this.zonesWithoutShop[randomInt(0,this.zonesWithoutShop.length).toString().replace(',','-')].split('-');
+    createShop(this.jokeShop,18,6);
 
     // CREATE NPCS
     for (var i=0;i<overworldNPCs.length;i++) {
-      createNPCs(overworldNPCs[i],coordsWithOutTopPassage);
+      createNPCs(overworldNPCs[i]);
     }
 
     // COUNT MONEY IN WORLD
@@ -160,6 +190,13 @@ function loadZone(newCoords,dirEnteredFrom) {
     loadZone(newCoords);
   }
   checkForBoss();
+  if (character != undefined && character.secondaryWeapon != {}) {
+    character.secondaryWeapon = {"type":"boomerang","_id":0};
+    character.secondaryWeaponOut = false;
+    character.secondaryWeaponUsed = false;
+    character.secondaryWeaponCount = 0;
+    stopLoop(boomerang,'boomerang');
+  }
   // playEnemySounds();
 }
 
@@ -182,26 +219,38 @@ function countCoinsInWorld() {
 function checkForBoss() {
   var lzc = loadedZone.coordinates;
   var bzc = world.zones[world.keyZone].coordinates;
-  // console.log(lzc[0]-1,bzc[0],lzc[1]-1,bzc[1])
-  if (
-    lzc[0]-1 == bzc[0] && lzc[1]-1 == bzc[1]
-    || lzc[0]-1 == bzc[0] && lzc[1] == bzc[1]
-    || lzc[0] == bzc[0] && lzc[1]-1 == bzc[1]
-    || lzc[0]+1 == bzc[0] && lzc[1]+1 == bzc[1]
-    || lzc[0]+1 == bzc[0] && lzc[1] == bzc[1]
-    || lzc[0] == bzc[0] && lzc[1]+1 == bzc[1]
-    || lzc[0]+1 == bzc[0] && lzc[1]-1 == bzc[1]
-    || lzc[0]-1 == bzc[0] && lzc[1]+1 == bzc[1]
-  )
-  {
-    // console.log('close');
-    bossScream.setVolume(0.5);
-    if (!('bossScream' in timeoutLoops)) {
-      startLoop(bossScream,2000,'bossScream');
+  var bossAlive = false;
+  for(var i=0;i<world.zones[world.keyZone].enemies.length;i++) {
+    console.log(t,bossAlive);
+    var t = world.zones[world.keyZone].enemies[i].type;
+    if (t == "boss-bloog" || t == "prince-bloog" || t == "king-bloog") {
+      console.log(t,bossAlive);
+      bossAlive = true;
+      break;
     }
-  } else if (lzc[0] == bzc[0] && lzc[1] == bzc[1]) {
-    // console.log('you there')
-    bossScream.setVolume(1);
+  }
+
+  if (bossAlive) {
+    if (
+      lzc[0]-1 == bzc[0] && lzc[1]-1 == bzc[1]
+      || lzc[0]-1 == bzc[0] && lzc[1] == bzc[1]
+      || lzc[0] == bzc[0] && lzc[1]-1 == bzc[1]
+      || lzc[0]+1 == bzc[0] && lzc[1]+1 == bzc[1]
+      || lzc[0]+1 == bzc[0] && lzc[1] == bzc[1]
+      || lzc[0] == bzc[0] && lzc[1]+1 == bzc[1]
+      || lzc[0]+1 == bzc[0] && lzc[1]-1 == bzc[1]
+      || lzc[0]-1 == bzc[0] && lzc[1]+1 == bzc[1]
+    )
+    {
+      bossScream.setVolume(0.5);
+      if (!('bossScream' in timeoutLoops)) {
+        startLoop(bossScream,2000,'bossScream');
+      }
+    } else if (lzc[0] == bzc[0] && lzc[1] == bzc[1]) {
+      bossScream.setVolume(1);
+    } else {
+      stopLoop(bossScream,'bossScream');
+    }
   } else {
     stopLoop(bossScream,'bossScream');
   }

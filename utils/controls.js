@@ -9,12 +9,13 @@ function checkCharacterMovement() {
 
 
 function keyReleased() {
-  if (character != 'undefined') {
+  if (character != undefined) {
     if (character.isAlive) {
       if (keyCode == SNES_RIGHT || keyCode == SNES_LEFT || keyCode == SNES_UP || keyCode == SNES_DOWN || keyCode == RIGHT_ARROW || keyCode == LEFT_ARROW || keyCode == UP_ARROW || keyCode == DOWN_ARROW) {
         var index = keyCodeMap.indexOf(keyCode);
         keyCodeMap.splice(index,1);
       }
+      if (keyCode == SNES_A) { character.vel = 4; }
     }
   }
 }
@@ -23,8 +24,7 @@ function keyReleased() {
 function keyPressed() {
   if (character != 'undefined') {
     if (character.isAlive) {
-      // WEAPON
-      if (keyCode == 32 || keyCode == SNES_Y) { // SPACEBAR
+      if (keyCode == 13 || keyCode == SNES_START) { // RETURN
         if (gameWon) {
           if (level == 3) {} else {
             reset();
@@ -33,10 +33,18 @@ function keyPressed() {
             character.hasCompass = false;
             character.hasMasterKey = false;
           }
-        } else {
-          character.useWeapon();
         }
       }
+      // WEAPON
+      if (keyCode == 32 || keyCode == SNES_B) { // SPACEBAR
+        character.useWeapon();
+      }
+
+      if (keyCode == SNES_Y) {
+        character.useSecondaryWeapon();
+      }
+
+      if (keyCode == SNES_A) { character.vel = 10; }
 
       // MOVEMENT
       if (keyCode == RIGHT_ARROW || keyCode == SNES_RIGHT) { // keyCode == 68
@@ -60,13 +68,22 @@ function keyPressed() {
         character.last_d = 'DOWN';
         character.moving(true);
 
-      // RESET CHARACTER
+      // // AIM
+      // if (keyCode == RIGHT_ARROW && keyCode == UP_ARROW) { // keyCode == 68, 83
+      //   keyCodeMap.push(keyCode);
+      //   character.aim = 'UPPER_RIGHT' ;
+      // }
+      // console.log(keyCodeMap,character.aim)
+
+
+
+    // RESET CHARACTER
     } else if (keyCode == 81 || keyCode == SNES_SELECT) { // Q
         resetCharacter();
       }
     } else {
       // DEAD
-      if (keyCode == 32 || keyCode == SNES_Y) { // SPACEBAR
+      if (keyCode == 13 || keyCode == SNES_START) { // RETURN
         // location.reload();
         resetCharacter();
       }
