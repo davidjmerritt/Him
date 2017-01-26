@@ -41,16 +41,16 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 
 ### 1.2.0
 - New NPCs
--- Boomerang Master
--- George
--- Guy
+ - Boomerang Master
+ - George
+ - Guy
 - New Items!
--- Boomerang
--- Stairs
+ - Boomerang
+ - Stairs
 - After death character loads in front of last shop visited.
 - Blood Effect when Enemies are destroyed
 - Animations
--- Boomerang
+ - Boomerang
 - Added Green Bloogs to Level 1
 <br><br>
 
@@ -69,16 +69,16 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 
 
 ### NEXT RELEASE
--[ ] Speed Shoes
--[ ] BOMBS!!!
--[ ] Save Your Progress
--[ ] WarpZones!
--[ ] More Sounds Effects
--[ ] MORE things to do in every ZONE
--[ ] More and Harder Enemies
--[ ] More Varied Zones
--[ ] Character Movement Animations
--[ ] Improved Character Movement (Snap to Grid)
+- Speed Shoes
+- BOMBS!!!
+- Save Your Progress
+- WarpZones!
+- More Sounds Effects
+- MORE things to do in every ZONE
+- More and Harder Enemies
+- More Varied Zones
+- Character Movement Animations
+- Improved Character Movement (Snap to Grid)
 <br><br>
 
 
