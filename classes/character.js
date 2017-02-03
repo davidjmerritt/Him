@@ -37,6 +37,10 @@ function Character() {
   this.secondaryWeaponOut = false;
   this.secondaryWeaponCount = 0;
   this.aim;
+  this.tertiaryWeapon = {"type":"bomb","_id":null};
+  this.tertiaryWeaponUsed = false;
+  this.hasTertiaryWeapon = false;
+  this.bombs = 0;
 
   this.damageDelt = function() {
     var damage = character.weapon.damage*character.power();
@@ -86,7 +90,8 @@ function Character() {
   }
 
   this.explode = function() {
-    createDebris(this.pos,randomInt(-25,25),6,this.primeColor);
+    createDebris(this.pos,randomInt(-2,2),5,RED);
+    createCharacterDebris(this.pos,[this.primeColor,BROWN,LIGHT_TAN]);
   }
 
   this.update = function() {
@@ -200,7 +205,18 @@ function Character() {
         this.secondaryWeapon = new Heatseeker(pos, this.last_d,launchPos);
         this.secondaryWeaponOut = true;
       }
+    }
+  }
 
+  this.useTertiaryWeapon = function() {
+    this.tertiaryWeaponUsed = true;
+    if (this.hasTertiaryWeapon) {
+      if (character.bombs > 0) {
+        var bomb = new Bomb(this.pos,this.d, 0);
+        bomb.set();
+        loadedZone.bombs.push(bomb);
+        character.bombs -= 1;
+      }
     }
   }
 
@@ -283,12 +299,13 @@ var character;
 
 function createCharacter() {
   character = new Character();
-  character.healthBar = new Progressbar(appWidth-progressBarWidth-blockSize-25,15,progressBarWidth,pixelSize*1.5);
+  character.healthBar = new Progressbar(blockSize*5,15,progressBarWidth,pixelSize*2);
+  // character.healthBar = new Progressbar(appWidth-progressBarWidth-blockSize-25,15,progressBarWidth,pixelSize*1.5);
   character.healthBar.fillCol = [255, 0, 0, 200];
   character.healthBar.backCol = [0, 0, 0, 75];
   character.health = startHealth;
   // character.weapon = createItem(startingSword);
-  character.burndownBar = new Progressbar(appWidth-progressBarWidth-blockSize-25,15+pixelSize*1.5,progressBarWidth,pixelSize/4);
+  character.burndownBar = new Progressbar(blockSize*5,15+pixelSize*2,progressBarWidth,pixelSize/4);
   character.burndownBar.fillCol = [0, 100, 255, 200];
   character.burndownBar.backCol = [0, 0, 0, 100];
   console.log(character);
@@ -358,6 +375,14 @@ function drawCharacter() {
 
         }
       }
+      // BOMBS
+      var bombs = loadedZone.bombs;
+      for (var bo=0;bo<bombs.length;bo++) {
+        var bomb = bombs[bo];
+        if (character.hits(bomb)) {
+          entityPush(character,bomb);
+        }
+      }
       // ENEMY
       var enemies = loadedZone.enemies;
       for (var e=0;e<enemies.length;e++) {
@@ -383,6 +408,17 @@ function drawCharacter() {
                   enemy.isInvincible = true;
                   weaponMissile.explode();
                   enemyHit.play();
+                }
+              }
+              for (var d=0;d<loadedZone.debris.length;d++) {
+                var debris = loadedZone.debris[d];
+                if (debris.canDamage) {
+                  if (debris.hits(enemy)) {
+                    enemy.health -= Math.ceil(debris.damage);
+                    enemy.isInvincible = true;
+                    enemyHit.play();
+                    break;
+                  }
                 }
               }
               if (enemy.health <= 0) {
@@ -447,6 +483,22 @@ function drawCharacter() {
         if (character.hits(npc)) {
           npc.isTalking = true;
           entityPush(character,npc);
+        }
+      }
+      // DEBRIS
+      var debris = loadedZone.debris;
+      for (var de=0;de<debris.length;de++) {
+        var debri = debris[de];
+        if (debri.hits(block)) {
+          if (debri.canDamage && block.isRemovable) {
+            var block_index = blocks.indexOf(block);
+            if (block_index > -1) {
+              var hasNextRoom = destroyOtherWallBlock(c,block);
+              if (hasNextRoom || !findInArray(["topBorder","bottomBorder","rightBorder","leftBorder"],c)) {
+                blocks.splice(block_index,1);
+              }
+            }
+          }
         }
       }
     }

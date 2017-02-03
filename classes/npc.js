@@ -1,13 +1,16 @@
 var npcTypes = [
-  {"_id":0, "type":"ollie","primeColor": DARK_BLUE,"secondaryColor": DARK_BROWN ,"tertiaryColor": LIGHT_YELLOW,"movable": false,"solid": true, "damage":1,"health":0,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["Hello! My name is Ollie.","I hear there is a sword for sale in the {CUSTOM}.","Did you meet my sister Jolly?","I ate beans for lunch... Watch out!"]},
-  {"_id":1, "type":"whiteswordmaster","primeColor": DARK_BLUE,"secondaryColor": OFF_WHITE,"tertiaryColor": DARK_BROWN,"movable": false,"solid": true, "damage":1,"health":0,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["Buy a White Sword? Only. 250 Coins.","I made it myself.","I hear there that Boss Bloog has a key."]},
-  {"_id":2, "type":"goldswordmaster","primeColor": DARK_BROWN,"secondaryColor": DARK_RED,"tertiaryColor": LIGHT_TAN,"movable": false,"solid": true, "damage":1,"health":0,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["Buy a Gold Sword? Only 500 Coins.","Do you smell gas?","These are rare."]},
-  {"_id":3, "type":"coinmaster","primeColor": DARK_GREEN,"secondaryColor": DARK_GRAY,"tertiaryColor": DARK_BROWN,"movable": false,"solid": true, "damage":1,"health":0,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["Take this and tell no one.","I have been seeing a lot more bloogs around here."]},
-  {"_id":4, "type":"jolly","primeColor": DARK_RED,"secondaryColor": BLACK,"tertiaryColor": LIGHT_TAN,"movable": false,"solid": true, "damage":1,"health":0,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["Hiya. I'm Jolly! My brother is Ollie.", "I hear there is an old rich man giving away coins in the {CUSTOM}.","Beware the ides of... shh... do you smell something?"]},
-  {"_id":5, "type":"woodenswordmaster","primeColor": DARK_RED,"secondaryColor": LIGHT_TAN,"tertiaryColor": LIGHT_YELLOW,"movable": false,"solid": true, "damage":1,"health":0,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["It's a dangerous to go alone... Take this.","Use it to fight the bloogs and trim the hedges.","If you remove all bloogs in an area you will be rewarded.","Thanks for not killing me..."]},
+  {"_id":0, "type":"ollie","primeColor": DARK_BLUE,"secondaryColor": DARK_BROWN ,"tertiaryColor": LIGHT_YELLOW,"movable": false,"solid": true, "damage":1,"health":.1,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["Hello! My name is Ollie.","I hear there is a sword for sale in the {CUSTOM}.","Did you meet my sister Jolly?","I ate beans for lunch... Watch out!"]},
+  {"_id":1, "type":"whiteswordmaster","primeColor": DARK_BLUE,"secondaryColor": OFF_WHITE,"tertiaryColor": DARK_BROWN,"movable": false,"solid": true, "damage":1,"health":.1,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["Buy a White Sword? Only. 250 Coins.","I made it myself.","I hear there that Boss Bloog has a key."]},
+  {"_id":2, "type":"goldswordmaster","primeColor": DARK_BROWN,"secondaryColor": DARK_RED,"tertiaryColor": LIGHT_TAN,"movable": false,"solid": true, "damage":1,"health":.1,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["Buy a Gold Sword? Only 500 Coins.","Do you smell gas?","These are rare."]},
+  {"_id":3, "type":"coinmaster","primeColor": DARK_GREEN,"secondaryColor": DARK_GRAY,"tertiaryColor": DARK_BROWN,"movable": false,"solid": true, "damage":1,"health":.1,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["Take this and tell no one.","I have been seeing a lot more bloogs around here."]},
+  {"_id":4, "type":"jolly","primeColor": DARK_RED,"secondaryColor": BLACK,"tertiaryColor": LIGHT_TAN,"movable": false,"solid": true, "damage":1,"health":.1,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["Hiya. I'm Jolly! My brother is Ollie.", "I hear there is an old rich man giving away coins in the {CUSTOM}.","Beware the ides of... shh... do you smell something?"]},
+  {"_id":5, "type":"woodenswordmaster","primeColor": DARK_RED,"secondaryColor": LIGHT_TAN,"tertiaryColor": LIGHT_YELLOW,"movable": false,"solid": true, "damage":1,"health":.1,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["It's a dangerous to go alone... Take this.","Use it to fight the bloogs and trim the hedges.","If you remove all bloogs in an area you will be rewarded.","Thanks for not killing me..."]},
   {"_id":6, "type":"george","primeColor": BLACK,"secondaryColor": DARK_GRAY,"tertiaryColor": LIGHT_YELLOW,"movable": false,"solid": true, "damage":1,"health":.1,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["George is my name. Jokes are my game."]},
-  {"_id":7, "type":"guy","primeColor": DARK_BROWN,"secondaryColor": YELLOW,"tertiaryColor": OFF_WHITE,"movable": false,"solid": true, "damage":1,"health":0,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["Oh hey. Wuz up guy?","You will need a really special weapon to defeat the Boss Bloog.","He's tough... you feel me?"]},
-  {"_id":8, "type":"boomerangmaster","primeColor": COOL_BLUE,"secondaryColor": DARK_RED,"tertiaryColor": DARK_BROWN,"movable": false,"solid": true, "damage":1,"health":0,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["G'day! Fancy a Boomerang? Only 100 Coins.","Use it to stun enemies and fetch out of reach objects.","I am a lazily designed character... just sayin'."]},
+  {"_id":7, "type":"guy","primeColor": DARK_BROWN,"secondaryColor": YELLOW,"tertiaryColor": OFF_WHITE,"movable": false,"solid": true, "damage":1,"health":.1,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["Oh hey. Wuz up guy?","You will need a really special weapon to defeat the Boss Bloog.","He's tough... you feel me?"]},
+  {"_id":8, "type":"boomerangmaster","primeColor": COOL_BLUE,"secondaryColor": DARK_RED,"tertiaryColor": DARK_BROWN,"movable": false,"solid": true, "damage":1,"health":.1,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["G'day! Fancy a Boomerang? Only 100 Coins.","Use it to stun enemies and fetch out of reach objects.","I am a lazily designed character... just sayin'."]},
+  {"_id":9, "type":"doctor","primeColor": DARK_GRAY,"secondaryColor": BLACK,"tertiaryColor": LIGHT_YELLOW,"movable": false,"solid": true, "damage":1,"health":.1,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["Pork belly can heal you! Trust me I am a doctor.","I ate so much pork belly last night... Yum, Yum!","Yea, yea, yea, yea, yea... A jyea, yea, yea, yea, yeaaah... aahh yeah!"]},
+  {"_id":10, "type":"bombmaster","primeColor": DARK_BLUE,"secondaryColor": ORANGE,"tertiaryColor": LIGHT_YELLOW,"movable": false,"solid": true, "damage":1,"health":.1,"speed":1,"rarity":2,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"messages":["Use these bombs to open passages between zones.","Be careful they are powerful!","That smell?  Oh that's the bomb making sulfur... I swear."]},
+
 ];
 
 var overworldNPCs = [0,4,7];
@@ -75,9 +78,9 @@ function Npc(_id,pos) {
         }
       } else if (level == 2) {
         if (message.indexOf("{CUSTOM}") > -1) {
-          if (character.weapon._id > 5) {
+          if (character.weapon._id > 7) {
             message = 'I like your new sword!';
-          } else if (character.weapon._id <= 5) {
+          } else if (character.weapon._id <= 7) {
             message = message.replace('{CUSTOM}',getRegionFromCoords(world.swordShop));
           } else {
             message = "Dude! You need a weapon.  It's dangerous out here.";
@@ -264,6 +267,7 @@ function Npc(_id,pos) {
     if (this.isTalking) {
       this.talkingCount += 1;
       this.talk(this.message);
+      this.talkingDuration = textWidth(this.message)/1.5;
       this.moving(false);
       if (this.talkingCount > this.talkingDuration) {
         this.isTalking = false;
@@ -328,7 +332,7 @@ function Npc(_id,pos) {
   this.explode = function(i) {
     this.drop();
     loadedZone.npcs.splice(i,1);
-    createDebris(character.pos,randomInt(-5,5),100,RED);
+    createDebris(this.pos,randomInt(-5,5),100,RED);
   }
 
   this.drop = function() {
@@ -363,18 +367,32 @@ function drawNPCs() {
     npc.render();
     npc.update();
     npc.edges();
-    if (character.hasWeapon) {
+
+    if (character.hasWeapon && character.weaponUsed) {
       if (npc.health > 0) {
         if (character.weapon.hits(npc)) {
           npc.health -= character.damageDelt();
           npc.isInvincible = true;
           enemyHit.play();
         }
-        if (npc.health <= 0) {
-          npc.explode(i);
-          enemyExplode.play();
+      }
+    }
+    if (character.tertiaryWeaponUsed) {
+      for (var d=0;d<loadedZone.debris.length;d++) {
+        var debris = loadedZone.debris[d];
+        if (debris.canDamage) {
+          if (debris.hits(npc)) {
+            npc.health -= Math.ceil(debris.damage);
+            npc.isInvincible = true;
+            enemyHit.play();
+            break;
+          }
         }
       }
+    }
+    if (npc.health <= 0) {
+      npc.explode(i);
+      enemyExplode.play();
     }
   }
 }

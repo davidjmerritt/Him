@@ -14,6 +14,7 @@ function shopDraw() {
   drawDebris();
   drawItems();
   drawMissiles();
+  drawBombs();
   if (character.isAlive) { drawCharacter(); } else { drawMenu("GAMEOVER"); }
   if (gameWon) { drawMenu("WIN"); loadedZone.enemies = []; } else { gameCheck(); }
   checkCharacterMovement();
@@ -36,17 +37,17 @@ function createShop(coordinates,item_id,npc_id) {
   world.shops[shop_id].type = "shop";
   world.shops[shop_id].enemies = [];
   world.shops[shop_id].blocks = {};
-  world.shops[shop_id].blocks["topBorder"] = createBlockBorderTopThick(2);
-  world.shops[shop_id].blocks["rightBorder"] = createBlockBorderRightThick(2);
-  world.shops[shop_id].blocks["leftBorder"] = createBlockBorderLeftThick(2);
-  world.shops[shop_id].blocks["bottomBorder"] = createBlockBorderBottomOpenDoubleThick(2);
+  world.shops[shop_id].blocks["topBorder"] = createBlockBorderTopThickBoundry(2);
+  world.shops[shop_id].blocks["rightBorder"] = createBlockBorderRightThickBoundry(2);
+  world.shops[shop_id].blocks["leftBorder"] = createBlockBorderLeftThickBoundry(2);
+  world.shops[shop_id].blocks["bottomBorder"] = createBlockBorderBottomOpenDoubleThick(13);
   world.shops[shop_id].items.push(createItem(item_id,'CENTER')); // ITEM
   world.shops[shop_id].npcs.push(new Npc(npc_id,createVector(width/2,height/3))); // NPC
   if (npcTypes[world.shops[shop_id].npcs[0]._id].type == "george") {
     npcTypes[world.shops[shop_id].npcs[0]._id].messages = shuffleArray(jokes);
     world.shops[shop_id].npcs[0].items.push(6);
   }
-  world.shops[shop_id].items.push(new Item(14)); // FAIRY
+  // world.shops[shop_id].items.push(new Item(14)); // FAIRY
 
   // EXTERIOR
   var zone_id = shop_id;

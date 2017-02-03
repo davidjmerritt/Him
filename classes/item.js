@@ -4,7 +4,7 @@ var itemTypes = [
   {"_id":2, "type":"portal","innerColor": BLACK,"movable": false,"solid": false, "damage":0,"rarity":"special","value":0,"decays":false,size:[2,1]},
   {"_id":3, "type":"key","innerColor": ORANGE,"secondaryColor":YELLOW,"movable": true,"solid": true, "damage":0,"rarity":"unique","value":20,"decays":false},
   {"_id":4, "type":"sword","innerColor": WOOD_BROWN,"secondaryColor": DARK_GREEN,"movable": false,"solid": true, "damage":1,"rarity":"unique","value":0,"decays":false,"burndown":1},
-  {"_id":5, "type":"heart","innerColor": RED,"secondaryColor":BLUE,"movable": false,"solid": false,"damage":0,"rarity":1,"value":0,"decays":true},
+  {"_id":5, "type":"heart","innerColor": RED,"secondaryColor":BLUE,"movable": false,"solid": false,"damage":0,"damage":0,"rarity":1,"value":0,"decays":true},
   {"_id":6, "type":"coin","innerColor": LIGHT_BLUE,"secondaryColor":BLUE,"tertiaryColor":WHITE,"movable": false,"solid": false, "damage":0,"rarity":2,"value":5,"decays":true},
   {"_id":7, "type":"sword","innerColor": OFF_WHITE,"secondaryColor": DARK_BLUE,"movable": false,"solid": true, "damage":2,"rarity":"unique","value":250,"decays":false,"burndown":2},
   {"_id":8, "type":"sword","innerColor": GOLD,"secondaryColor": DARKER_RED,"movable": false,"solid": true, "damage":4,"rarity":"unique","value":500,"decays":false,"burndown":4},
@@ -17,11 +17,13 @@ var itemTypes = [
   {"_id":15, "type":"coin","innerColor": OFF_WHITE,"secondaryColor":LIGHT_BLUE,"tertiaryColor":WHITE,"movable": false,"solid": false, "damage":0,"rarity":"unique","value":100,"decays":false},
   {"_id":16, "type":"coin","innerColor": OFF_WHITE,"secondaryColor":YELLOW,"tertiaryColor":WHITE,"movable": false,"solid": false, "damage":0,"rarity":"unique","value":50,"decays":false},
   {"_id":17, "type":"shrub","innerColor": OFF_GREEN,"secondaryColor":DARK_GREEN,"tertiaryColor":DARK_BROWN,"movable": false,"solid": true, "damage":0,"rarity":"special","value":0,"decays":false},
-  {"_id":18, "type":"coin","innerColor": COOL_BLUE,"secondaryColor":PURPLE,"tertiaryColor":WHITE,"movable": false,"solid": false, "damage":0,"rarity":1,"value":-5,"decays":false},
+  {"_id":18, "type":"coin","innerColor": COOL_BLUE,"secondaryColor":PURPLE,"tertiaryColor":WHITE,"movable": false,"solid": false, "damage":0,"rarity":100,"value":-5,"decays":false},
   {"_id":19, "type":"downstairs","innerColor": OFF_WHITE,"secondaryColor":BLACK,"tertiaryColor":DARK_GRAY,"movable": false,"solid": false, "damage":0,"rarity":"unique","value":0,"decays":false},
   {"_id":20, "type":"upstairs","innerColor": OFF_WHITE,"secondaryColor":BLACK,"tertiaryColor":DARK_GRAY,"movable": false,"solid": false, "damage":0,"rarity":"unique","value":0,"decays":false},
   {"_id":21, "type":"fence","innerColor": DARK_BROWN,"movable": false,"solid": true, "damage":0,"rarity":"special","value":0,"decays":false,size:[4,4],"overlay":false},
   {"_id":22, "type":"boomerang","innerColor": YELLOW,"secondaryColor":COOL_BLUE,"tertiaryColor":DARK_RED,"movable": false,"solid": false, "damage":0,"rarity":"unique","value":100,"decays":false},
+  {"_id":23, "type":"bomb","innerColor": DARK_BLUE,"secondaryColor":BLUE,"tertiaryColor":OFF_WHITE,"movable": false,"solid": false, "damage":0,"rarity":10,"value":25,"decays":true,size:[1,1]},
+  {"_id":24, "type":"porkbelly","innerColor": LIGHT_PINK,"secondaryColor":DARK_RED,"tertiaryColor":OFF_WHITE,"movable": false,"solid": false, "damage":0,"rarity":"special","value":0,"decays":false},
 ];
 
 function Item(_id) {
@@ -85,7 +87,7 @@ function Item(_id) {
   this.explode = function(i) {
     this.drop();
     loadedZone.items.splice(i,1);
-    createDebris(this.pos,randomInt(-25,25),4,this.innerColor);
+    createDebris(this.pos,randomInt(-10,10),4,this.innerColor);
   }
 
   this.drop = function() {
@@ -199,6 +201,13 @@ function Item(_id) {
       rect(this.pos.x+pixelSize*3,this.pos.y+pixelSize*2,pixelSize,pixelSize);
       rect(this.pos.x,this.pos.y+pixelSize*2,pixelSize,pixelSize);
       rect(this.pos.x+pixelSize,this.pos.y+pixelSize*3,pixelSize,pixelSize);
+    } else if (this.type == "bomb") {
+      fill(OFF_YELLOW);
+      rect(this.pos.x,this.pos.y,pixelSize,pixelSize);
+      fill(OFF_WHITE);
+      rect(this.pos.x+pixelSize,this.pos.y,pixelSize,pixelSize);
+      fill(DARK_BLUE);
+      rect(this.pos.x+pixelSize,this.pos.y+pixelSize,pixelSize*2,pixelSize*2);
     } else if (this.type == "door") {
       if (character.hasMasterKey) {
         fill(COLORS[randomInt(0,COLORS.length)]);
@@ -308,6 +317,17 @@ function Item(_id) {
       fill(this.innerColor);
       rect(this.pos.x+pixelSize,this.pos.y+pixelSize,pixelSize*2,pixelSize);
       rect(this.pos.x+pixelSize,this.pos.y+pixelSize,pixelSize,pixelSize*2);
+    } else if (this.type == "porkbelly") {
+      fill(this.innerColor);
+      rect(this.pos.x+pixelSize,this.pos.y,pixelSize*3,pixelSize*3);
+      rect(this.pos.x,this.pos.y+pixelSize,pixelSize,pixelSize);
+      rect(this.pos.x+pixelSize*2,this.pos.y+pixelSize*3,pixelSize,pixelSize);
+      fill(this.innerColor);
+      rect(this.pos.x+pixelSize,this.pos.y+pixelSize,pixelSize*2,pixelSize*2);
+      fill(this.tertiaryColor);
+      rect(this.pos.x+pixelSize,this.pos.y+pixelSize*2,pixelSize,pixelSize);
+      rect(this.pos.x+pixelSize*2,this.pos.y+pixelSize,pixelSize,pixelSize);
+      rect(this.pos.x,this.pos.y+pixelSize*3,pixelSize,pixelSize);
     } else {
       fill(this.innerColor);
       rect(
@@ -392,7 +412,11 @@ function drawItems() {
       }
     }
     if (character.hits(item)) {
-      if (item.type == "key") {
+      if (item.type == "porkbelly") {
+        eat.play();
+        items.splice(b,1);
+        character.health = totalHealth;
+      } else if (item.type == "key") {
         getKey.play();
         items.splice(b,1);
         hud.characterIconColor = item.innerColor;
@@ -446,6 +470,11 @@ function droppedItemsInteractions(item,b) {
     if (character.health > totalHealth) {
       character.health = totalHealth
     }
+  } else if (item.type == "bomb") {
+      character.hasTertiaryWeapon = true;
+      items.splice(b,1);
+      character.bombs += 4;
+      getItem.play();
   } else if (item.type == "fairy") {
       items.splice(b,1);
       character.health = totalHealth;
@@ -481,8 +510,12 @@ function createItem(item_id,pos) {
     item.pos = createVector(width/4,height/4);
   } else if (pos == 'UPCENTER') {
     item.pos = createVector(width-width/2,height/4);
+  } else if (pos == 'UPCENTERDOOR') {
+    item.pos = createVector(width-width/2,blockSize*2);
   } else if (pos == 'UPRIGHT') {
     item.pos = createVector(width-width/4,height/4);
+  } else if (pos == 'BOTTOMCENTER') {
+    item.pos = createVector(width-width/2,height-blockSize*2);
   }
   return item;
 }

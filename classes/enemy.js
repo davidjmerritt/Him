@@ -176,11 +176,13 @@ function Enemy(_id,_index,pos) {
     if (enemyTypes[this._id].type == "boss-bloog" || enemyTypes[this._id].type == "prince-bloog" || enemyTypes[this._id].type == "king-bloog") {
       if (enemyTypes[this._id].spells.length > 0) {
         // var randomEnemy = randomInt(0,spawnableEnemies.length-1),loadedZone.enemies.length;
-        var spawn = new Enemy(4,loadedZone.enemies.length,this.pos); // white-bloog
-        if (randomInt(0,2)==randomInt(0,2)) {
-          spawn.items.push(5);
+        if (loadedZone.enemies.length < 5) {
+          var spawn = new Enemy(4,loadedZone.enemies.length,this.pos); // white-bloog
+          if (randomInt(0,2)==randomInt(0,2)) {
+            spawn.items.push(5);
+          }
+          loadedZone.enemies.push(spawn);
         }
-        loadedZone.enemies.push(spawn);
       }
     }
   }
@@ -293,7 +295,7 @@ function Enemy(_id,_index,pos) {
   this.explode = function(i) {
     this.drop();
     loadedZone.enemies.splice(i,1);
-    createDebris(this.pos,randomInt(-5,5),100,RED);
+    // createDebris(this.pos,randomInt(-5,5),50,RED);
     createDebris(this.pos,randomInt(-25,25),6,this.primeColor);
     if (this.type == "boss-bloog" || this.type == "prince-bloog" || this.type == "king-bloog") {
       stopLoop(bossScream,'bossScream');
@@ -394,7 +396,7 @@ function Enemy(_id,_index,pos) {
 
 function createEnemies(numberOfEnemies) {
   var enemies = [];
-  for (var i=0;i<numberOfEnemies+level;i++) {
+  for (var i=0;i<numberOfEnemies;i++) {
     var enemy_id = randomInt(0,enemyTypes.length);
     // var diceRoll = randomInt(-1,enemyTypes[enemy_id].rarity)+1; //  *** NOT USING THIS ***
 

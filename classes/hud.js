@@ -6,9 +6,8 @@ function Hud() {
   this.h = world.matrixHeight*this.blockWidth*2;
   this.characterIconColor = LIGHTER_BLUE;
 
-  this.look = function() {
+  this.miniMap = function() {
     textFont(defaultFont);
-
     stroke(BLACK)
     // NEGATIVE SPACE
     if (character.hasMap) {
@@ -44,7 +43,8 @@ function Hud() {
         (world.zones_index[i].split('-')[0]*this.blockWidth*2)+this.offset,
         (world.zones_index[i].split('-')[1]*this.blockWidth*2)+this.offset,
         (this.blockWidth*2),
-        (this.blockWidth*2)
+        (this.blockWidth*2),
+        10
       );
     }
     rect(
@@ -139,18 +139,24 @@ function Hud() {
     if (STATE == 'SHOP') { var info = "S-"+level; }
     // text(info, appWidth-100, 45);
     text(info, this.offset+25, 45);
+  }
 
+  this.look = function() {
 
-    var x_offset = appWidth-blockSize-15;
+    this.miniMap();
+
+    var x_offset = appWidth-blockSize-15; // LEFT SIDE
 
     // COINS
+    var pos_x = blockSize*5;
+    var pos_y = this.pos.y+blockSize/2+15;
     c = color(50, 50, 50, 100)
     fill(c);
     rect(
-      x_offset, // appWidth-185,
-      this.pos.y,
+      pos_x, // appWidth-185,
+      pos_y-2,
       blockSize,
-      blockSize
+      blockSize+pixelSize+10+2
     );
     value = alpha(c);
     fill(value);
@@ -159,7 +165,53 @@ function Hud() {
     textAlign(CENTER);
     var info = character.coins;
     // text(info, appWidth-160, 45);
-    text(info, appWidth-40, 45);
+    // text(info, appWidth-40, 45);
+    var scale = 2;
+    var offset = (pixelSize*scale)/2.5;
+    var pos_x = offset+pos_x+2;
+    var pos_y = offset+pos_y;
+    text(info, blockSize*5.5, blockSize+pixelSize*5.2);
+    fill(LIGHT_GREEN);
+    rect(pos_x,pos_y+(pixelSize/scale),(pixelSize/scale),(pixelSize/scale)*2);
+    rect(pos_x+(pixelSize/scale)*2,pos_y,(pixelSize/scale),(pixelSize/scale)*4);
+    rect(pos_x+(pixelSize/scale),pos_y,(pixelSize/scale),(pixelSize/scale)*4);
+    rect(pos_x+(pixelSize/scale)*3,pos_y+(pixelSize/scale),(pixelSize/scale),(pixelSize/scale)*2);
+    fill(WHITE);
+    rect(pos_x+(pixelSize/scale)*2,pos_y,(pixelSize/scale),(pixelSize/scale));
+    rect(pos_x+(pixelSize/scale)*3,pos_y+(pixelSize/scale),(pixelSize/scale),(pixelSize/scale));
+    fill(DARK_GREEN);
+    rect(pos_x+(pixelSize/scale)*3,pos_y+(pixelSize/scale)*2,(pixelSize/scale),(pixelSize/scale));
+    rect(pos_x,pos_y+(pixelSize/scale)*2,(pixelSize/scale),(pixelSize/scale));
+    rect(pos_x+(pixelSize/scale),pos_y+(pixelSize/scale)*3,(pixelSize/scale),(pixelSize/scale));
+
+    // BOMBS
+    var pos_x = blockSize*6+10;
+    var pos_y = this.pos.y+blockSize/2+15;
+    c = color(50, 50, 50, 100)
+    fill(c);
+    rect(
+      pos_x, // appWidth-185,
+      pos_y-2,
+      blockSize,
+      blockSize+pixelSize+10+2
+    );
+    value = alpha(c);
+    fill(value);
+    fill(255, 255, 255);
+    textSize(16);
+    textAlign(CENTER);
+    var info = character.bombs;
+    var scale = 1.5
+    var offset = (pixelSize*scale)/2;
+    var pos_x = pos_x+offset;
+    var pos_y = pos_y+offset;
+    text(info, blockSize*6.7, blockSize+pixelSize*5.2);
+    fill(OFF_YELLOW);
+    rect(pos_x,pos_y,pixelSize/scale,pixelSize/scale);
+    fill(OFF_WHITE);
+    rect(pos_x+pixelSize/scale,pos_y,pixelSize/scale,pixelSize/scale);
+    fill(DARK_BLUE);
+    rect(pos_x+pixelSize/scale,pos_y+pixelSize/scale,(pixelSize*2)/scale,(pixelSize*2)/scale);
 
     // PRIMARY WEAPON
     if (character.hasWeapon) {
@@ -167,14 +219,14 @@ function Hud() {
       fill(c);
       rect(
         x_offset,
-        75,
+        15,
         blockSize,
         blockSize*2+10
       );
       value = alpha(c);
       fill(value);
       fill(character.weapon.innerColor);
-      var y_offset = 80;
+      var y_offset = 20;
       rect(this.pos.x+pixelSize+(x_offset-pixelSize/1.5),this.pos.y+y_offset-pixelSize+10,pixelSize,pixelSize*4);
       fill(character.weapon.secondaryColor);
       rect(this.pos.x+pixelSize+(x_offset-pixelSize/1.5),this.pos.y+pixelSize*4+y_offset+5,pixelSize,pixelSize*1.6);
@@ -184,11 +236,12 @@ function Hud() {
     // SECONDARY ITEM
     if (character.hasSecondaryWeapon) {
       var x_offset = appWidth-blockSize-15; //appWidth-blockSize*2-25;
+      var y_offset = 135;
       c = color(50, 50, 50, 100)
       fill(c);
       rect(
         x_offset,
-        195,
+        y_offset,
         blockSize,
         blockSize
       );
@@ -196,8 +249,38 @@ function Hud() {
       fill(value);
       if (character.secondaryWeapon.type == 'boomerang') {
         fill(heatseekerTypes[character.secondaryWeapon._id].primaryColor);
-        rect(x_offset+pixelSize,195+pixelSize,pixelSize*2,pixelSize);
-        rect(x_offset+pixelSize,195+pixelSize,pixelSize,pixelSize*2);
+        rect(x_offset+pixelSize,y_offset+pixelSize,pixelSize*2,pixelSize);
+        rect(x_offset+pixelSize,y_offset+pixelSize,pixelSize,pixelSize*2);
+      }
+    }
+    // TERTIARY ITEM
+    if (character.hasTertiaryWeapon) {
+      var pos_x = appWidth-blockSize-15; //appWidth-blockSize*2-25;
+      var pos_y = 195;
+      c = color(50, 50, 50, 100)
+      fill(c);
+      rect(
+        pos_x,
+        pos_y,
+        blockSize,
+        blockSize
+      );
+      value = alpha(c);
+      fill(value);
+
+      if (character.tertiaryWeapon.type == 'bomb') {
+        if (character.bombs > 0) {
+          var scale = 1.25;
+          var offset = (pixelSize*scale)/2;
+          var pos_x = pos_x+offset+2;
+          var pos_y = pos_y+offset+2;
+          fill(OFF_YELLOW);
+          rect(pos_x,pos_y,pixelSize/scale,pixelSize/scale);
+          fill(OFF_WHITE);
+          rect(pos_x+pixelSize/scale,pos_y,pixelSize/scale,pixelSize/scale);
+          fill(DARK_BLUE);
+          rect(pos_x+pixelSize/scale,pos_y+pixelSize/scale,(pixelSize*2)/scale,(pixelSize*2)/scale);
+        }
       }
     }
   }

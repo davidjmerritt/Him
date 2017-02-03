@@ -1,12 +1,16 @@
 var LOZ = 'snd/loz/';
 var LOZLTTP = 'snd/loz-ltp/';
 var LOZOOT = 'snd/loz-oot/';
+var MINECRAFT = 'snd/minecraft/';
+
 
 function preload() {
   caveTrack = loadSound(LOZLTTP+'16-cave.mp3');
   overworldTrack = loadSound(LOZLTTP+'04-overworld.mp3');
   darkworldTrack = loadSound(LOZLTTP+'12-dark-world.mp3');
   selectTrack = loadSound(LOZLTTP+'11-select-screen.mp3');
+  deathTrack = loadSound(LOZ+'07-game-over.mp3');
+  endingTrack = loadSound(LOZLTTP+'30-ending.mp3');
 
   boomerang = loadSound(LOZLTTP+'LTTP_Boomerang.wav');
   burnDownPeak = loadSound(LOZLTTP+'LTTP_Menu_Cursor.wav');
@@ -29,11 +33,20 @@ function preload() {
   swordSlash3 = loadSound(LOZLTTP+'LTTP_Sword3.wav');
   swordSlash4 = loadSound(LOZLTTP+'LTTP_Sword4.wav');
 
+  bombBlow = loadSound(LOZ+'LOZ_Bomb_Blow.wav');
+  bombDrop = loadSound(LOZ+'LOZ_Bomb_Drop.wav');
   bossScream = loadSound(LOZ+'LOZ_Boss_Scream1.wav');
   swordBeam = loadSound(LOZ+'LOZ_Sword_Shoot.wav');
   fanfare1 = loadSound(LOZ+'LOZ_Fanfare.wav');
+  getItem = loadSound(LOZ+'LOZ_Get_Heart.wav');
 
   fanfare2 = loadSound(LOZOOT+'OOT_Fanfare_SmallItem.wav');
+
+  eat = loadSound(MINECRAFT+'eat.wav');
+  eat1 = loadSound(MINECRAFT+'eat1.wav');
+  eat2 = loadSound(MINECRAFT+'eat2.wav');
+  eat3 = loadSound(MINECRAFT+'eat3.wav');
+  burp = loadSound(MINECRAFT+'burp.wav');
 
   // LTTP_Boss_Fireball.wav
   // LTTP_Boss_Hit.wav
@@ -54,6 +67,8 @@ function stopAllSounds() {
   caveTrack.stop();
   overworldTrack.stop();
   selectTrack.stop();
+  deathTrack.stop();
+  endingTrack.stop();
 }
 
 
@@ -67,6 +82,7 @@ function stopAllSounds() {
 //     }
 //   }
 // }
+
 
 var timeoutLoops = {};
 function startLoop(snd,milliDelay,whichLoop) {
@@ -83,4 +99,25 @@ function stopLoop(snd,whichLoop) {
   snd.stop();
   window.clearTimeout(timeoutLoops[whichLoop]);
   delete timeoutLoops[whichLoop];
+}
+
+
+function stopAllLoops() {
+  for (var i in timeoutLoops) {
+    window.clearTimeout(timeoutLoops[i]);
+  }
+  timeoutLoops = {};
+}
+
+
+function successCallback() {
+  console.log('Complete!');
+}
+
+function errorCallback() {
+  console.log('Error Loading File!');
+}
+
+function whileLoading() {
+  console.log('Loading File...');
 }

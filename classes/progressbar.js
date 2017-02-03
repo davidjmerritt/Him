@@ -9,6 +9,7 @@ function Progressbar(x,y,w,h) {
   this.d = -1;
 
   this.update = function(p) {
+    if (p < 0) { p = 0; }
     this.percent = p;
   }
 

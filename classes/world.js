@@ -20,9 +20,11 @@ function World(w,h) {
   this.swordShop;
   this.hundredShop;
   this.fiftyShop;
+  this.doctorShop;
+  this.bombShop;
+  this.jokeShop;
   this.coinsInWorld;
   this.npcs = [];
-  this.jokeShop;
   this.lastShop;
 
   this.create = function() {
@@ -108,6 +110,9 @@ function World(w,h) {
     // CREATE DOWNSTAIRS @ START
     // this.zones[defaultCoords.toString().replace(',','-')].items.push(createItem(19,"UPRIGHT"));
 
+    // CREATE BOMB @ START
+    // this.zones[defaultCoords.toString().replace(',','-')].items.push(createItem(23,"UPCENTERDOOR"));
+
     // CREATE FENCE @ START
     // this.zones[defaultCoords.toString().replace(',','-')].items.push(createItem(21,"CENTER"));
     // var fenceCluster = clusterLayout("BROWN_FENCE");
@@ -145,6 +150,16 @@ function World(w,h) {
       createShop(this.boomerangShop,22,8);
     }
 
+    // DOCTOR SHOPS
+    for (var i=0;i<3;i++) {
+      this['doctorShop'+(i+1)] = this.zonesWithoutShop[randomInt(0,this.zonesWithoutShop.length).toString().replace(',','-')].split('-');
+      createShop(this['doctorShop'+(i+1)],24,9);
+    }
+
+    // BOMB SHOP
+    this.bombShop = this.zonesWithoutShop[randomInt(0,this.zonesWithoutShop.length).toString().replace(',','-')].split('-');
+    createShop(this.bombShop,23,10);
+
     // JOKE SHOP
     this.jokeShop = this.zonesWithoutShop[randomInt(0,this.zonesWithoutShop.length).toString().replace(',','-')].split('-');
     createShop(this.jokeShop,18,6);
@@ -167,6 +182,7 @@ function drawZone() {
   drawBlocks();
   drawDebris();
   drawMissiles();
+  drawBombs();
 }
 
 
@@ -221,10 +237,10 @@ function checkForBoss() {
   var bzc = world.zones[world.keyZone].coordinates;
   var bossAlive = false;
   for(var i=0;i<world.zones[world.keyZone].enemies.length;i++) {
-    console.log(t,bossAlive);
+    // console.log(t,bossAlive);
     var t = world.zones[world.keyZone].enemies[i].type;
     if (t == "boss-bloog" || t == "prince-bloog" || t == "king-bloog") {
-      console.log(t,bossAlive);
+      // console.log(t,bossAlive);
       bossAlive = true;
       break;
     }

@@ -39,6 +39,20 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 ---
 ## RELEASE FEATURES
 
+### 1.3.0
+- New Item
+- BOMBS!!!
+- New NPC
+ - Doctor
+- Bug Fixes
+- Less Lag
+- New Zones
+- New Animation
+- New Sounds Effects
+- New Music
+<br><br>
+
+
 ### 1.2.0
 - New NPCs
  - Boomerang Master
@@ -68,25 +82,22 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 <br><br>
 
 
-### NEXT RELEASE
-- Speed Shoes
-- BOMBS!!!
-- Save Your Progress
+### UPCOMING FEATURES
 - WarpZones!
-- More Sounds Effects
 - MORE things to do in every ZONE
 - More and Harder Enemies
 - More Varied Zones
 - Character Movement Animations
 - Improved Character Movement (Snap to Grid)
+- Save Your Progress
+- Speed Shoes
 <br><br>
 
 
 ### BUGS
-
 <br><br>
 
-###  FUTURE FEATURES & IDEAS
+### FUTURE FEATURES & IDEAS
 
 ###### ANIMATIONS
 - Character movement
@@ -101,8 +112,8 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 ###### BLOCKS
 - SHOULD ONLY BE EFFECTED IF CHARACTER IS HOLDING CERTAIN WEAPON
 - Add Chests with items
-- Add interactivty with other blocks. If hit stop in place.
-- Like MC can be broken down and then placed back in environment
+- Add interactivity with other blocks. If hit stop in place.
+- Like MC can be broken down and then placed back in environment.
 - Mix different objects together and make stone and create barrier...
 - Blocks like stones that can be lifted over the head and carried, throw, etc...
 <br><br>

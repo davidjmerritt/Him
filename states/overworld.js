@@ -5,8 +5,7 @@ function overworldSetup() {
 
 
 function overworldReset() {
-  stopAllSounds();
-  overworldTrack.loop(); overworldTrack.setVolume(0.3);
+  deathCount = 0;
   level += 1;
   gameWon = false;
   keyCodeMap = [];
@@ -21,6 +20,8 @@ function overworldReset() {
   if (character === undefined) {
     createCharacter();
   }
+  stopAllSounds();
+  overworldTrack.loop(); overworldTrack.setVolume(0.3);
 }
 
 
@@ -29,7 +30,20 @@ function overworldDraw() {
   drawItems();
   drawEnemies();
 
-  if (character.isAlive) { drawCharacter(); } else { drawMenu("GAMEOVER"); }
+  if (character.isAlive) { drawCharacter(); } else {
+    if (deathCount == 0) {
+      stopAllSounds();
+      stopAllLoops();
+      character.explode();
+      controlsEnabled = false;
+    } else if (deathCount == 1) {
+      deathTrack.play();
+    } else if (deathCount > 60*3) {
+      drawMenu("GAMEOVER");
+      controlsEnabled = true;
+    }
+    deathCount += 1;
+  }
   if (gameWon) { drawMenu("WIN"); } else { gameCheck(); }
 
   checkCharacterMovement();
@@ -57,14 +71,20 @@ function gameCheck() {
 
 
 function levelComplete() {
+  controlsEnabled = false;
   loadedZone.enemies = [];
   character.hasMasterKey = false;
   gameWon = true;
   overworldTrack.stop();
   fanfare2.play();
   var to = window.setTimeout(function() {
-    selectTrack.loop();
+    if (level == 3) {
+      endingTrack.loop();
+    } else {
+      selectTrack.loop();
+    }
     gameWonCount = 0;
     window.clearTimeout(to);
+    controlsEnabled = true;
   }, 3000);
 }

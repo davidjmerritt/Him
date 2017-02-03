@@ -1,10 +1,78 @@
 var clusterTypes = {
+  "SPECTACLE_ROCK": {
+    "layout": [
+      [0,0,3,3,2],
+      [3,appBlockHeight/2.5,5,4,2], //2=BROWN
+      [4.5,4,2,1,2],
+      [4,4.5,3,1,2],
+      [3.5,5,4,1,2],
+      [11,appBlockHeight/2.5,5,4,2],
+      [12.5,4,1,1,2],
+      [12,4.5,3,1,2],
+      [11.5,5,4,1,2],
+      [0,appBlockHeight-3,3,3,2],
+      [0,appBlockHeight-3,3,3,2],
+    ]
+  },
+  "EMPTY": {
+    "layout": []
+  },
+  "TREES": {
+    "layout": [
+      [2.5,3.5,1,1,7],
+      [2.5,appBlockHeight-5.5,1,1,7],
+      [2.5,appBlockHeight-3.2,1,1,7],
+      [2.5,appBlockHeight/2.5,1,1,7],
+
+      [appBlockWidth/4,3.5,1,1,7],
+      [appBlockWidth/4,appBlockHeight-5.5,1,1,7],
+      [appBlockWidth/4,appBlockHeight-3.2,1,1,7],
+      [appBlockWidth/4,appBlockHeight/2.5,1,1,7],
+      [appBlockWidth/2.5,appBlockHeight/2.5,1,1,7],//7=DARK_GREEN
+      [appBlockWidth/2.5,appBlockHeight-5.5,1,1,7],
+
+
+      [appBlockWidth-6,3.5,1,1,7],
+      [appBlockWidth-6,appBlockHeight/2.5,1,1,7],//7=DARK_GREEN
+      [appBlockWidth-6,appBlockHeight-5.5,1,1,7],
+      [appBlockWidth-6,appBlockHeight-3.2,1,1,7],
+
+      [appBlockWidth-8.5,appBlockHeight/2.5,1,1,7],
+      [appBlockWidth-8.5,appBlockHeight-5.5,1,1,7],
+
+      [appBlockWidth-3.5,3.5,1,1,7],
+      [appBlockWidth-3.5,appBlockHeight/2.5,1,1,7],//7=DARK_GREEN
+      [appBlockWidth-3.5,appBlockHeight-5.5,1,1,7],
+      [appBlockWidth-3.5,appBlockHeight-3.2,1,1,7],
+
+
+
+    ],
+  },
   "GREEN_GRID": {
     "layout": [
       [appBlockWidth/4,appBlockHeight/4,1,1,3], //8=OFF_GREEN
       [appBlockWidth/4,(appBlockHeight/4)*3,1,1,3],
       [(appBlockWidth/4)*3,appBlockHeight/4,1,1,3],
       [(appBlockWidth/4)*3,(appBlockHeight/4)*3,1,1,3]
+    ]
+  },
+  "RIVER_1": {
+    "layout": [
+      [0,0,3,5,1],
+      [0,2,8,3,1],
+      [5,3,3,8,1],
+      [5,3,3,8,1],
+      [5,11,3,4,14],
+    ]
+  },
+  "RIVER_2": {
+    "layout": [
+      [0,0,3,5,1],
+      [0,2,8,3,1],
+      [5,3,3,5,1],
+      [5,3,3,8,14],
+      [5,11,3,4,1],
     ]
   },
   "TWO_POOLS": {

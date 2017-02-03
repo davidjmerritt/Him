@@ -1,5 +1,5 @@
 var BLUE = [32, 56, 236];
-var DARK_BLUE = [32, 56, 136];
+var DARK_BLUE = [25, 35, 120];
 var WHITE = [252, 252, 252];
 var OFF_WHITE = [245, 245, 235];
 var BROWN = [200, 76, 12];
@@ -17,6 +17,7 @@ var DARK_RED = [190,0,50];
 var DARKER_RED = [150,0,40];
 var ORANGE = [255,100,0];
 var OFF_ORANGE = [255,80,0];
+var OFF_YELLOW = [225, 225, 225];
 var YELLOW = [255,180,50];
 var LIGHT_YELLOW = [255,210,150];
 var DARK_GRAY = [100, 100, 100];
@@ -27,6 +28,7 @@ var LIGHT_BLUE = [50, 200, 255];
 var LIGHTER_BLUE = [100, 250, 255];
 var GOLD = [255,230,100];
 var PINK = [255,0,100];
+var LIGHT_PINK = [255,150,150];
 var OFF_PINK = [255,0,80];
 var LIGHT_GREEN = [100,255,100];
 var PURPLE = [140, 0, 142];
@@ -42,7 +44,7 @@ var appBlockWidth = appWidth/blockSize;
 var appHeight = 720;
 var appBlockHeight = appHeight/blockSize;
 
-
+var deathCount = 0;
 var level = 0;
 var worldWidth = 16; //4
 var worldHeight = 8; //8 //2
@@ -60,15 +62,17 @@ var totalHealth = 12;
 
 var maxCoins = 999;
 
-var progressBarWidth = 250;
+var progressBarWidth = blockSize*2+10;
 
 var defaultFont = "Helvetica";
 
 var numberOfShopsMax = 4;
 
-var clusterTypesIndex = ["SNOW_TOP","DIRT_TOP","TRI_ROOM","LONE_BROWN_STONE","LONE_GRAY_STONE","LONG_SHRUB","WARP_STONES","TWO_POOLS","GREEN_GRID","TWO_GREEN","LARGE_WARP_STONES","GRAY_STRIPS"];
+var clusterTypesIndex = ["RIVER_2","RIVER_1","TREES","SPECTACLE_ROCK","EMPTY","SNOW_TOP","DIRT_TOP","TRI_ROOM","LONE_BROWN_STONE","LONE_GRAY_STONE","LONG_SHRUB","WARP_STONES","TWO_POOLS","GREEN_GRID","TWO_GREEN","LARGE_WARP_STONES","GRAY_STRIPS"];
 
 var gameWonCount = 0;
+
+var controlsEnabled = true;
 
 var defaultZoneBlocks = {
   topBorder: [],

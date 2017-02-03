@@ -8,6 +8,7 @@ function Zone() {
   this.missiles = {"enemy":[],"weapon":[]};
   this.walls = [];
   this.items = [];
+  this.bombs = [];
   this.hasShop = false;
   this.npcs = [];
   this.type = "overworld";
@@ -23,7 +24,9 @@ function Zone() {
     this.backgroundColor = newZone.backgroundColor;
     this.hasShop = newZone.hasShop;
     // closeWallsToNoWhere(coordinates,walls)
-    if (this._id != defaultCoords.toString().replace(',','-')) { this.enemies = createEnemies(randomInt(0,8)+level); }
+    if (this._id != defaultCoords.toString().replace(',','-')) {
+      this.enemies = createEnemies(randomInt(0,8));
+    }
   }
 }
 
@@ -58,7 +61,7 @@ function createZone(coordinates,walls) {
 
   // RIGHT WALL
   if (coordinates[0] == world.matrixWidth-1) {
-    blocks["rightBorder"] = createBlockBorderRight(block_id);
+    blocks["rightBorder"] = createBlockBorderRightBoundry(block_id);
   } else {
     if (!walls[1]) {
       blocks["rightBorder"] = createBlockBorderRightOpen(block_id);
@@ -69,7 +72,7 @@ function createZone(coordinates,walls) {
 
   // BOTTOM WALL
   if (coordinates[1] == world.matrixHeight-1) {
-    blocks["bottomBorder"] = createBlockBorderBottom(block_id);
+    blocks["bottomBorder"] = createBlockBorderBottomBoundry(block_id);
   } else {
     if (!walls[2]) {
       blocks["bottomBorder"] = createBlockBorderBottomOpen(block_id);
@@ -80,7 +83,7 @@ function createZone(coordinates,walls) {
 
   // LEFT WALL
   if (coordinates[0] == 0) {
-    blocks["leftBorder"] = createBlockBorderLeft(block_id);
+    blocks["leftBorder"] = createBlockBorderLeftBoundry(block_id);
   } else {
     if (!walls[3]) {
       blocks["leftBorder"] = createBlockBorderLeftOpen(block_id);
@@ -91,7 +94,7 @@ function createZone(coordinates,walls) {
 
   // TOP WALL
   if (coordinates[1] == 0) {
-    blocks["topBorder"] = createBlockBorderTop(block_id);
+    blocks["topBorder"] = createBlockBorderTopBoundry(block_id);
   } else {
     if (!walls[0]) {
         blocks["topBorder"] = createBlockBorderTopOpen(block_id);
