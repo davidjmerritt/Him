@@ -1,8 +1,11 @@
 var BLUE = [32, 56, 236];
 var DARK_BLUE = [25, 35, 120];
+var DARKER_BLUE = [15, 25, 100];
 var WHITE = [252, 252, 252];
 var OFF_WHITE = [245, 245, 235];
+var DARK_OFF_WHITE = [230, 230, 200];
 var BROWN = [200, 76, 12];
+var DARK_BROWN = [150, 50, 10];
 var OFF_BROWN = [180, 70, 10];
 var GREEN = [0, 168, 0];
 var DARK_GREEN = [40, 80, 40];
@@ -52,7 +55,7 @@ var defaultCoords = [0,0]; // [world.matrixWidth/2,world.matrixHeight-1];;
 var loadedZone;
 
 var startingSword = 4; // 4=WOOD, 7=WHITE, 8=MASTER
-var startItems = [5,6,14]; // 5=HEART, 6=5-COIN, 14=FAIRY
+var startItems = [5,6,14,26]; // 5=HEART, 6=5-COIN, 14=FAIRY, 26=HERB
 
 var gameWon = false;
 var matrixTest = [];
@@ -61,6 +64,7 @@ var startHealth = 6;
 var totalHealth = 12;
 
 var maxCoins = 999;
+var maxBombs = 12;
 
 var progressBarWidth = blockSize*2+10;
 

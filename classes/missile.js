@@ -1,11 +1,22 @@
-function Missile(pos, d, origin, sizeOffset) {
-  this._id = 0;
+missileTypes = [
+  {"_id":0, "type":"magic","innerColor": LIGHT_BLUE,"secondaryColor":LIGHT_GREEN,"tertiaryColor":WHITE,"movable": false,"solid": false, "damage":0.5,"rarity":1,"value":1,"decays":true,"size":[3,1]},
+  {"_id":1, "type":"fireball","innerColor": RED,"secondaryColor":ORANGE,"tertiaryColor":YELLOW,"movable": false,"solid": false, "damage":3,"rarity":1,"value":1,"decays":true,"size":[3,3]},
+];
+
+function Missile(_id, pos, d, origin, sizeOffset) {
+  this._id = _id;
   this.pos = pos.copy();
   this.vel = 10;
   this.d = d;
   this.r = pixelSize*3;
   this.origin = origin;
-  this.sizeOffset = sizeOffset;
+  this.sizeOffset = missileTypes[this._id].size;
+  this.innerColor = missileTypes[this._id].innerColor;
+  this.secondaryColor = missileTypes[this._id].secondaryColor;
+  this.tertiaryColor = missileTypes[this._id].tertiaryColor;
+  this.rotateCount = 0;
+  this.spinFactor = 1;
+  this.damage = missileTypes[this._id].damage;
 
   this.update = function(d) {
     if (this.d == 'RIGHT') {
@@ -49,21 +60,52 @@ function Missile(pos, d, origin, sizeOffset) {
 
   this.look = function() {
     noStroke();
-    fill(COLORS[randomInt(0,COLORS.length)]);
-    if (this.d == 'RIGHT' || this.d == 'LEFT') {
-      rect(
-        this.pos.x,
-        this.pos.y+pixelSize*1.5,
-        (this.r)*this.sizeOffset[0],
-        (pixelSize)*this.sizeOffset[1]
-      );
-    } else {
-      rect(
-        this.pos.x+pixelSize*1.5,
-        this.pos.y,
-        (pixelSize)*this.sizeOffset[0],
-        (this.r)*this.sizeOffset[1]
-      );
+    if (missileTypes[this._id].type == "magic") {
+      fill(COLORS[randomInt(0,COLORS.length)]);
+      if (this.d == 'RIGHT' || this.d == 'LEFT') {
+        rect(
+          this.pos.x,
+          this.pos.y+pixelSize*1.5,
+          pixelSize*this.sizeOffset[0],
+          pixelSize*this.sizeOffset[1]
+        );
+      } else {
+        rect(
+          this.pos.x+pixelSize*1.5,
+          this.pos.y,
+          pixelSize*this.sizeOffset[1],
+          pixelSize*this.sizeOffset[0]
+        );
+      }
+    } else if (missileTypes[this._id].type == "fireball") {
+      fill([this.innerColor,this.secondaryColor,this.tertiaryColor][randomInt(0,3)]);
+      this.rotateCount += 1;
+      if (this.rotateCount < 1*this.spinFactor) {
+        if (this.d == 'RIGHT' || this.d == 'LEFT') {
+          rect(this.pos.x,this.pos.y+pixelSize/1.5,pixelSize*this.sizeOffset[0],pixelSize*this.sizeOffset[1]);
+        } else {
+          rect(this.pos.x+pixelSize/1.5,this.pos.y,pixelSize*this.sizeOffset[0],pixelSize*this.sizeOffset[1]);
+        }
+      } else if (this.rotateCount >= 1*this.spinFactor && this.rotateCount < 2*this.spinFactor) {
+        if (this.d == 'RIGHT' || this.d == 'LEFT') {
+          rect(this.pos.x,this.pos.y+pixelSize*1.5,pixelSize*this.sizeOffset[1],pixelSize*this.sizeOffset[0]);
+        } else {
+          rect(this.pos.x+pixelSize*1.5,this.pos.y,pixelSize*this.sizeOffset[1],pixelSize*this.sizeOffset[0]);
+        }
+      } else if (this.rotateCount >= 2*this.spinFactor && this.rotateCount < 3*this.spinFactor) {
+        if (this.d == 'RIGHT' || this.d == 'LEFT') {
+          rect(this.pos.x,this.pos.y+pixelSize/1.5,pixelSize*this.sizeOffset[0],pixelSize*this.sizeOffset[1]);
+        } else {
+          rect(this.pos.x+pixelSize/1.5,this.pos.y,pixelSize*this.sizeOffset[0],pixelSize*this.sizeOffset[1]);
+        }
+      } else if (this.rotateCount >= 3*this.spinFactor && this.rotateCount < 4*this.spinFactor) {
+        if (this.d == 'RIGHT' || this.d == 'LEFT') {
+          rect(this.pos.x,this.pos.y+pixelSize*1.5,pixelSize*this.sizeOffset[1],pixelSize*this.sizeOffset[0]);
+        } else {
+          rect(this.pos.x+pixelSize*1.5,this.pos.y,pixelSize*this.sizeOffset[1],pixelSize*this.sizeOffset[0]);
+        }
+        this.rotateCount = 0;
+      }
     }
   }
 

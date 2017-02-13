@@ -24,9 +24,9 @@ function Zone() {
     this.backgroundColor = newZone.backgroundColor;
     this.hasShop = newZone.hasShop;
     // closeWallsToNoWhere(coordinates,walls)
-    if (this._id != defaultCoords.toString().replace(',','-')) {
-      this.enemies = createEnemies(randomInt(0,8));
-    }
+    // if (this._id != defaultCoords.toString().replace(',','-')) { // OLD WAY TO CREATE ENEMIES
+    //   this.enemies = createEnemies(randomInt(0,8));
+    // }
   }
 }
 

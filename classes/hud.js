@@ -22,23 +22,11 @@ function Hud() {
       }
     }
 
-    noStroke();
-    // BREADCRUMBS
-    if (character.hasMap) {
-      fill(255,255,255,150);
-      for (var i=0;i<world.breadcrumbs.length;+i++) {
-        rect(
-          (world.breadcrumbs[i][0]*this.blockWidth*2)+this.offset+1,
-          (world.breadcrumbs[i][1]*this.blockWidth*2)+this.offset+1,
-          (this.blockWidth*2)-2,
-          (this.blockWidth*2)-2
-        );
-      }
-    }
     // MINI-MAP BG
+    noStroke();
     c = color(50, 50, 50, 100);
     fill(c);
-    for (var i=0;i<world.zones.length;+i++) {
+    for (var i=0;i<world.zones.length;i++) {
       rect(
         (world.zones_index[i].split('-')[0]*this.blockWidth*2)+this.offset,
         (world.zones_index[i].split('-')[1]*this.blockWidth*2)+this.offset,
@@ -67,6 +55,57 @@ function Hud() {
     // value = alpha(c);
     // fill(value);
 
+    // ENEMY COUNT
+    // if (character.hasMap) {
+      // noStroke();
+      // for (var i=0;i<world.zones_index.length;i++) {
+      //   var coords = world.zones_index[i].split('-');
+      //   var x_coord = parseInt(coords[0]);
+      //   var y_coord = parseInt(coords[1]);
+      //   if (world.zones[world.zones_index[i]].enemies.length > 0) {
+          // fill(BLACK);
+          // text(world.zones[world.zones_index[i]].enemies.length, (x_coord*this.blockWidth*2)+this.offset+3, (y_coord*this.blockWidth*2)+this.offset+12);
+          // fill(255,0,0,100);
+          // rect(
+          //   (x_coord*this.blockWidth*2)+this.offset+1,
+          //   (y_coord*this.blockWidth*2)+this.offset+1,
+          //   (this.blockWidth*2)-2,
+          //   (this.blockWidth*2)-2
+          // );
+          // rect(
+          //   (x_coord*this.blockWidth*2)+this.offset+5,
+          //   (y_coord*this.blockWidth*2)+this.offset+5,
+          //   (this.blockWidth)-2,
+          //   (this.blockWidth)-2
+          // );
+          // ellipse(
+          //   (x_coord*this.blockWidth*2)+this.offset+7,
+          //   (y_coord*this.blockWidth*2)+this.offset+8,
+          //   (this.blockWidth)-2,
+          //   (this.blockWidth)-2
+          // );
+      //   }
+      // }
+    // }
+
+    noStroke();
+    // BREADCRUMBS
+    if (character.hasMap) {
+      // fill(this.characterIconColor)
+      fill(255,255,255,100);
+      for (var i=0;i<world.breadcrumbs.length;i++) {
+        rect(
+          (world.breadcrumbs[i][0]*this.blockWidth*2)+this.offset+4.5,
+          (world.breadcrumbs[i][1]*this.blockWidth*2)+this.offset+4.7,
+          (this.blockWidth)-2,
+          (this.blockWidth)-2
+          // (world.breadcrumbs[i][0]*this.blockWidth*2)+this.offset+1,
+          // (world.breadcrumbs[i][1]*this.blockWidth*2)+this.offset+1,
+          // (this.blockWidth*2)-2,
+          // (this.blockWidth*2)-2
+        );
+      }
+    }
 
     // CHARACTER
     noFill();
@@ -301,4 +340,34 @@ function drawHud() {
   if (character.health <= 0) {
     character.isAlive = false;
   }
+}
+
+
+function updateMazeAfterWallDestroyed(zoneCoords,otherWallCoords,wallSide,otherWallSide) {
+  var zoneIndex;
+  var otherZoneIndex;
+  for (var k=0;k<maze.length;k++) {
+    var x = zoneCoords.split('-')[0];
+    var y = zoneCoords.split('-')[1];
+    var xx = otherWallCoords.split('-')[0];
+    var yy = otherWallCoords.split('-')[1];
+    if (x == maze[k].i && y == maze[k].j) {
+      zoneIndex = k;
+    }
+    if (xx == maze[k].i && yy == maze[k].j) {
+      otherZoneIndex = k;
+    }
+  }
+
+  if (wallSide == "topBorder") { wallIndex = 0; } else
+  if (wallSide == "rightBorder") { wallIndex = 1; } else
+  if (wallSide == "bottomBorder") { wallIndex = 2; } else
+  if (wallSide == "leftBorder") { wallIndex = 3; }
+  maze[zoneIndex].walls[wallIndex] = false;
+
+  if (otherWallSide == "topBorder") { wallIndex = 0; } else
+  if (otherWallSide == "rightBorder") { wallIndex = 1; } else
+  if (otherWallSide == "bottomBorder") { wallIndex = 2; } else
+  if (otherWallSide == "leftBorder") { wallIndex = 3; }
+  maze[otherZoneIndex].walls[wallIndex] = false;
 }

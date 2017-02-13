@@ -27,6 +27,32 @@ function Menu() {
     text("GAME OVER\n\nPress the START button to CONTINUE", width/2,height/2-25);
   }
 
+  this.loadingWorld = function(data) {
+    textFont(defaultFont);
+    noStroke();
+    c = color(255, 0, 0, 150);
+    fill(c);
+    rect(
+      0,
+      0,
+      width,
+      height
+    );
+    value = alpha(c);
+    fill(value);
+    fill(BLACK);
+    rect(
+      width/2-640/2,
+      height/2-240/2,
+      640,
+      240
+    );
+    fill(250, 250, 250);
+    textSize(28);
+    textAlign(CENTER);
+    text("Loading..."+data, width/2,height/2-25);
+  }
+
   this.win = function() {
     textFont(defaultFont);
     noStroke();
@@ -61,6 +87,7 @@ function Menu() {
     push();
     if (m == "GAMEOVER") { this.gameOver(); }
     if (m == "WIN") { this.win(); }
+    if (m == "LOADING") { this.loadingWorld(); }
     pop();
   }
 }

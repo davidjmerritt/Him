@@ -27,7 +27,7 @@ function shopDraw() {
 }
 
 
-function createShop(coordinates,item_id,npc_id) {
+function createShop(coordinates,item_id,npc_id,kind) {
   // INTERIOR
   var shop_id = coordinates.toString().replace(',','-');
   var shopZone = new Zone();
@@ -35,6 +35,7 @@ function createShop(coordinates,item_id,npc_id) {
   shopZone.create(coordinates,[true, true, false, true]);
   world.shops[shop_id] = shopZone;
   world.shops[shop_id].type = "shop";
+  world.shops[shop_id].kind = kind;
   world.shops[shop_id].enemies = [];
   world.shops[shop_id].blocks = {};
   world.shops[shop_id].blocks["topBorder"] = createBlockBorderTopThickBoundry(2);
@@ -68,7 +69,14 @@ function createShop(coordinates,item_id,npc_id) {
 function loadShop(shopCoords) {
   var shopCoordsString = shopCoords.toString().replace(',','-');
   overworldTrack.stop();
-  caveTrack.loop(); caveTrack.setVolume(0.3);
+  if (["sword","special"].has(world.shops[shopCoordsString].kind)) {
+    caveTrack.loop(); caveTrack.setVolume(0.3);
+  } else if (["doctor","coin"].has(world.shops[shopCoordsString].kind)){
+    fairyTrack.loop(); fairyTrack.setVolume(0.3);
+  } else if (["joke","item"].has(world.shops[shopCoordsString].kind)){
+    shopTrack.loop(); shopTrack.setVolume(0.3);
+  }
+
   loadedZone = world.shops[shopCoordsString];
   world.lastShop = shopCoordsString;
 }

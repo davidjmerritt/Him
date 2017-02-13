@@ -4,7 +4,9 @@ function Character() {
   this.isMoving = false;
   this.d = 'STILL';
   this.last_d = 'DOWN';
-  this.vel = 3.5;
+  this.walkSpeed = 3.5;
+  this.runSpeed = 10;
+  this.vel = this.walkSpeed;
   this.health = 0;
   this.isAlive = true;
   this.coins = 0;
@@ -13,6 +15,8 @@ function Character() {
   this.invincibleCount = 0 ;
   this.isInvincible = false;
   this.primeColor = BLACK;
+  this.skinColor = LIGHT_TAN;
+  this.hairColor = BROWN;
   this.hasWeapon = false;
   this.weapon = false;
   this.weaponCount = 0;
@@ -41,6 +45,15 @@ function Character() {
   this.tertiaryWeaponUsed = false;
   this.hasTertiaryWeapon = false;
   this.bombs = 0;
+  this.isRunning = false;
+  this.hasSpeedShoes = false;
+  this.isAsleep = false;
+  this.sleepCount = 0;
+  this.sleepCountMax = 300;
+  this.isPoisoned = false;
+  this.poisonCount = 0;
+  this.poisonCountMax = 360;
+  this.posionDamage = 1;
 
   this.damageDelt = function() {
     var damage = character.weapon.damage*character.power();
@@ -53,35 +66,39 @@ function Character() {
     fill(this.primeColor);
     rect(this.pos.x,this.pos.y,this.r*2,this.r*2);
     if (this.d == 'DOWN' || this.d == 'STILL') {
-      fill(BROWN);
+      fill(this.hairColor);
       rect(this.pos.x,this.pos.y,this.r*2,this.r*2/2);
-      fill(LIGHT_TAN);
+      fill(this.skinColor);
       rect(this.pos.x,this.pos.y+this.r*2/2,pixelSize,pixelSize);
       rect(this.pos.x+pixelSize*3,this.pos.y+this.r*2/2,pixelSize,pixelSize);
-      fill(LIGHT_TAN);
+      fill(this.skinColor);
       rect(this.pos.x+pixelSize,this.pos.y+pixelSize,pixelSize,pixelSize);
       rect(this.pos.x+this.r*2/2,this.pos.y+pixelSize,pixelSize,pixelSize);
     } else if (this.d == 'UP') {
-      fill(BROWN);
+      fill(this.hairColor);
       rect(this.pos.x,this.pos.y,this.r*2,this.r*2/2);
     } else if (this.d == 'RIGHT') {
-      fill(BROWN);
+      fill(this.hairColor);
       rect(this.pos.x,this.pos.y,this.r*2,this.r*2/2);
-      fill(LIGHT_TAN);
+      fill(this.skinColor);
       rect(this.pos.x+this.r*2/2,this.pos.y+this.r*2/2,pixelSize,pixelSize);
       rect(this.pos.x+pixelSize,this.pos.y+this.r*2/2,pixelSize,pixelSize);
-      fill(LIGHT_TAN);
+      fill(this.skinColor);
       rect(this.pos.x+pixelSize*2,this.pos.y+pixelSize,pixelSize,pixelSize);
       rect(this.pos.x+pixelSize*3,this.pos.y+pixelSize,pixelSize,pixelSize);
     } else if (this.d == 'LEFT') {
-      fill(BROWN);
+      fill(this.hairColor);
       rect(this.pos.x,this.pos.y,this.r*2,this.r*2/2);
-      fill(LIGHT_TAN);
+      fill(this.skinColor);
       rect(this.pos.x+this.r*2/2,this.pos.y+this.r*2/2,pixelSize,pixelSize);
       rect(this.pos.x+pixelSize,this.pos.y+this.r*2/2,pixelSize,pixelSize);
-      fill(LIGHT_TAN);
+      fill(this.skinColor);
       rect(this.pos.x,this.pos.y+pixelSize,pixelSize,pixelSize);
       rect(this.pos.x+pixelSize,this.pos.y+pixelSize,pixelSize,pixelSize);
+    }
+    if (character.hasSpeedShoes) {
+      fill(itemTypes[25].innerColor);
+      rect(this.pos.x,this.pos.y+pixelSize*3,pixelSize*4,pixelSize);
     }
   }
 
@@ -101,7 +118,49 @@ function Character() {
 
     if (this.isMoving) {
       this.move();
+      if (this.hasSpeedShoes) {
+        this.run();
+      }
     }
+
+    if (this.isPoisoned) {
+      this.skinColor = LIGHT_GREEN;
+      this.poisonCount += 1;
+      if (this.poisonCount == this.poisonCountMax-300) {
+        this.health -= this.posionDamage; this.isInvincible = true; characterHit.play();
+      } else if (this.poisonCount == this.poisonCountMax-240) {
+        this.health -= this.posionDamage; this.isInvincible = true; characterHit.play();
+      } else if (this.poisonCount == this.poisonCountMax-180) {
+        this.health -= this.posionDamage; this.isInvincible = true; characterHit.play();
+      } else if (this.poisonCount == this.poisonCountMax-120) {
+        this.health -= this.posionDamage; this.isInvincible = true; characterHit.play();
+      } else if (this.poisonCount == this.poisonCountMax-60) {
+        this.health -= this.posionDamage; this.isInvincible = true; characterHit.play();
+      } else if (this.poisonCount == this.poisonCountMax) {
+        this.health -= this.posionDamage; this.isInvincible = true; characterHit.play();
+      }
+      if (this.poisonCount >= this.poisonCountMax) {
+        this.isPoisoned = false;
+        this.poisonCount = 0;
+        this.skinColor = LIGHT_TAN;
+      }
+    } else {
+      this.poisonCount = 0;
+      this.skinColor = LIGHT_TAN;
+    }
+
+    if (this.isAsleep) {
+      controlsEnabled = false;
+      this.sleepCount += 1;
+      this.skinColor = DARK_OFF_WHITE;
+      if (this.sleepCount >= this.sleepCountMax) {
+        this.sleepCount = 0;
+        this.isAsleep = false;
+        controlsEnabled = true;
+        this.skinColor = LIGHT_TAN;
+      }
+    }
+
     if (this.isInvincible) {
       this.primeColor = COLORS[randomInt(0,COLORS.length)];
       this.invincibleCount += 1;
@@ -122,7 +181,7 @@ function Character() {
         this.moving(true);
       }
     } else {
-      this.weapon.pos = this.pos.copy();
+      // this.weapon.pos = this.pos.copy();
     }
 
     if (this.hasSecondaryWeapon && this.secondaryWeaponUsed) {
@@ -172,8 +231,13 @@ function Character() {
       this.weapon.pos = createVector(this.pos.x, this.pos.y - this.r*2);
     }
     if (!this.isBurningDown && this.health == totalHealth && character.hasWeapon) {
-      swordBeam.play();
-      loadedZone.missiles.weapon.push(new Missile(this.weapon.pos, this.last_d, "weapon", this.sizeOffset));
+      if (this.weapon._id < 8) {
+        swordBeam.play();
+        loadedZone.missiles.weapon.push(new Missile(0, this.weapon.pos, this.last_d, "weapon"));
+      } else {
+        fire.play();
+        loadedZone.missiles.weapon.push(new Missile(1, this.weapon.pos, this.last_d, "weapon"));
+      }
     }
   }
 
@@ -233,6 +297,26 @@ function Character() {
     character.burndownBar.update(character.burndownBar.percent);
   }
 
+  this.running = function(r) {
+    this.isRunning = r;
+  }
+  this.run = function() {
+    if (this.isRunning) {
+      character.vel = character.runSpeed;
+      if (this.last_d == 'RIGHT') {
+        this.weapon.pos = createVector(this.pos.x + pixelSize*3, this.pos.y);
+      } else if (this.last_d == 'LEFT') {
+        this.weapon.pos = createVector(this.pos.x - pixelSize*3, this.pos.y);
+      } else if (this.last_d == 'DOWN') {
+        this.weapon.pos = createVector(this.pos.x, this.pos.y + pixelSize*3);
+      } else if (this.last_d == 'UP') {
+        this.weapon.pos = createVector(this.pos.x, this.pos.y - pixelSize*3);
+      }
+    } else {
+      character.vel = character.walkSpeed;
+    }
+  }
+
   this.hits = function(entity) {
     var d = dist(this.pos.x, this.pos.y, entity.pos.x, entity.pos.y);
     if (d < (this.r + entity.r)) {
@@ -253,7 +337,7 @@ function Character() {
       world.breadcrumbs.push(loadedZone.coordinates);
     } else if (this.pos.y > appHeight) { // BOTTOM
       if (STATE == 'SHOP') { // EXIT PORTAL
-        caveTrack.stop();
+        stopAllSounds();
         overworldTrack.loop(); overworldTrack.setVolume(0.3);
         this.enteringPortal = false;
         this.pos = createVector(width-(blockSize*3)-(blockSize/2),blockSize);
@@ -341,7 +425,7 @@ function drawCharacter() {
   drawNPCs();
 
   character.weapon.d = character.last_d;
-  if (character.hasWeapon && character.weaponUsed) {
+  if (character.hasWeapon && character.weaponUsed || character.hasSpeedShoes && character.isRunning && character.hasWeapon) {
     character.weapon.render();
   } else {
     character.weapon.pos = createVector(-9999,-9999);
@@ -404,7 +488,7 @@ function drawCharacter() {
               for (var m=0;m<loadedZone.missiles.weapon.length;m++) {
                 var weaponMissile = loadedZone.missiles.weapon[m];
                 if (weaponMissile.hits(enemy)) {
-                  enemy.health -= Math.ceil(character.damageDelt()/2);
+                  enemy.health -= weaponMissile.damage; //Math.ceil(character.damageDelt()/2);
                   enemy.isInvincible = true;
                   weaponMissile.explode();
                   enemyHit.play();
@@ -448,24 +532,27 @@ function drawCharacter() {
           }
         }
         if (!character.isInvincible) {
-          if (character.hits(enemy)) {
-            characterHit.play();
-            if (character.health <= 3) {
-              startLoop(lowHealth,1500,'lowHealth');
-            }
-            character.pos = createVector(character.pos.x-blockSize,character.pos.y-blockSize);
-            var damageTaken = character.ac+enemy.damage;
-            character.health -= damageTaken;
-            character.isInvincible = true;
-            if (enemy.rarity != "unique") {
-              entityPush(character,enemy);
+          if (!character.isRunning) {
+            if (character.hits(enemy)) {
+              characterHit.play();
+              if (character.health <= 3) {
+                startLoop(lowHealth,1500,'lowHealth');
+              }
+              character.pos = createVector(character.pos.x-blockSize,character.pos.y-blockSize);
+              var damageTaken = character.ac+enemy.damage;
+              character.health -= damageTaken;
+              character.isInvincible = true;
+              if (enemy.rarity != "unique") {
+                entityPush(character,enemy);
+              }
             }
           }
           for (var em=0;em<loadedZone.missiles.enemy.length;em++) {
             var enemyMissile = loadedZone.missiles.enemy[em];
             if (enemyMissile.hits(character)) {
-              var damageTaken = character.ac+enemy.damage;
-              character.health -= round(damageTaken*2);
+              // var damageTaken = character.ac+enemyMissile.damage;
+              // character.health -= round(damageTaken*2);
+              character.health -= (character.ac+enemyMissile.damage);
               character.isInvincible = true;
               enemyMissile.explode();
             }

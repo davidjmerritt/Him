@@ -23,7 +23,9 @@ function World(w,h) {
   this.doctorShop;
   this.bombShop;
   this.jokeShop;
-  this.coinsInWorld;
+  this.shoeShop;
+  this.coinsInWorld = 0;
+  this.enemiesInWorld = 0;
   this.npcs = [];
   this.lastShop;
 
@@ -103,7 +105,6 @@ function World(w,h) {
     //   this.zones[this.doorZone].blocks[guid()] = doorCluster[i];
     // }
 
-
     // CREATE UPSTAIRS @ START
     // this.zones[defaultCoords.toString().replace(',','-')].items.push(createItem(20,"UPLEFT"));
 
@@ -120,9 +121,42 @@ function World(w,h) {
     //   this.zones[defaultCoords.toString().replace(',','-')].blocks[guid()] = fenceCluster[i];
     // }
 
+    // CREATE WHITE-BLOOG @ START
+    // var priceBloog = new Enemy(6,0,createVector(randomInt(blockSize*2,width-blockSize*2), randomInt(blockSize*2,height-blockSize*2)));
+    // this.zones[defaultCoords.toString().replace(',','-')].enemies.push(priceBloog);
+
+    // CREATE WHITE-BLOOG @ START
+    // var bloog = new Enemy(4,0,createVector(randomInt(blockSize*2,width-blockSize*2), randomInt(blockSize*2,height-blockSize*2)));
+    // this.zones[defaultCoords.toString().replace(',','-')].enemies.push(bloog);
+
+    // CREATE MAD-BOMBER @ START
+    // var bomber = new Enemy(9,0,createVector(randomInt(blockSize*2,width-blockSize*2), randomInt(blockSize*2,height-blockSize*2)));
+    // this.zones[defaultCoords.toString().replace(',','-')].enemies.push(bomber);
+
+    // CREATE RED-MAGE @ START
+    // var mage = new Enemy(10,0,createVector(randomInt(blockSize*2,width-blockSize*2), randomInt(blockSize*2,height-blockSize*2)));
+    // this.zones[defaultCoords.toString().replace(',','-')].enemies.push(mage);
+
+    // // CREATE Grey-MAGE @ START
+    // var mage = new Enemy(11,0,createVector(randomInt(blockSize*2,width-blockSize*2), randomInt(blockSize*2,height-blockSize*2)));
+    // this.zones[defaultCoords.toString().replace(',','-')].enemies.push(mage);
+
+    // // CREATE BLACK-MAGE @ START
+    // var mage = new Enemy(12,0,createVector(randomInt(blockSize*2,width-blockSize*2), randomInt(blockSize*2,height-blockSize*2)));
+    // this.zones[defaultCoords.toString().replace(',','-')].enemies.push(mage);
+
+    // CREATE HERB @ START
+    // this.zones[defaultCoords.toString().replace(',','-')].items.push(createItem(26,"UPCENTERDOOR"));
+
+
+    // CREATE SNAKE @ START
+    // var snake = new Snake();
+    // this.zones[defaultCoords.toString().replace(',','-')].enemies.push(snake);
+
+
     // SWORD SHOPS
     if (level == 1) {
-      createShop(defaultCoords,4,5); // WOODEN SWORD SHOP
+      createShop(defaultCoords,4,5,"sword"); // WOODEN SWORD SHOP
       var swordID = 7;
       var npcID = 1;
     } else if (level == 2) {
@@ -133,44 +167,50 @@ function World(w,h) {
     }
     if (!swordID) {} else {
       this.swordShop = this.zonesWithoutShop[randomInt(0,this.zonesWithoutShop.length).toString().replace(',','-')].split('-');
-      createShop(this.swordShop,swordID,npcID);
+      createShop(this.swordShop,swordID,npcID,"sword");
     }
 
     // 100 COINS SHOP
     this.hundredShop = this.zonesWithoutShop[randomInt(0,this.zonesWithoutShop.length).toString().replace(',','-')].split('-');
-    createShop(this.hundredShop,15,3);
+    createShop(this.hundredShop,15,3,"coin");
 
     // 50 COINS SHOP
     this.fiftyShop = this.zonesWithoutShop[randomInt(0,this.zonesWithoutShop.length).toString().replace(',','-')].split('-');
-    createShop(this.fiftyShop,16,3);
+    createShop(this.fiftyShop,16,3,"coin");
 
     // BOOMERANG SHOP
     if (level == 1) {
       this.boomerangShop = this.zonesWithoutShop[randomInt(0,this.zonesWithoutShop.length).toString().replace(',','-')].split('-');
-      createShop(this.boomerangShop,22,8);
+      createShop(this.boomerangShop,22,8,"special");
+    }
+
+    // SHOE SHOP
+    if (level == 2) {
+      this.shoeShop = this.zonesWithoutShop[randomInt(0,this.zonesWithoutShop.length).toString().replace(',','-')].split('-');
+      createShop(this.shoeShop,25,11,"special");
     }
 
     // DOCTOR SHOPS
     for (var i=0;i<3;i++) {
       this['doctorShop'+(i+1)] = this.zonesWithoutShop[randomInt(0,this.zonesWithoutShop.length).toString().replace(',','-')].split('-');
-      createShop(this['doctorShop'+(i+1)],24,9);
+      createShop(this['doctorShop'+(i+1)],24,9,"doctor");
     }
 
     // BOMB SHOP
     this.bombShop = this.zonesWithoutShop[randomInt(0,this.zonesWithoutShop.length).toString().replace(',','-')].split('-');
-    createShop(this.bombShop,23,10);
+    createShop(this.bombShop,23,10,"item");
 
     // JOKE SHOP
     this.jokeShop = this.zonesWithoutShop[randomInt(0,this.zonesWithoutShop.length).toString().replace(',','-')].split('-');
-    createShop(this.jokeShop,18,6);
+    createShop(this.jokeShop,18,6,"joke");
 
     // CREATE NPCS
     for (var i=0;i<overworldNPCs.length;i++) {
       createNPCs(overworldNPCs[i]);
     }
 
-    // COUNT MONEY IN WORLD
-    this.coinsInWorld = countCoinsInWorld();
+    // CREATE ENEMIES
+    createEnemiesByCoins();
 
     console.log(world);
   }

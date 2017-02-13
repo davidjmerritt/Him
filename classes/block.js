@@ -401,6 +401,7 @@ function createBorders() {
 
 function destroyOtherWallBlock(wall,block) {
   if (wall == 'topBorder') {
+    var otherWall = 'bottomBorder';
     var otherWallCoords = [loadedZone.coordinates[0],loadedZone.coordinates[1]-1].toString().replace(',','-');
     var nextZone = world.zones[otherWallCoords];
     if (nextZone != undefined) {
@@ -414,6 +415,7 @@ function destroyOtherWallBlock(wall,block) {
       }
     }
   } else if (wall == 'bottomBorder') {
+    var otherWall = 'topBorder';
     var otherWallCoords = [loadedZone.coordinates[0],loadedZone.coordinates[1]+1].toString().replace(',','-');
     var nextZone = world.zones[otherWallCoords];
     if (nextZone != undefined) {
@@ -427,6 +429,7 @@ function destroyOtherWallBlock(wall,block) {
       }
     }
   } else if (wall == 'rightBorder') {
+    var otherWall = 'leftBorder';
     var otherWallCoords = [loadedZone.coordinates[0]+1,loadedZone.coordinates[1]].toString().replace(',','-');
     var nextZone = world.zones[otherWallCoords];
     if (nextZone != undefined) {
@@ -440,6 +443,7 @@ function destroyOtherWallBlock(wall,block) {
       }
     }
   } else if (wall == 'leftBorder') {
+    var otherWall = 'rightBorder';
     var otherWallCoords = [loadedZone.coordinates[0]-1,loadedZone.coordinates[1]].toString().replace(',','-');
     var nextZone = world.zones[otherWallCoords];
     if (nextZone != undefined) {
@@ -453,5 +457,10 @@ function destroyOtherWallBlock(wall,block) {
       }
     }
   }
-  if (nextZone != undefined) { return true; } else { return false; }
+  if (nextZone != undefined) {
+    updateMazeAfterWallDestroyed(loadedZone._id,otherWallCoords,wall,otherWall);
+    return true;
+  } else {
+    return false;
+  }
 }

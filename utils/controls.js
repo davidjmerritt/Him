@@ -4,18 +4,23 @@ var keyCodeMap = [];
 function checkCharacterMovement() {
   if (keyCodeMap.length == 0) {
     character.moving(false);
+    character.running(false);
+
   }
+  if (!keyCodeMap.has(SNES_A)) {
+    character.running(false);
+  }
+  // console.log(character.isRunning)
 }
 
 
 function keyReleased() {
   if (character != undefined) {
     if (character.isAlive) {
-      if (keyCode == SNES_RIGHT || keyCode == SNES_LEFT || keyCode == SNES_UP || keyCode == SNES_DOWN || keyCode == RIGHT_ARROW || keyCode == LEFT_ARROW || keyCode == UP_ARROW || keyCode == DOWN_ARROW) {
+      if (keyCode == SNES_RIGHT || keyCode == SNES_LEFT || keyCode == SNES_UP || keyCode == SNES_DOWN || keyCode == RIGHT_ARROW || keyCode == LEFT_ARROW || keyCode == UP_ARROW || keyCode == DOWN_ARROW || keyCode == SNES_A) {
         var index = keyCodeMap.indexOf(keyCode);
         keyCodeMap.splice(index,1);
       }
-      if (keyCode == SNES_A) { character.vel = 4; }
     }
   }
 }
@@ -51,7 +56,13 @@ function keyPressed() {
             character.useTertiaryWeapon();
           }
 
-          if (keyCode == SNES_A) { character.vel = 10; }
+          if (keyCode == SNES_A) {
+            keyCodeMap.push(keyCode);
+            if (character.hasSpeedShoes) {
+              character.useWeapon();
+              character.running(true);
+            }
+          }
 
         // MOVEMENT
           if (keyCode == RIGHT_ARROW || keyCode == SNES_RIGHT) { // keyCode == 68

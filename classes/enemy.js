@@ -1,13 +1,17 @@
 var enemyTypes = [
-  {"_id":0, "type":"red-bloog","innerColor": RED,"secondaryColor": BLACK,"movable": true,"solid": true, "damage":1,"health":.9,"speed":2,"rarity":2,"digger":false,"pusher":true,"size":[1,1],"attack":null,"level":0,"exp":5,"requiredWeapons":[4,7,8]},
-  {"_id":1, "type":"blue-bloog","innerColor": BLUE,"secondaryColor": BLACK,"movable": true,"solid": true, "damage":2,"health":2,"speed":4,"rarity":3,"digger":true,"pusher":false,"size":[1,1],"attack":null,"level":2,"exp":10,"requiredWeapons":[4,7,8]},
-  {"_id":2, "type":"green-bloog","innerColor": GREEN,"secondaryColor": BLACK,"movable": true,"solid": true, "damage":3,"health":2,"speed":1,"rarity":5,"digger":false,"pusher":true,"size":[1,1],"attack":null,"level":0,"exp":15,"requiredWeapons":[4,7,8]},
-  {"_id":3, "type":"black-bloog","innerColor": BLACK,"secondaryColor": OFF_WHITE,"movable": true,"solid": true, "damage":5,"health":3,"speed":3,"rarity":10,"digger":false,"pusher":true,"size":[1,1],"attack":null,"level":3,"exp":20,"requiredWeapons":[4,7,8]},
-  {"_id":4, "type":"white-bloog","innerColor": OFF_WHITE,"secondaryColor": BLACK,"movable": true,"solid": true, "damage":4,"health":5,"speed":3,"rarity":20,"digger":true,"pusher":true,"size":[1,1],"attack":"missile","level":4,"exp":30,"requiredWeapons":[4,7,8]},
-  {"_id":5, "type":"boss-bloog","innerColor": PURPLE,"secondaryColor": BLACK,"tertiaryColor": OFF_PURPLE,"movable": false,"solid": false, "damage":5,"health":20,"speed":.4,"rarity":"unique","digger":false,"pusher":false,"size":[3,3],"attack":"missile","spells":[],"requiredWeapons":[7,8],"level":0,"exp":100},
-  {"_id":6, "type":"prince-bloog","innerColor": PINK,"secondaryColor": BLACK,"tertiaryColor": OFF_PINK,"movable": false,"solid": false, "damage":8,"health":35,"speed":.6,"rarity":"unique","digger":false,"pusher":false,"size":[3,3],"attack":"missile","spells":["spawner"],"requiredWeapons":[8],"level":0,"exp":200},
-  {"_id":7, "type":"king-bloog","innerColor": ORANGE,"secondaryColor": BLACK,"tertiaryColor": OFF_ORANGE,"movable": false,"solid": false, "damage":10,"health":50,"speed":.8,"rarity":"unique","digger":false,"pusher":false,"size":[3,3],"attack":"missile","spells":["spawner"],"requiredWeapons":[8],"level":0,"exp":500},
-  {"_id":8, "type":"blue-flutter","innerColor": BLACK,"secondaryColor": DARK_BLUE,"movable": false,"solid": false, "damage":0.2,"health":0.2,"speed":6,"rarity":5,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":2,"exp":3,"requiredWeapons":[4,7,8]},
+  {"_id":0, "type":"red-bloog","innerColor": RED,"secondaryColor": BLACK,"movable": true,"solid": true, "damage":1,"health":.9,"speed":2,"rarity":1,"digger":false,"pusher":true,"size":[1,1],"attack":null,"level":1,"exp":5,"requiredWeapons":[4,7,8],"spells":[],"magic":0,"burndown":[12,16]},
+  {"_id":1, "type":"blue-bloog","innerColor": BLUE,"secondaryColor": BLACK,"movable": true,"solid": true, "damage":2,"health":2,"speed":4,"rarity":2,"digger":true,"pusher":false,"size":[1,1],"attack":null,"level":2,"exp":10,"requiredWeapons":[4,7,8],"burndown":[12,16]},
+  {"_id":2, "type":"green-bloog","innerColor": GREEN,"secondaryColor": BLACK,"movable": true,"solid": true, "damage":3,"health":2,"speed":1,"rarity":2,"digger":false,"pusher":true,"size":[1,1],"attack":null,"level":1,"exp":15,"requiredWeapons":[4,7,8],"burndown":[12,16]},
+  {"_id":3, "type":"black-bloog","innerColor": BLACK,"secondaryColor": OFF_WHITE,"movable": true,"solid": true, "damage":5,"health":3,"speed":3,"rarity":10,"digger":false,"pusher":true,"size":[1,1],"attack":null,"level":3,"exp":20,"requiredWeapons":[4,7,8],"burndown":[12,16]},
+  {"_id":4, "type":"white-bloog","innerColor": OFF_WHITE,"secondaryColor": BLACK,"movable": true,"solid": true, "damage":4,"health":5,"speed":3,"rarity":20,"digger":true,"pusher":true,"size":[1,1],"attack":"missile","level":4,"exp":30,"requiredWeapons":[4,7,8],"burndown":[12,16]},
+  {"_id":5, "type":"boss-bloog","innerColor": PURPLE,"secondaryColor": BLACK,"tertiaryColor": OFF_PURPLE,"movable": false,"solid": false, "damage":5,"health":20,"speed":.4,"rarity":"unique","digger":false,"pusher":false,"size":[3,3],"attack":"missile","spells":[],"requiredWeapons":[7,8],"level":0,"exp":100,"magic":0,"burndown":[12,16]},
+  {"_id":6, "type":"prince-bloog","innerColor": PINK,"secondaryColor": BLACK,"tertiaryColor": OFF_PINK,"movable": false,"solid": false, "damage":8,"health":35,"speed":.6,"rarity":"unique","digger":false,"pusher":false,"size":[3,3],"attack":"missile","spells":["spawner"],"requiredWeapons":[8],"level":0,"exp":200,"magic":10,"burndown":[12,16]},
+  {"_id":7, "type":"king-bloog","innerColor": ORANGE,"secondaryColor": BLACK,"tertiaryColor": OFF_ORANGE,"movable": false,"solid": false, "damage":10,"health":50,"speed":.8,"rarity":"unique","digger":false,"pusher":false,"size":[3,3],"attack":"missile","spells":["spawner"],"requiredWeapons":[8],"level":0,"exp":500,"magic":10,"burndown":[12,16]},
+  {"_id":8, "type":"blue-flutter","innerColor": BLACK,"secondaryColor": DARK_BLUE,"movable": false,"solid": false, "damage":0.2,"health":0.2,"speed":6,"rarity":5,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":2,"exp":3,"requiredWeapons":[4,7,8],"burndown":[12,16]},
+  {"_id":9, "type":"mad-bomber","innerColor": BLACK,"secondaryColor": DARK_BLUE,"tertiaryColor": DARKER_GRAY,"movable": false,"solid": false, "damage":1,"health":4,"speed":3,"rarity":100,"digger":true,"pusher":true,"size":[1,1],"attack":"bomb","level":2,"exp":3,"requiredWeapons":[4,7,8],"spells":["bomb"],"items":[23],"burndown":[12,16]},
+  {"_id":10, "type":"red-mage","innerColor": DARK_RED,"secondaryColor": BLACK,"tertiaryColor": DARKER_RED,"movable": true,"solid": true, "damage":0.1,"health":2,"speed":1,"rarity":50,"digger":false,"pusher":true,"size":[1,1],"attack":null,"level":2,"exp":5,"requiredWeapons":[4,7,8],"spells":["sleep","fireball"],"magic":4,"burndown":[1,3]},
+  {"_id":11, "type":"gray-mage","innerColor": DARK_GRAY,"secondaryColor": BLACK,"tertiaryColor": DARKER_GRAY,"movable": true,"solid": true, "damage":0.1,"health":4,"speed":2,"rarity":75,"digger":false,"pusher":true,"size":[1,1],"attack":null,"level":3,"exp":5,"requiredWeapons":[4,7,8],"spells":["poison","sleep","fireball"],"items":[26],"magic":8,"burndown":[3,5]},
+  {"_id":12, "type":"black-mage","innerColor": BLACK,"secondaryColor": DARKER_GRAY,"tertiaryColor": DARKER_GRAY,"movable": true,"solid": true, "damage":0.1,"health":6,"speed":2,"rarity":100,"digger":false,"pusher":true,"size":[1,1],"attack":null,"level":3,"exp":5,"requiredWeapons":[4,7,8],"spells":["poison","sleep","fireball"],"items":[26],"magic":16,"burndown":[2,3]},
 ];
 
 function Enemy(_id,_index,pos) {
@@ -36,7 +40,7 @@ function Enemy(_id,_index,pos) {
   this.canPush = enemyTypes[this._id].pusher;
   this.attackType = enemyTypes[this._id].attack;
   this.attackCount = 0;
-  this.attackCountMax = 300;
+  this.attackCountMax = randomInt(300,600);
   this.wallHitCount = 0;
   this.sizeOffset = enemyTypes[this._id].size;
   this.rarity = enemyTypes[_id].rarity;
@@ -45,11 +49,60 @@ function Enemy(_id,_index,pos) {
   this.locList = ["LEFT","RIGHT","UP","DOWN","STILL"];
   this.isStunned = false;
   this.stunnedCount = 0 ;
+  this.spells = enemyTypes[_id].spells;
+  this.castCount = 0;
+  this.castCountMax = randomInt(enemyTypes[_id].burndown[0]*60,enemyTypes[_id].burndown[1]*60);
+  this.castingSpell = false;
+  this.magic = enemyTypes[_id].magic;
+  this.isResting = false;
+  this.restCount = 0;
+  this.recoveryTime = 240;
 
   this.look = function() {
     noStroke();
+
+    if (this.type.slice(-6) == "bomber" || this.type.slice(-4) == "mage") {
+      noStroke();
+      fill(this.primeColor);
+      rect(this.pos.x,this.pos.y,this.r*2,this.r*2);
+      if (this.d == 'DOWN' || this.d == 'STILL') {
+        fill(this.primeColor);
+        rect(this.pos.x,this.pos.y,this.r*2,this.r*2/2);
+        fill(this.tertiaryColor);
+        rect(this.pos.x,this.pos.y+this.r*2/2,pixelSize,pixelSize);
+        rect(this.pos.x+pixelSize*3,this.pos.y+this.r*2/2,pixelSize,pixelSize);
+        fill(this.secondaryColor);
+        rect(this.pos.x+pixelSize,this.pos.y+pixelSize,pixelSize,pixelSize);
+        rect(this.pos.x+this.r*2/2,this.pos.y+pixelSize,pixelSize,pixelSize);
+      } else if (this.d == 'UP') {
+        fill(this.primeColor);
+        rect(this.pos.x,this.pos.y,this.r*2,this.r*2/2);
+      } else if (this.d == 'RIGHT') {
+        fill(this.primeColor);
+        rect(this.pos.x,this.pos.y,this.r*2,this.r*2/2);
+        fill(this.tertiaryColor);
+        rect(this.pos.x+this.r*2/2,this.pos.y+this.r*2/2,pixelSize,pixelSize);
+        rect(this.pos.x+pixelSize,this.pos.y+this.r*2/2,pixelSize,pixelSize);
+        fill(this.secondaryColor);
+        rect(this.pos.x+pixelSize*2,this.pos.y+pixelSize,pixelSize,pixelSize);
+        rect(this.pos.x+pixelSize*3,this.pos.y+pixelSize,pixelSize,pixelSize);
+      } else if (this.d == 'LEFT') {
+        fill(this.primeColor);
+        rect(this.pos.x,this.pos.y,this.r*2,this.r*2/2);
+        fill(this.tertiaryColor);
+        rect(this.pos.x+this.r*2/2,this.pos.y+this.r*2/2,pixelSize,pixelSize);
+        rect(this.pos.x+pixelSize,this.pos.y+this.r*2/2,pixelSize,pixelSize);
+        fill(this.secondaryColor);
+        rect(this.pos.x,this.pos.y+pixelSize,pixelSize,pixelSize);
+        rect(this.pos.x+pixelSize,this.pos.y+pixelSize,pixelSize,pixelSize);
+      }
+      if (this.type.slice(-4) == "mage") {
+        fill(this.primeColor);
+        rect(this.pos.x+pixelSize/2,this.pos.y-pixelSize/2,pixelSize*3,pixelSize);
+      }
+
     // FLUTTER
-    if (this.type.slice(-7) == "flutter") {
+    } else if (this.type.slice(-7) == "flutter") {
       fill([this.primeColor,this.secondaryColor][randomInt(0,2)]);
       rect(this.pos.x,this.pos.y,pixelSize,pixelSize);
       rect(this.pos.x+pixelSize*3,this.pos.y,pixelSize,pixelSize);
@@ -168,22 +221,70 @@ function Enemy(_id,_index,pos) {
     }
   }
 
-  this.attack = function() {
-    if (this.attackType != null && !this.isInvincible) {
-      loadedZone.missiles.enemy.push(new Missile(this.pos, this.last_d, "enemy", this.sizeOffset));
-    }
-    // SPAWNER SPELL
-    if (enemyTypes[this._id].type == "boss-bloog" || enemyTypes[this._id].type == "prince-bloog" || enemyTypes[this._id].type == "king-bloog") {
-      if (enemyTypes[this._id].spells.length > 0) {
-        // var randomEnemy = randomInt(0,spawnableEnemies.length-1),loadedZone.enemies.length;
-        if (loadedZone.enemies.length < 5) {
-          var spawn = new Enemy(4,loadedZone.enemies.length,this.pos); // white-bloog
-          if (randomInt(0,2)==randomInt(0,2)) {
-            spawn.items.push(5);
+  this.cast = function(spell) {
+    var castingCost = 1;  // THIS SHIOULD BE SET TO LOOK UP AGAINST SPELL CHART
+    if (this.spells.has(spell)) {
+      if (this.magic >= castingCost) {
+        this.castingSpell = true;
+
+        // POISION
+        if (spell == "poison") {
+          sleep.play();
+          character.isPoisoned = true;
+          this.magic -= 1;
+        }
+
+        // SLEEP
+        if (spell == "sleep") {
+          sleep.play();
+          character.isAsleep = true;
+          this.magic -= 1;
+        }
+
+        // FIREBALL
+        if (spell == "fireball") {
+          sleep.play();
+          fire.play();
+          loadedZone.missiles.enemy.push(new Missile(1, createVector(this.pos.x+blockSize,this.pos.y+blockSize), this.last_d, "enemy"));
+          this.magic -= 1;
+        }
+
+        // SPAWNER
+        if (spell == "spawner") {
+          if (enemyTypes[this._id].spells.length > 0) {
+            // var randomEnemy = randomInt(0,spawnableEnemies.length-1),loadedZone.enemies.length;
+            if (loadedZone.enemies.length < 5) {
+              pop1.setVolume(2); pop1.play();
+              var spawn = new Enemy(4,loadedZone.enemies.length,this.pos); // white-bloog
+              if (randomInt(0,2)==randomInt(0,2)) {
+                spawn.items.push(5);
+              }
+              loadedZone.enemies.push(spawn);
+            }
+            this.magic -= 1;
           }
-          loadedZone.enemies.push(spawn);
         }
       }
+    }
+    // console.log(this.magic);
+  }
+
+  this.attack = function() {
+    // MISSILE
+    if (this.attackType == "missile" && !this.isInvincible) {
+      if (enemyTypes[this._id].type.slice(-5) == "bloog") {
+        bigBeam.setVolume(0.3); bigBeam.play();
+      } else {
+        reverseBeam.play();
+      }
+      loadedZone.missiles.enemy.push(new Missile(0, this.pos, this.last_d, "enemy"));
+    }
+
+    // BOMB
+    if (enemyTypes[this._id].type == "mad-bomber") {
+      var bomb = new Bomb(this.pos,this.d, 0);
+      bomb.set();
+      loadedZone.bombs.push(bomb);
     }
   }
 
@@ -219,11 +320,48 @@ function Enemy(_id,_index,pos) {
       }
     }
 
+    // ENEMY CAST SPELL
+    if (this.spells != null && this.magic > 0 || this.castingSpell || this.isResting) {
+      this.castCount += 1;
+      if (this.castingSpell) {
+        this.primeColor = COLORS[randomInt(0,COLORS.length)];
+      }
+      if (this.castCount >= 20) {
+        this.castingSpell = false;
+        this.primeColor = enemyTypes[this._id].innerColor;
+        this.secondaryColor = enemyTypes[this._id].secondaryColor;
+      }
+      if (this.castCount > this.castCountMax) {
+        this.cast(this.spells[randomInt(0,this.spells.length)]);
+        this.castCount = 0;
+        this.castCountMax = randomInt(enemyTypes[_id].burndown[0]*100,enemyTypes[_id].burndown[1]*100);
+      }
+    }
+
+    // ENEMY RESTING
+    if (this.magic <= 0) {
+      this.isResting = true;
+      this.isStunned = true;
+    }
+    if (this.isResting) {
+      this.restCount += 1;
+      // console.log(this.magic);
+      if (this.restCount > this.recoveryTime*this.magic) {
+        this.magic += 1;
+      }
+      if (this.magic == enemyTypes[_id].magic) {
+      // if (this.restCount > this.restCountMax) {
+        this.isResting = false;
+        this.isStunned = false;
+        this.restCount = 0;
+      }
+    }
+
     // ENEMY ATTACK
     if (this.attackType != null) {
       this.attackCount += 1;
       if (this.attackCount > this.attackCountMax) {
-        this.moveCountMax = randomInt(200,600);
+        this.attackCount = randomInt(200,600);
         this.attack();
         this.attackCount = 0;
       }
@@ -398,18 +536,31 @@ function createEnemies(numberOfEnemies) {
   var enemies = [];
   for (var i=0;i<numberOfEnemies;i++) {
     var enemy_id = randomInt(0,enemyTypes.length);
-    // var diceRoll = randomInt(-1,enemyTypes[enemy_id].rarity)+1; //  *** NOT USING THIS ***
-
     if (enemyTypes[enemy_id].rarity != "unique" && enemyTypes[enemy_id].level <= level) {
-      enemies.push(new Enemy(enemy_id,i,createVector(randomInt(blockSize*2,width-blockSize*2), randomInt(blockSize*2,height-blockSize*2))));
+      var diceRoll = randomInt(0,enemyTypes[enemy_id].rarity);
+      if (diceRoll == randomInt(0,enemyTypes[enemy_id].rarity)) {
+        // console.log(enemyTypes[enemy_id].type)
+        enemies.push(new Enemy(enemy_id,i,createVector(randomInt(blockSize*2,width-blockSize*2), randomInt(blockSize*2,height-blockSize*2))));
+      }
     }
   }
   for (var i=0;i<enemies.length;i++) {
+    // CUSTOM ITEMS FOR ENEMY
+    if (enemyTypes[enemies[i]._id].items != undefined) {
+      if (enemyTypes[enemies[i]._id].items.length > 0) {
+        var diceRoll = randomInt(0,2);
+        if (diceRoll == randomInt(0,2)) {
+          enemies[i].items.push(enemyTypes[enemies[i]._id].items[randomInt(0,enemyTypes[enemies[i]._id].items.length)]);
+        }
+      }
+    }
     var randomItem = createRandomItem();
     if (randomItem != false) {
       enemies[i].items.push(randomItem);
       // console.log(itemTypes[randomItem].type,itemTypes[randomItem].value)
+      // console.log(enemyTypes[enemies[i]._id].type,enemies[i].items)
     }
+
     // ADD EXTRA
     var diceRollForExtraItem = randomInt(0,3);
     if (diceRollForExtraItem == 0) {
@@ -423,8 +574,10 @@ function createEnemies(numberOfEnemies) {
     // enemies[i].items.push(5); // HEARTS ONLY
     // enemies[i].items.push(0); // 1 COIN ONLY
     // enemies[i].items.push(6); // 5 COIN ONLY
+    // 26 = Medical Herb
     // console.log(enemies)
   }
+
   return enemies;
 }
 
@@ -469,4 +622,33 @@ function respawnEnemies() {
       }
     }
   }
+}
+
+function createEnemiesByCoins() {
+  var enemyCount = 0;
+  while (world.coinsInWorld < 250*level) {
+    var enemyZone = world.zones_index[randomInt(0,world.zones_index.length).toString().replace(',','-')];
+    if (enemyZone==defaultCoords.toString().replace(',','-')) {} else {
+      var newEnemies = createEnemies(randomInt(0,8));
+      enemyCount += newEnemies.length;
+      if (world.zones[enemyZone].enemies.length == 0) {
+        // console.log('new')
+        world.zones[enemyZone].enemies = newEnemies;
+      } else {
+        // console.log('concat')
+        world.zones[enemyZone].enemies.concat(newEnemies);
+      }
+      world.coinsInWorld = countCoinsInWorld();
+    }
+    // console.log(world.coinsInWorld,enemyCount);
+    if (enemyCount > 2000*level) { break; }
+  }
+
+  var enemiesFinalCount = 0;
+  for (var i in world.zones) {
+    if (world.zones[i].enemies == undefined) {} else {
+      enemiesFinalCount += world.zones[i].enemies.length;
+    }
+  }
+  world.enemiesInWorld = enemiesFinalCount;
 }

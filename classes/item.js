@@ -22,8 +22,11 @@ var itemTypes = [
   {"_id":20, "type":"upstairs","innerColor": OFF_WHITE,"secondaryColor":BLACK,"tertiaryColor":DARK_GRAY,"movable": false,"solid": false, "damage":0,"rarity":"unique","value":0,"decays":false},
   {"_id":21, "type":"fence","innerColor": DARK_BROWN,"movable": false,"solid": true, "damage":0,"rarity":"special","value":0,"decays":false,size:[4,4],"overlay":false},
   {"_id":22, "type":"boomerang","innerColor": YELLOW,"secondaryColor":COOL_BLUE,"tertiaryColor":DARK_RED,"movable": false,"solid": false, "damage":0,"rarity":"unique","value":100,"decays":false},
-  {"_id":23, "type":"bomb","innerColor": DARK_BLUE,"secondaryColor":BLUE,"tertiaryColor":OFF_WHITE,"movable": false,"solid": false, "damage":0,"rarity":10,"value":25,"decays":true,size:[1,1]},
+  {"_id":23, "type":"bomb","innerColor": DARK_BLUE,"secondaryColor":BLUE,"tertiaryColor":OFF_WHITE,"movable": false,"solid": false, "damage":0,"rarity":10,"value":40,"amount":4,"decays":true,size:[1,1]},
   {"_id":24, "type":"porkbelly","innerColor": LIGHT_PINK,"secondaryColor":DARK_RED,"tertiaryColor":OFF_WHITE,"movable": false,"solid": false, "damage":0,"rarity":"special","value":0,"decays":false},
+  {"_id":25, "type":"speedshoes","innerColor": DARK_BLUE,"secondaryColor":DARK_GRAY,"tertiaryColor":OFF_WHITE,"movable": false,"solid": false, "damage":0,"rarity":"unique","value":100,"decays":false},
+  {"_id":26, "type":"herb","innerColor": DARK_RED,"secondaryColor":OFF_GREEN,"movable": false,"solid": false,"damage":0,"damage":0,"rarity":3,"value":0,"decays":true},
+
 ];
 
 function Item(_id) {
@@ -188,6 +191,15 @@ function Item(_id) {
       rect(this.pos.x+pixelSize,this.pos.y+pixelSize*2,pixelSize,pixelSize*2);
       rect(this.pos.x+pixelSize*2,this.pos.y+pixelSize,pixelSize,pixelSize*3);
       rect(this.pos.x+pixelSize*3,this.pos.y+pixelSize,pixelSize,pixelSize*3);
+    } else if (this.type == "herb") {
+      fill(this.secondaryColor);
+      rect(this.pos.x+pixelSize,this.pos.y,pixelSize*2,pixelSize);
+      rect(this.pos.x+pixelSize*2,this.pos.y+pixelSize,pixelSize*2,pixelSize);
+      rect(this.pos.x+pixelSize,this.pos.y+pixelSize*2,pixelSize,pixelSize);
+      rect(this.pos.x+pixelSize*3,this.pos.y+pixelSize*2,pixelSize,pixelSize);
+      fill(this.innerColor);
+      rect(this.pos.x,this.pos.y+pixelSize*2,pixelSize,pixelSize*2);
+      rect(this.pos.x+pixelSize,this.pos.y+pixelSize*3,pixelSize,pixelSize);
     } else if (this.type == "coin") {
       fill(this.innerColor);
       rect(this.pos.x,this.pos.y+pixelSize,pixelSize,pixelSize*2);
@@ -328,6 +340,12 @@ function Item(_id) {
       rect(this.pos.x+pixelSize,this.pos.y+pixelSize*2,pixelSize,pixelSize);
       rect(this.pos.x+pixelSize*2,this.pos.y+pixelSize,pixelSize,pixelSize);
       rect(this.pos.x,this.pos.y+pixelSize*3,pixelSize,pixelSize);
+    } else if (this.type == "speedshoes") {
+      fill(this.innerColor);
+      rect(this.pos.x+pixelSize,this.pos.y,pixelSize,pixelSize*2);
+      rect(this.pos.x,this.pos.y+pixelSize,pixelSize*2,pixelSize);
+      rect(this.pos.x+pixelSize*2,this.pos.y+pixelSize*2,pixelSize,pixelSize*2);
+      rect(this.pos.x+pixelSize,this.pos.y+pixelSize*3,pixelSize*2,pixelSize);
     } else {
       fill(this.innerColor);
       rect(
@@ -447,6 +465,23 @@ function drawItems() {
         character.coins -= itemTypes[item._id].value;
         items.splice(b,1);
         fanfare1.play();
+      } else if (item.type == "bomb" && STATE == 'SHOP' && character.coins >= itemTypes[item._id].value) {
+        if (character.bombs < maxBombs) {
+          character.hasTertiaryWeapon = true;
+          character.coins -= itemTypes[item._id].value;
+          items.splice(b,1);
+          loseCoin.play();
+          if (character.bombs+itemTypes[item._id].amount >= maxBombs) {
+            character.bombs = maxBombs;
+          } else {
+            character.bombs += itemTypes[item._id].amount;
+          }
+        }
+      } else if (item.type == "speedshoes" && character.coins >= itemTypes[item._id].value) {
+        character.hasSpeedShoes = true;
+        character.coins -= itemTypes[item._id].value;
+        items.splice(b,1);
+        fanfare1.play();
       } else {
         if (item.type == "shrub") {
           entityPush(character,item);
@@ -470,10 +505,18 @@ function droppedItemsInteractions(item,b) {
     if (character.health > totalHealth) {
       character.health = totalHealth
     }
-  } else if (item.type == "bomb") {
+  } else if (item.type == "bomb" && STATE == 'OVERWORLD') {
       character.hasTertiaryWeapon = true;
       items.splice(b,1);
-      character.bombs += 4;
+      getItem.play();
+      if (character.bombs+1 >= maxBombs) {
+        character.bombs = maxBombs;
+      } else {
+        character.bombs += 1;
+      }
+  } else if (item.type == "herb") {
+      items.splice(b,1);
+      character.isPoisoned = false;
       getItem.play();
   } else if (item.type == "fairy") {
       items.splice(b,1);
@@ -561,7 +604,7 @@ function createItemCluster(x,y,w,h,it) {
     items.push(createItem(itemTypeID));
     var diceRoll = randomInt(0,4);
     if (diceRoll == 0) {
-      items[i].items = [[0,5][randomInt(0,2)]];
+      items[i].items = [[0,5,26][randomInt(0,3)]];
     }
     items[i].pos.x = (_x * blockDefaultWidth) + (x*blockDefaultWidth);
     items[i].pos.y = (_y * blockDefaultHeight) + (y*blockDefaultHeight);
@@ -571,7 +614,7 @@ function createItemCluster(x,y,w,h,it) {
 
 
 function createShrubs() {
-  var maxLengthOfRow = 6;
+  var maxLengthOfRow = 12;
   var topLeft = [appBlockWidth/2-maxLengthOfRow/2,2,randomInt(0,maxLengthOfRow),randomInt(0,2)+1,17];
   var bottomLeft = [appBlockWidth/2-maxLengthOfRow/2,appBlockHeight-3,randomInt(0,maxLengthOfRow),randomInt(0,2)+1,17];
   var growth = [topLeft,bottomLeft][randomInt(0,2)];

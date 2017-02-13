@@ -2,6 +2,7 @@ var LOZ = 'snd/loz/';
 var LOZLTTP = 'snd/loz-ltp/';
 var LOZOOT = 'snd/loz-oot/';
 var MINECRAFT = 'snd/minecraft/';
+var FFIV = 'snd/ff-iv/';
 
 
 function preload() {
@@ -11,6 +12,8 @@ function preload() {
   selectTrack = loadSound(LOZLTTP+'11-select-screen.mp3');
   deathTrack = loadSound(LOZ+'07-game-over.mp3');
   endingTrack = loadSound(LOZLTTP+'30-ending.mp3');
+  shopTrack = loadSound(LOZLTTP+'21-fortune-teller.mp3');
+  fairyTrack = loadSound(LOZLTTP+'24-the-goddess-appears.mp3');
 
   boomerang = loadSound(LOZLTTP+'LTTP_Boomerang.wav');
   burnDownPeak = loadSound(LOZLTTP+'LTTP_Menu_Cursor.wav');
@@ -37,16 +40,23 @@ function preload() {
   bombDrop = loadSound(LOZ+'LOZ_Bomb_Drop.wav');
   bossScream = loadSound(LOZ+'LOZ_Boss_Scream1.wav');
   swordBeam = loadSound(LOZ+'LOZ_Sword_Shoot.wav');
+  reverseBeam = loadSound(LOZ+'LOZ_Sword_Shoot-reverse.wav');
   fanfare1 = loadSound(LOZ+'LOZ_Fanfare.wav');
   getItem = loadSound(LOZ+'LOZ_Get_Heart.wav');
+  fire = loadSound(LOZ+'LOZ_Candle.wav');
 
   fanfare2 = loadSound(LOZOOT+'OOT_Fanfare_SmallItem.wav');
+  pop1 = loadSound(LOZOOT+'OOT_Bottle_Pop.wav');
 
   eat = loadSound(MINECRAFT+'eat.wav');
   eat1 = loadSound(MINECRAFT+'eat1.wav');
   eat2 = loadSound(MINECRAFT+'eat2.wav');
   eat3 = loadSound(MINECRAFT+'eat3.wav');
   burp = loadSound(MINECRAFT+'burp.wav');
+
+  sleep = loadSound(FFIV+'healmag-reverse.wav');
+  bigBeam = loadSound(FFIV+'redmag.wav');
+
 
   // LTTP_Boss_Fireball.wav
   // LTTP_Boss_Hit.wav
@@ -64,6 +74,8 @@ function preload() {
 }
 
 function stopAllSounds() {
+  fairyTrack.stop();
+  shopTrack.stop();
   caveTrack.stop();
   overworldTrack.stop();
   selectTrack.stop();

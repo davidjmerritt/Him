@@ -39,6 +39,36 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 ---
 ## RELEASE FEATURES
 
+### 1.4.0
+- Speed Shoes!
+- New Items
+ - Speed Shoes
+ - Medical Herbs
+- New Enemies
+ - Mad Bomber
+ - Red Mage
+ - Grey Mage
+- New Spells
+ - Sleep
+ - Poison
+ - Fireball
+- New Zones
+- New Sounds
+ - Sleep Spell
+ - Spawner Spell
+ - Missile
+ - Fireball
+- Amount of coins in world is more balanced
+- Bombs now sold in shop 4 for 40 coins
+- Added dash attack
+- Applied rarity logic to enemy spawns
+- New passages created by bombing between zones now show up in HUD
+- Added 12 limit cap on bombs
+- More shrubs
+- Added favicon
+<br><br>
+
+
 ### 1.3.0
 - New Item
 - BOMBS!!!
@@ -83,26 +113,35 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 
 
 ### UPCOMING FEATURES
+- Experience! - After killing monsters get debris as exp.  Required for certain things.
+- Dungeons!
 - WarpZones!
-- MORE things to do in every ZONE
-- More and Harder Enemies
-- More Varied Zones
-- Character Movement Animations
-- Improved Character Movement (Snap to Grid)
-- Save Your Progress
-- Speed Shoes
+- Intro Screen!
+- Saving!
+- Better HUD!
+- Improved Character Movement (Snap to Grid)!
+- Movement Animations!
+- iOS and Android Support
 <br><br>
 
 
 ### BUGS
+- Shop transition has delay
+- When mashing attack and directional sword direction is in correct
+- Blasting from single wall to double-thick wall.  Doesn't open passage completely.
+- Economy is needs to be based upon items in region.
 <br><br>
 
+
 ### FUTURE FEATURES & IDEAS
+
 
 ###### ANIMATIONS
 - Character movement
 - Add states to character for getting item
 - Character attacking
+<br><br>
+
 
 ###### BIOMES
 - Ranges of land naturally shift from water to snow
@@ -151,6 +190,12 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 - Ability to combine bloog parts into something
 <br><br>
 
+###### ENEMIES
+- Mage - white and black can cast spells like: sleep, poison, confuse, slow
+- Snake - Segmented creature that runs around very fast
+- Manhandla - 4 clawed spinning creature that shoots heat seeking balls
+<br><br>
+
 
 ###### ENEMY
 - Their explosion drops are experience points or can be used for something
@@ -159,7 +204,7 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 - SHOULD ONLY DROP CERTAIN items
 - Only load in certain Areas: eg black-blook only in gray areas
 - Add special skills
-  - poison spell
+  - cast spell
   - move blocks
   - dig blocks
 <br><br>
@@ -169,7 +214,11 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 - Helmet - Increase AC / decrease speed
 - Tunic/Mail - Increase AC / decrease speed
 - Gloves - push things / smash things
-- Boots - Increase speed
+- Boots - Increase Stamina +1 (BROWN)
+- Speed Shoes - Double speed (WHITE) / Decrease Stamina by -2
+- Ice Shoes - Increase Stamina +1 (BLACK) / Abilty to walk on ice without slipping
+- Fire Shoes - (RED) / Abilty to walk on Lava without taking damage
+- Flippers - Ability to swim (BLUE)
 <br><br>
 
 
@@ -219,9 +268,15 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 <br><br>
 
 
-###### INVENTORY
-- 3 Items up at all times
-- Main
+###### ITEMS
+- Candle - Lights rooms that are in dark
+- Spell Book - Required for casting spells
+- Spell Scrolls - Different spells are on scroll.  If used without book spell is one time only.
+- Arrows
+- Whip
+- Mace - Ball and chain Swing around 360 degree
+- Shovel
+- Shield
 <br><br>
 
 
@@ -246,6 +301,7 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 
 
 ###### NPCs
+- Abilty to spam a talk button to speed up message time or cancel message
 - RANDOM NPCs are AROUND SELLING THINGS
 - More NPCs with More hints
 - Village 4 joined squares
@@ -274,7 +330,7 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 
 ###### SECONDARY WEAPONS
 - Boomberang
-- Bombs
+- Bombs - destroy blocks and scorch ground
 <br><br>
 
 
@@ -302,12 +358,13 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 
 
 ###### SPELLS
-Temporary
-- Slow
-- Poison
+- Slow - Temporarily cut player movement speed in half
+- Poison - Loose 6 health in 2 second intervals over 12 seconds
 - Disable Attack
-- Haste
-- Fireball
+- Sleep - Can't move or use any items or weapons
+- Haste - Temporarily double players movement speed
+- Confuse - Temporarily reverse controls (up = down, left = right)
+- Fireball - Cast 1 block size ball of fire.  Explodes on contact either other enemies and destroys blocks.
 - Strength
 - Turn into fairy
 - Heat seeking missile
