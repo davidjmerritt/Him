@@ -41,11 +41,11 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 
 ### 1.5.0
 - New Enemies
- - Yellow Mage
- - White Mage
- - New Spells
-  - Confuse
-  - Heal
+-- Yellow Mage
+-- White Mage
+- New Spells
+-- Confuse
+-- Heal
 - God Mode Cheat Code
 - All enemy types spawn on all levels
 
@@ -53,22 +53,22 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 ### 1.4.0
 - Speed Shoes!
 - New Items
- - Speed Shoes
- - Medical Herbs
+-- Speed Shoes
+-- Medical Herbs
 - New Enemies
- - Mad Bomber
- - Red Mage
- - Grey Mage
+-- Mad Bomber
+-- Red Mage
+-- Grey Mage
 - New Spells
- - Sleep
- - Poison
- - Fireball
+-- Sleep
+-- Poison
+-- Fireball
 - New Zones
 - New Sounds
- - Sleep Spell
- - Spawner Spell
- - Missile
- - Fireball
+-- Sleep Spell
+-- Spawner Spell
+-- Missile
+-- Fireball
 - Amount of coins in world is more balanced
 - Bombs now sold in shop 4 for 40 coins
 - Added dash attack
@@ -84,7 +84,7 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 - New Item
 - BOMBS!!!
 - New NPC
- - Doctor
+-- Doctor
 - Bug Fixes
 - Less Lag
 - New Zones
@@ -96,16 +96,16 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 
 ### 1.2.0
 - New NPCs
- - Boomerang Master
- - George
- - Guy
+-- Boomerang Master
+-- George
+-- Guy
 - New Items!
- - Boomerang
- - Stairs
+-- Boomerang
+-- Stairs
 - After death character loads in front of last shop visited.
 - Blood Effect when Enemies are destroyed
 - Animations
- - Boomerang
+-- Boomerang
 - Added Green Bloogs to Level 1
 <br><br>
 
