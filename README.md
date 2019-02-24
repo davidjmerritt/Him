@@ -53,22 +53,22 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 ### 1.4.0
 - Speed Shoes!
 - New Items
- - Speed Shoes
- - Medical Herbs
+   - Speed Shoes
+   - Medical Herbs
 - New Enemies
- - Mad Bomber
- - Red Mage
- - Grey Mage
+   - Mad Bomber
+   - Red Mage
+   - Grey Mage
 - New Spells
- - Sleep
- - Poison
- - Fireball
+   - Sleep
+   - Poison
+   - Fireball
 - New Zones
 - New Sounds
- - Sleep Spell
- - Spawner Spell
- - Missile
- - Fireball
+   - Sleep Spell
+   - Spawner Spell
+   - Missile
+   - Fireball
 - Amount of coins in world is more balanced
 - Bombs now sold in shop 4 for 40 coins
 - Added dash attack
@@ -84,7 +84,7 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 - New Item
 - BOMBS!!!
 - New NPC
- - Doctor
+   - Doctor
 - Bug Fixes
 - Less Lag
 - New Zones
@@ -96,16 +96,16 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 
 ### 1.2.0
 - New NPCs
- - Boomerang Master
- - George
- - Guy
+   - Boomerang Master
+   - George
+   - Guy
 - New Items!
- - Boomerang
- - Stairs
+   - Boomerang
+   - Stairs
 - After death character loads in front of last shop visited.
 - Blood Effect when Enemies are destroyed
 - Animations
- - Boomerang
+   - Boomerang
 - Added Green Bloogs to Level 1
 <br><br>
 
@@ -175,11 +175,11 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 - Make 128+ variations
 - Spiral jetty
 - Walls that block off areas
-  - Can be exploded with Bombs
-  - Can be pushed
-  - Can be dug up
-  - Can be passed through magically with item
-  - Open when block is pushed or other trigger
+    - Can be exploded with Bombs
+    - Can be pushed
+    - Can be dug up
+    - Can be passed through magically with item
+    - Open when block is pushed or other trigger
 - Add clusters that create mazes within the zone
 - Add clusters that block entrances: ex. enter left can only go up enter from right can only go down.
 <br><br>
@@ -217,9 +217,9 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 - SHOULD ONLY DROP CERTAIN items
 - Only load in certain Areas: eg black-blook only in gray areas
 - Add special skills
-  - cast spell
-  - move blocks
-  - dig blocks
+    - cast spell
+    - move blocks
+    - dig blocks
 <br><br>
 
 
@@ -266,13 +266,13 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 ###### GRAPHICS
 - Rotate Heart
 - Design BLOCKS
-  - Trees
-  - Stone
-  - Water
-  - Sand
-  - Grass
-  - Snow
-  - Ice
+    - Trees
+    - Stone
+    - Water
+    - Sand
+    - Grass
+    - Snow
+    - Ice
 <br><br>
 
 
@@ -295,9 +295,9 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 
 ###### LEVELS
 - THERE SHOULD BE LEVELS
-  - DUNGEONS THAT PLAY THE SAME WAY BUT HAVE A PALLET - EACH IS LARGER THAN THE LAST
-  - PARTS OF THE thing are there?
-  - WEAPONS ARE THERE
+    - DUNGEONS THAT PLAY THE SAME WAY BUT HAVE A PALLET - EACH IS LARGER THAN THE LAST
+    - PARTS OF THE thing are there?
+    - WEAPONS ARE THERE
 <br><br>
 
 
@@ -356,17 +356,17 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 
 ###### SOUND EFFECTS & MUSIC
 - Add Sounds effects for:
-  - Sword swipe
-  - Enemy hit
-  - Coin get
-  - Special item get
-  - Boss
-  - Fairy
-  - Sword laser
-  - Burn-down complete
+    - Sword swipe
+    - Enemy hit
+    - Coin get
+    - Special item get
+    - Boss
+    - Fairy
+    - Sword laser
+    - Burn-down complete
 - Add music for:
-  - Overworld theme
-  - Menu
+    - Overworld theme
+    - Menu
 <br><br>
 
 
