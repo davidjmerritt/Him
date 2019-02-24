@@ -1,4 +1,5 @@
 var keyCodeMap = [];
+var keyCodeHistory = [];
 
 
 function checkCharacterMovement() {
@@ -26,7 +27,19 @@ function keyReleased() {
 }
 
 
+function enableGodMode() {
+  if (arraysEqual(keyCodeHistory.slice(Math.max(keyCodeHistory.length - 12, 0)),[38, 38, 40, 40, 37, 39, 37, 39, 32, 71, 78, 79])) {
+    character.isGod();
+    // stopAllSounds();
+    mushroom.play();
+    // creepyeggs.play();
+  }
+}
+
+
 function keyPressed() {
+  keyCodeHistory.push(keyCode);
+  enableGodMode();
   if (controlsEnabled) {
     if (character != 'undefined') {
       if (character.isAlive) {
@@ -67,23 +80,47 @@ function keyPressed() {
         // MOVEMENT
           if (keyCode == RIGHT_ARROW || keyCode == SNES_RIGHT) { // keyCode == 68
             keyCodeMap.push(keyCode);
-            character.d = 'RIGHT' ;
-            character.last_d = 'RIGHT';
+            if (!character.isConfused) {
+              character.d = 'RIGHT' ;
+              character.last_d = 'RIGHT';
+            } else {
+              keyCodeMap.push(keyCode);
+              character.d = 'LEFT' ;
+              character.last_d = 'LEFT';
+            }
             character.moving(true);
           } else if (keyCode == LEFT_ARROW || keyCode == SNES_LEFT) { // || keyCode == 65
             keyCodeMap.push(keyCode);
-            character.d = 'LEFT' ;
-            character.last_d = 'LEFT';
+            if (!character.isConfused) {
+              character.d = 'LEFT' ;
+              character.last_d = 'LEFT';
+            } else {
+              keyCodeMap.push(keyCode);
+              character.d = 'RIGHT' ;
+              character.last_d = 'RIGHT';
+            }
             character.moving(true);
           } else if (keyCode == UP_ARROW || keyCode == SNES_UP) { // || keyCode == 87
             keyCodeMap.push(keyCode);
-            character.d = 'UP' ;
-            character.last_d = 'UP';
+            if (!character.isConfused) {
+              character.d = 'UP' ;
+              character.last_d = 'UP';
+            } else {
+              keyCodeMap.push(keyCode);
+              character.d = 'DOWN' ;
+              character.last_d = 'DOWN';
+            }
             character.moving(true);
           } else if (keyCode == DOWN_ARROW || keyCode == SNES_DOWN) { // || keyCode == 83
             keyCodeMap.push(keyCode);
-            character.d = 'DOWN';
-            character.last_d = 'DOWN';
+            if (!character.isConfused) {
+              character.d = 'DOWN' ;
+              character.last_d = 'DOWN';
+            } else {
+              keyCodeMap.push(keyCode);
+              character.d = 'UP' ;
+              character.last_d = 'UP';
+            }
             character.moving(true);
 
           // // AIM

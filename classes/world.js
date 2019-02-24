@@ -129,27 +129,36 @@ function World(w,h) {
     // var bloog = new Enemy(4,0,createVector(randomInt(blockSize*2,width-blockSize*2), randomInt(blockSize*2,height-blockSize*2)));
     // this.zones[defaultCoords.toString().replace(',','-')].enemies.push(bloog);
 
-    // CREATE MAD-BOMBER @ START
+
+    // // CREATE MAD-BOMBER @ START
     // var bomber = new Enemy(9,0,createVector(randomInt(blockSize*2,width-blockSize*2), randomInt(blockSize*2,height-blockSize*2)));
     // this.zones[defaultCoords.toString().replace(',','-')].enemies.push(bomber);
-
-    // CREATE RED-MAGE @ START
+    //
+    // // CREATE RED-MAGE @ START
     // var mage = new Enemy(10,0,createVector(randomInt(blockSize*2,width-blockSize*2), randomInt(blockSize*2,height-blockSize*2)));
     // this.zones[defaultCoords.toString().replace(',','-')].enemies.push(mage);
-
-    // // CREATE Grey-MAGE @ START
+    //
+    // // // CREATE GREY-MAGE @ START
     // var mage = new Enemy(11,0,createVector(randomInt(blockSize*2,width-blockSize*2), randomInt(blockSize*2,height-blockSize*2)));
     // this.zones[defaultCoords.toString().replace(',','-')].enemies.push(mage);
-
-    // // CREATE BLACK-MAGE @ START
+    //
+    // // // CREATE BLACK-MAGE @ START
     // var mage = new Enemy(12,0,createVector(randomInt(blockSize*2,width-blockSize*2), randomInt(blockSize*2,height-blockSize*2)));
     // this.zones[defaultCoords.toString().replace(',','-')].enemies.push(mage);
+    //
+    // // // CREATE WHITE-MAGE @ START
+    // var mage = new Enemy(13,0,createVector(randomInt(blockSize*2,width-blockSize*2), randomInt(blockSize*2,height-blockSize*2)));
+    // this.zones[defaultCoords.toString().replace(',','-')].enemies.push(mage);
+
+    // CREATE YELLOW-MAGE @ START
+    // var mage = new Enemy(14,0,createVector(randomInt(blockSize*2,width-blockSize*2), randomInt(blockSize*2,height-blockSize*2)));
+    // this.zones[defaultCoords.toString().replace(',','-')].enemies.push(mage);
+
 
     // CREATE HERB @ START
     // this.zones[defaultCoords.toString().replace(',','-')].items.push(createItem(26,"UPCENTERDOOR"));
 
-
-    // CREATE SNAKE @ START
+    // CREATE SNAKE @ START ** THIS IS BROKEN
     // var snake = new Snake();
     // this.zones[defaultCoords.toString().replace(',','-')].enemies.push(snake);
 

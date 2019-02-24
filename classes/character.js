@@ -54,6 +54,9 @@ function Character() {
   this.poisonCount = 0;
   this.poisonCountMax = 360;
   this.posionDamage = 1;
+  this.isConfused = false;
+  this.confuseCount = 0;
+  this.confuseCountMax = 1000;
 
   this.damageDelt = function() {
     var damage = character.weapon.damage*character.power();
@@ -156,6 +159,17 @@ function Character() {
       if (this.sleepCount >= this.sleepCountMax) {
         this.sleepCount = 0;
         this.isAsleep = false;
+        controlsEnabled = true;
+        this.skinColor = LIGHT_TAN;
+      }
+    }
+
+    if (this.isConfused) {
+      this.confuseCount += 1;
+      this.skinColor = LIGHT_PINK;
+      if (this.confuseCount >= this.confuseCountMax) {
+        this.confuseCount = 0;
+        this.isConfused = false;
         controlsEnabled = true;
         this.skinColor = LIGHT_TAN;
       }
@@ -375,6 +389,21 @@ function Character() {
     this.look();
     pop();
   }
+
+  this.isGod = function() {
+      this.health = totalHealth;
+      this.hasWeapon = true;
+      this.weapon = createItem(8);
+      this.burndownFactor = itemTypes[8].burndown;
+      this.hasMap = true;
+      this.hasCompass = true;
+      this.hasMasterKey = true;
+      this.hasSecondaryWeapon = true;
+      this.secondaryWeapon = {"type":"boomerang","_id":0};
+      this.hasTertiaryWeapon = true;
+      this.bombs = 999;
+      this.hasSpeedShoes = true;
+  }
 }
 
 
@@ -392,7 +421,7 @@ function createCharacter() {
   character.burndownBar = new Progressbar(blockSize*5,15+pixelSize*2,progressBarWidth,pixelSize/4);
   character.burndownBar.fillCol = [0, 100, 255, 200];
   character.burndownBar.backCol = [0, 0, 0, 100];
-  console.log(character);
+  // console.log(character);
 }
 
 

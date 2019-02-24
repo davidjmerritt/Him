@@ -3,6 +3,9 @@ var LOZLTTP = 'snd/loz-ltp/';
 var LOZOOT = 'snd/loz-oot/';
 var MINECRAFT = 'snd/minecraft/';
 var FFIV = 'snd/ff-iv/';
+var CONTRA = 'snd/contra/';
+var METROIDII = 'snd/metroid2/';
+var SMW = 'snd/smw/';
 
 
 function preload() {
@@ -54,8 +57,16 @@ function preload() {
   eat3 = loadSound(MINECRAFT+'eat3.wav');
   burp = loadSound(MINECRAFT+'burp.wav');
 
+  heal = loadSound(FFIV+'healmag.wav');
   sleep = loadSound(FFIV+'healmag-reverse.wav');
   bigBeam = loadSound(FFIV+'redmag.wav');
+  confuse = loadSound(FFIV+'20Poison.wav');
+
+  godmode = loadSound(CONTRA+'title.mp3');
+
+  creepyeggs = loadSound(METROIDII+'04-caverns-1.mp3');
+
+  mushroom = loadSound(SMW+'smw_power-up.wav');
 
 
   // LTTP_Boss_Fireball.wav

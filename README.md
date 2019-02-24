@@ -39,6 +39,17 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 ---
 ## RELEASE FEATURES
 
+### 1.5.0
+- New Enemies
+ - Yellow Mage
+ - White Mage
+ - New Spells
+  - Confuse
+  - Heal
+- God Mode Cheat Code
+- All enemy types spawn on all levels
+
+
 ### 1.4.0
 - Speed Shoes!
 - New Items
@@ -122,10 +133,12 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 - Improved Character Movement (Snap to Grid)!
 - Movement Animations!
 - iOS and Android Support
+- More random holes between maze walls
 <br><br>
 
 
 ### BUGS
+- Game crashes when attempting to bomb walls in hidden rooms
 - Shop transition has delay
 - When mashing attack and directional sword direction is in correct
 - Blasting from single wall to double-thick wall.  Doesn't open passage completely.
