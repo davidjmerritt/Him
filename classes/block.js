@@ -458,7 +458,7 @@ function destroyOtherWallBlock(wall,block) {
     }
   }
   if (nextZone != undefined) {
-    updateMazeAfterWallDestroyed(loadedZone._id,otherWallCoords,wall,otherWall);
+    updateMazeAfterWallDestroyed(loadedZone._id,otherWallCoords,wall,otherWall); // THIS IS NOT WORKING
     return true;
   } else {
     return false;

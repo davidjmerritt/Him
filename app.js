@@ -13,6 +13,10 @@ function reset() {
 
 
 function draw() {
-  if (STATE == "OVERWORLD") { overworldDraw(); } else
-  if (STATE == "SHOP") { shopDraw(); }
+  if (STATE == 'PAUSED') {
+    drawMenu("PAUSE");
+  } else {
+    if (STATE == "OVERWORLD") { overworldDraw(); } else
+    if (STATE == "SHOP") { shopDraw(); }
+  }
 }

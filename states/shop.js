@@ -66,7 +66,8 @@ function createShop(coordinates,item_id,npc_id,kind) {
 }
 
 
-function loadShop(shopCoords) {
+function shopSounds() {
+  var shopCoords = loadedZone.coordinates;
   var shopCoordsString = shopCoords.toString().replace(',','-');
   overworldTrack.stop();
   if (["sword","special"].has(world.shops[shopCoordsString].kind)) {
@@ -76,7 +77,38 @@ function loadShop(shopCoords) {
   } else if (["joke","item"].has(world.shops[shopCoordsString].kind)){
     shopTrack.loop(); shopTrack.setVolume(0.3);
   }
+}
 
+function lowerShopSounds() {
+  var shopCoords = loadedZone.coordinates;
+  var shopCoordsString = shopCoords.toString().replace(',','-');
+  if (["sword","special"].has(world.shops[shopCoordsString].kind)) {
+    caveTrack.setVolume(0.05);
+  } else if (["doctor","coin"].has(world.shops[shopCoordsString].kind)){
+    fairyTrack.setVolume(0.05);
+  } else if (["joke","item"].has(world.shops[shopCoordsString].kind)){
+    shopTrack.setVolume(0.05);
+  }
+}
+
+
+function raiseShopSounds() {
+  var shopCoords = loadedZone.coordinates;
+  var shopCoordsString = shopCoords.toString().replace(',','-');
+  if (["sword","special"].has(world.shops[shopCoordsString].kind)) {
+    caveTrack.setVolume(0.3);
+  } else if (["doctor","coin"].has(world.shops[shopCoordsString].kind)){
+    fairyTrack.setVolume(0.3);
+  } else if (["joke","item"].has(world.shops[shopCoordsString].kind)){
+    shopTrack.setVolume(0.3);
+  }
+}
+
+function loadShop() {
+  var shopCoords = loadedZone.coordinates;
+  var shopCoordsString = shopCoords.toString().replace(',','-');
   loadedZone = world.shops[shopCoordsString];
   world.lastShop = shopCoordsString;
+
+  shopSounds();
 }

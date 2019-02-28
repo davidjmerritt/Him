@@ -8,6 +8,7 @@ function Character() {
   this.runSpeed = 10;
   this.vel = this.walkSpeed;
   this.health = 0;
+  this.healthMax = 0;
   this.isAlive = true;
   this.coins = 0;
   this.keys = 0;
@@ -57,6 +58,11 @@ function Character() {
   this.isConfused = false;
   this.confuseCount = 0;
   this.confuseCountMax = 1000;
+  this.deathCount = 0;
+  this.exp = 0;
+  this.totalExp = 0;
+  this.next = 20;
+  this.level = 1;
 
   this.damageDelt = function() {
     var damage = character.weapon.damage*character.power();
@@ -244,7 +250,7 @@ function Character() {
     } else if (this.last_d == 'UP') {
       this.weapon.pos = createVector(this.pos.x, this.pos.y - this.r*2);
     }
-    if (!this.isBurningDown && this.health == totalHealth && character.hasWeapon) {
+    if (!this.isBurningDown && this.health == this.healthMax && character.hasWeapon) {
       if (this.weapon._id < 8) {
         swordBeam.play();
         loadedZone.missiles.weapon.push(new Missile(0, this.weapon.pos, this.last_d, "weapon"));
@@ -366,7 +372,7 @@ function Character() {
       if (this.enteringPortal) { // ENTER PORTAL
         this.pos = createVector(width/2,appHeight-this.r*3);
         STATE = "SHOP";
-        loadShop(loadedZone.coordinates);
+        loadShop();
       } else {
         loadZone(newCoordsFromDir("TOP"),"TOP");
         this.pos.y = appHeight - this.r*3;
@@ -391,7 +397,7 @@ function Character() {
   }
 
   this.isGod = function() {
-      this.health = totalHealth;
+      this.health = this.healthMax;
       this.hasWeapon = true;
       this.weapon = createItem(8);
       this.burndownFactor = itemTypes[8].burndown;
@@ -413,6 +419,7 @@ var character;
 function createCharacter() {
   character = new Character();
   character.healthBar = new Progressbar(blockSize*5,15,progressBarWidth,pixelSize*2);
+  character.healthMax = totalHealth;
   // character.healthBar = new Progressbar(appWidth-progressBarWidth-blockSize-25,15,progressBarWidth,pixelSize*1.5);
   character.healthBar.fillCol = [255, 0, 0, 200];
   character.healthBar.backCol = [0, 0, 0, 75];
@@ -422,6 +429,21 @@ function createCharacter() {
   character.burndownBar.fillCol = [0, 100, 255, 200];
   character.burndownBar.backCol = [0, 0, 0, 100];
   // console.log(character);
+}
+
+
+function levelUp() {
+  character.totalExp = character.exp;
+  character.level += 1;
+  character.next = character.next * character.level;
+  character.exp = 0;
+  character.healthMax += character.level*5;
+
+  character.healthBar.w = blockSize*(2*character.healthMax/character.healthMax)+character.healthMax;
+  character.burndownBar.w = blockSize*(2*character.healthMax/character.healthMax)+character.healthMax;
+
+  character.health = character.healthMax;
+
 }
 
 
@@ -447,6 +469,9 @@ function resetCharacter(TYPE) {
 
 
 function drawCharacter() {
+  // if (character.exp > 999999) { character.exp = 999999; }
+  if (character.exp >= character.next) { levelUp(); }
+
   character.render();
   character.update();
   character.edges();
@@ -536,6 +561,7 @@ function drawCharacter() {
               }
               if (enemy.health <= 0) {
                 enemy.explode(e);
+                character.exp += enemy.exp;
                 enemyExplode.play();
               } else {
                 // console.log(character.isFacing(enemy))

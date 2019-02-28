@@ -27,32 +27,60 @@ function keyReleased() {
 }
 
 
-function enableGodMode() {
-  if (arraysEqual(keyCodeHistory.slice(Math.max(keyCodeHistory.length - 12, 0)),[38, 38, 40, 40, 37, 39, 37, 39, 32, 71, 78, 79])) {
+function checkForAdminInputs() {
+  // console.log(keyCodeHistory,keyCodeHistory.slice(Math.max(keyCodeHistory.length - 12, 0)));
+
+  // KONAMI CODE
+  if (arraysEqual(keyCodeHistory.slice(Math.max(keyCodeHistory.length - 12, 0)),[38, 38, 40, 40, 37, 39, 37, 39, 74, 71, 78, 79])) {
     character.isGod();
-    // stopAllSounds();
     mushroom.play();
-    // creepyeggs.play();
   }
 }
 
 
 function keyPressed() {
   keyCodeHistory.push(keyCode);
-  enableGodMode();
+  checkForAdminInputs();
+
   if (controlsEnabled) {
     if (character != 'undefined') {
+
+      // ALIVE
       if (character.isAlive) {
         if (keyCode == 13 || keyCode == SNES_START) { // RETURN
+
+          // START NEW LEVEL
           if (gameWon) {
             if (level == 3) {} else {
               reset();
-              character.useWeapon();
+              // character.useWeapon();
               character.hasMap = false;
               character.hasCompass = false;
               character.hasMasterKey = false;
             }
+          } else {
+
+            // PAUSE GAME
+              if (keyCode == SNES_START) {
+                if (STATE != 'PAUSED') {
+                    PREVIOUS_STATE = STATE;
+                    if (STATE == 'OVERWORLD') { overworldTrack.setVolume(0.05); }
+                    if (STATE == 'SHOP') { lowerShopSounds(); }
+                    STATE = 'PAUSED';
+                    pause.play();
+                } else {
+                  STATE = PREVIOUS_STATE;
+                  unpause.play();
+                  if (STATE == 'OVERWORLD') {
+                    overworldTrack.setVolume(0.3);
+                  } else if (STATE == 'SHOP') {
+                    raiseShopSounds();
+                  }
+                }
+              }
           }
+        } else {
+
         }
 
         if (gameWon) {} else {
@@ -76,6 +104,7 @@ function keyPressed() {
               character.running(true);
             }
           }
+
 
         // MOVEMENT
           if (keyCode == RIGHT_ARROW || keyCode == SNES_RIGHT) { // keyCode == 68
@@ -123,6 +152,8 @@ function keyPressed() {
             }
             character.moving(true);
 
+          }
+
           // // AIM
           // if (keyCode == RIGHT_ARROW && keyCode == UP_ARROW) { // keyCode == 68, 83
           //   keyCodeMap.push(keyCode);
@@ -130,21 +161,16 @@ function keyPressed() {
           // }
           // console.log(keyCodeMap,character.aim)
 
-
-
-          // RESET CHARACTER
-          } else if (keyCode == 81 || keyCode == SNES_SELECT) { // Q
-              resetCharacter();
-          }
         }
       } else {
         // DEAD
         if (keyCode == 13 || keyCode == SNES_START) { // RETURN
-          deathCount = 0;
+          deathTrack = 0;
           stopAllSounds();
           resetCharacter();
           overworldTrack.loop(); overworldTrack.setVolume(0.3);
         }
+
       }
     }
   }

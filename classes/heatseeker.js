@@ -1,6 +1,6 @@
 var heatseekerTypes = [
-  { "_id":0,"type":"boomerang","primaryColor":YELLOW,"apex":200 },
-  { "_id":1,"type":"boomerang","primaryColor":COOL_BLUE,"apex":400 }
+  { "_id":0,"type":"boomerang","primaryColor":YELLOW,"apex":150 },
+  { "_id":1,"type":"magic-boomerang","primaryColor":COOL_BLUE,"apex":600 }
 ];
 
 

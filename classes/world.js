@@ -222,6 +222,7 @@ function World(w,h) {
     createEnemiesByCoins();
 
     console.log(world);
+    
   }
 }
 

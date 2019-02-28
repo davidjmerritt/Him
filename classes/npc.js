@@ -48,6 +48,7 @@ function Npc(_id,pos) {
   this.talkingDuration = 200;
   this.lastMessage = 0;
   this.health = npcTypes[_id].health;
+  this.exp = -100;
 
   this.talk = function(message) {
     textFont(defaultFont);
@@ -393,6 +394,7 @@ function drawNPCs() {
     if (npc.health <= 0) {
       npc.explode(i);
       enemyExplode.play();
+      character.exp += npc.exp;
     }
   }
 }

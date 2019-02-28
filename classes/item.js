@@ -16,7 +16,7 @@ var itemTypes = [
   {"_id":14, "type":"fairy","innerColor": PINK,"secondaryColor":LIGHT_BLUE,"movable": false,"solid": false,"damage":0,"rarity":5,"value":0,"decays":true,size:[1,1]},
   {"_id":15, "type":"coin","innerColor": OFF_WHITE,"secondaryColor":LIGHT_BLUE,"tertiaryColor":WHITE,"movable": false,"solid": false, "damage":0,"rarity":"unique","value":100,"decays":false},
   {"_id":16, "type":"coin","innerColor": OFF_WHITE,"secondaryColor":YELLOW,"tertiaryColor":WHITE,"movable": false,"solid": false, "damage":0,"rarity":"unique","value":50,"decays":false},
-  {"_id":17, "type":"shrub","innerColor": OFF_GREEN,"secondaryColor":DARK_GREEN,"tertiaryColor":DARK_BROWN,"movable": false,"solid": true, "damage":0,"rarity":"special","value":0,"decays":false},
+  {"_id":17, "type":"shrub","innerColor": OFF_GREEN,"secondaryColor":DARK_GREEN,"tertiaryColor":DARK_BROWN,"movable": false,"solid": true, "damage":0,"rarity":"special","value":0,"decays":false,"exp":1},
   {"_id":18, "type":"coin","innerColor": COOL_BLUE,"secondaryColor":PURPLE,"tertiaryColor":WHITE,"movable": false,"solid": false, "damage":0,"rarity":100,"value":-5,"decays":false},
   {"_id":19, "type":"downstairs","innerColor": OFF_WHITE,"secondaryColor":BLACK,"tertiaryColor":DARK_GRAY,"movable": false,"solid": false, "damage":0,"rarity":"unique","value":0,"decays":false},
   {"_id":20, "type":"upstairs","innerColor": OFF_WHITE,"secondaryColor":BLACK,"tertiaryColor":DARK_GRAY,"movable": false,"solid": false, "damage":0,"rarity":"unique","value":0,"decays":false},
@@ -52,6 +52,7 @@ function Item(_id) {
   this.moveCountMax = 2;
   this.moveCount = 0;
   this.items = [];
+  this.exp = itemTypes[this._id].exp;
 
   this.update = function(item_id) {
     // DECAY
@@ -419,6 +420,7 @@ function drawItems() {
         if (item.type == "shrub") {
           cutGrass.play();
           item.explode(b);
+          character.exp += item.exp;
         } else {
           droppedItemsInteractions(item,b);
         }
@@ -433,7 +435,7 @@ function drawItems() {
       if (item.type == "porkbelly") {
         eat.play();
         items.splice(b,1);
-        character.health = totalHealth;
+        character.health = character.healthMax;
       } else if (item.type == "key") {
         getKey.play();
         items.splice(b,1);
@@ -499,11 +501,11 @@ function droppedItemsInteractions(item,b) {
   if (item.type == "heart") {
     getHeart.play();
     items.splice(b,1);
-    if (character.health < totalHealth) {
+    if (character.health < character.healthMax) {
       character.health += 1;
     }
-    if (character.health > totalHealth) {
-      character.health = totalHealth
+    if (character.health > character.healthMax) {
+      character.health = character.healthMax
     }
   } else if (item.type == "bomb" && STATE == 'OVERWORLD') {
       character.hasTertiaryWeapon = true;
@@ -520,7 +522,7 @@ function droppedItemsInteractions(item,b) {
       getItem.play();
   } else if (item.type == "fairy") {
       items.splice(b,1);
-      character.health = totalHealth;
+      character.health = character.healthMax;
       getFairy.play();
   } else if (item.type == "coin") {
     if (itemTypes[item._id].value < 0) { loseCoin.play(); } else { getCoin.play(); }

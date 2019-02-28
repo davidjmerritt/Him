@@ -83,8 +83,36 @@ function Menu() {
     }
   }
 
+  this.pause = function() {
+    textFont(defaultFont);
+    noStroke();
+    c = color(0, 0, 0, 0);
+    fill(c);
+    rect(
+      0,
+      0,
+      width,
+      height
+    );
+    value = alpha(c);
+    fill(value);
+    fill(BLACK);
+    rect(
+      width/2-(160/2),
+      height/2-(65),
+      160,
+      60
+    );
+    fill(250, 250, 250);
+    textSize(28);
+    textAlign(CENTER);
+
+    text("PAUSED", width/2,height/2-25);
+  }
+
   this.render = function(m) {
     push();
+    if (m == "PAUSE") { this.pause(); }
     if (m == "GAMEOVER") { this.gameOver(); }
     if (m == "WIN") { this.win(); }
     if (m == "LOADING") { this.loadingWorld(); }

@@ -1,19 +1,19 @@
 var enemyTypes = [
-  {"_id":0, "type":"red-bloog","innerColor": RED,"secondaryColor": BLACK,"movable": true,"solid": true, "damage":1,"health":.9,"speed":2,"rarity":1,"digger":false,"pusher":true,"size":[1,1],"attack":null,"level":1,"exp":5,"requiredWeapons":[4,7,8],"spells":[],"magic":0,"burndown":[12,16]},
-  {"_id":1, "type":"blue-bloog","innerColor": BLUE,"secondaryColor": BLACK,"movable": true,"solid": true, "damage":2,"health":2,"speed":4,"rarity":2,"digger":true,"pusher":false,"size":[1,1],"attack":null,"level":2,"exp":10,"requiredWeapons":[4,7,8],"burndown":[12,16]},
-  {"_id":2, "type":"green-bloog","innerColor": GREEN,"secondaryColor": BLACK,"movable": true,"solid": true, "damage":3,"health":2,"speed":1,"rarity":2,"digger":false,"pusher":true,"size":[1,1],"attack":null,"level":1,"exp":15,"requiredWeapons":[4,7,8],"burndown":[12,16]},
-  {"_id":3, "type":"black-bloog","innerColor": BLACK,"secondaryColor": OFF_WHITE,"movable": true,"solid": true, "damage":5,"health":3,"speed":3,"rarity":10,"digger":false,"pusher":true,"size":[1,1],"attack":null,"level":3,"exp":20,"requiredWeapons":[4,7,8],"burndown":[12,16]},
-  {"_id":4, "type":"white-bloog","innerColor": OFF_WHITE,"secondaryColor": BLACK,"movable": true,"solid": true, "damage":4,"health":5,"speed":3,"rarity":20,"digger":true,"pusher":true,"size":[1,1],"attack":"missile","level":4,"exp":30,"requiredWeapons":[4,7,8],"burndown":[12,16]},
-  {"_id":5, "type":"boss-bloog","innerColor": PURPLE,"secondaryColor": BLACK,"tertiaryColor": OFF_PURPLE,"movable": false,"solid": false, "damage":5,"health":20,"speed":.4,"rarity":"unique","digger":false,"pusher":false,"size":[3,3],"attack":"missile","spells":[],"requiredWeapons":[7,8],"level":0,"exp":100,"magic":0,"burndown":[12,16]},
-  {"_id":6, "type":"prince-bloog","innerColor": PINK,"secondaryColor": BLACK,"tertiaryColor": OFF_PINK,"movable": false,"solid": false, "damage":8,"health":35,"speed":.6,"rarity":"unique","digger":false,"pusher":false,"size":[3,3],"attack":"missile","spells":["spawner"],"requiredWeapons":[8],"level":0,"exp":200,"magic":10,"burndown":[12,16]},
-  {"_id":7, "type":"king-bloog","innerColor": ORANGE,"secondaryColor": BLACK,"tertiaryColor": OFF_ORANGE,"movable": false,"solid": false, "damage":10,"health":50,"speed":.8,"rarity":"unique","digger":false,"pusher":false,"size":[3,3],"attack":"missile","spells":["spawner"],"requiredWeapons":[8],"level":0,"exp":500,"magic":10,"burndown":[12,16]},
-  {"_id":8, "type":"blue-flutter","innerColor": BLACK,"secondaryColor": DARK_BLUE,"movable": false,"solid": false, "damage":0.2,"health":0.2,"speed":6,"rarity":5,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"exp":3,"requiredWeapons":[4,7,8],"burndown":[12,16]},
-  {"_id":9, "type":"mad-bomber","innerColor": BLACK,"secondaryColor": DARK_BLUE,"tertiaryColor": DARKER_GRAY,"movable": false,"solid": false, "damage":1,"health":4,"speed":3,"rarity":100,"digger":true,"pusher":true,"size":[1,1],"attack":"bomb","level":0,"exp":3,"requiredWeapons":[4,7,8],"spells":["bomb"],"items":[23],"burndown":[12,16]},
-  {"_id":10, "type":"red-mage","innerColor": DARK_RED,"secondaryColor": BLACK,"tertiaryColor": DARKER_RED,"movable": true,"solid": true, "damage":0.1,"health":2,"speed":1,"rarity":50,"digger":false,"pusher":true,"size":[1,1],"attack":null,"level":0,"exp":5,"requiredWeapons":[4,7,8],"spells":["sleep","fireball"],"magic":4,"burndown":[1,3]},
-  {"_id":11, "type":"gray-mage","innerColor": DARK_GRAY,"secondaryColor": BLACK,"tertiaryColor": DARKER_GRAY,"movable": true,"solid": true, "damage":0.1,"health":4,"speed":2,"rarity":75,"digger":false,"pusher":true,"size":[1,1],"attack":null,"level":0,"exp":5,"requiredWeapons":[4,7,8],"spells":["poison","fireball"],"items":[26],"magic":8,"burndown":[3,5]},
-  {"_id":12, "type":"black-mage","innerColor": BLACK,"secondaryColor": DARKER_GRAY,"tertiaryColor": DARKER_GRAY,"movable": true,"solid": true, "damage":0.1,"health":6,"speed":2,"rarity":100,"digger":false,"pusher":true,"size":[1,1],"attack":null,"level":0,"exp":5,"requiredWeapons":[4,7,8],"spells":["sleep","fireball"],"items":[26],"magic":16,"burndown":[2,3]},
-  {"_id":13, "type":"white-mage","innerColor": WHITE,"secondaryColor": DARKER_RED,"tertiaryColor": OFF_WHITE,"movable": true,"solid": true, "damage":5,"health":10,"speed":4,"rarity":150,"digger":false,"pusher":true,"size":[1,1],"attack":null,"level":0,"exp":8,"requiredWeapons":[4,7,8],"spells":["heal","fireball"],"items":[14],"magic":3,"burndown":[5,10]},
-  {"_id":13, "type":"yellow-mage","innerColor": YELLOW,"secondaryColor": BROWN,"tertiaryColor": OFF_WHITE,"movable": true,"solid": true, "damage":1,"health":4,"speed":2,"rarity":40,"digger":false,"pusher":true,"size":[1,1],"attack":null,"level":0,"exp":4,"requiredWeapons":[4,7,8],"spells":["confuse","fireball"],"items":[24],"magic":10,"burndown":[3,5]},
+  {"_id":0, "type":"red-bloog","innerColor": RED,"secondaryColor": BLACK,"movable": true,"solid": true, "damage":1,"health":.9,"speed":2,"rarity":1,"digger":false,"pusher":true,"size":[1,1],"attack":null,"level":0,"exp":1,"requiredWeapons":[4,7,8],"spells":[],"magic":0,"burndown":[12,16],"items":[23]},
+  {"_id":1, "type":"blue-bloog","innerColor": BLUE,"secondaryColor": BLACK,"movable": true,"solid": true, "damage":2,"health":2,"speed":4,"rarity":2,"digger":true,"pusher":false,"size":[1,1],"attack":null,"level":0,"exp":2,"requiredWeapons":[4,7,8],"burndown":[12,16],"items":[23]},
+  {"_id":2, "type":"green-bloog","innerColor": GREEN,"secondaryColor": BLACK,"movable": true,"solid": true, "damage":3,"health":2,"speed":1,"rarity":2,"digger":false,"pusher":true,"size":[1,1],"attack":null,"level":0,"exp":3,"requiredWeapons":[4,7,8],"burndown":[12,16],"items":[23]},
+  {"_id":3, "type":"black-bloog","innerColor": BLACK,"secondaryColor": OFF_WHITE,"movable": true,"solid": true, "damage":5,"health":3,"speed":3,"rarity":3,"digger":false,"pusher":true,"size":[1,1],"attack":null,"level":0,"exp":5,"requiredWeapons":[4,7,8],"burndown":[12,16],"items":[23]},
+  {"_id":4, "type":"white-bloog","innerColor": OFF_WHITE,"secondaryColor": BLACK,"movable": true,"solid": true, "damage":4,"health":5,"speed":3,"rarity":3,"digger":true,"pusher":true,"size":[1,1],"attack":"missile","level":0,"exp":7,"requiredWeapons":[4,7,8],"burndown":[12,16],"items":[23]},
+  {"_id":5, "type":"boss-bloog","innerColor": PURPLE,"secondaryColor": BLACK,"tertiaryColor": OFF_PURPLE,"movable": false,"solid": false, "damage":5,"health":20,"speed":.4,"rarity":"unique","digger":false,"pusher":false,"size":[3,3],"attack":"missile","spells":[],"requiredWeapons":[7,8],"level":0,"exp":100,"magic":0,"burndown":[12,16],"items":[23]},
+  {"_id":6, "type":"prince-bloog","innerColor": PINK,"secondaryColor": BLACK,"tertiaryColor": OFF_PINK,"movable": false,"solid": false, "damage":8,"health":35,"speed":.6,"rarity":"unique","digger":false,"pusher":false,"size":[3,3],"attack":"missile","spells":["spawner"],"requiredWeapons":[8],"level":0,"exp":200,"magic":10,"burndown":[12,16],"items":[23]},
+  {"_id":7, "type":"king-bloog","innerColor": ORANGE,"secondaryColor": BLACK,"tertiaryColor": OFF_ORANGE,"movable": false,"solid": false, "damage":10,"health":50,"speed":.8,"rarity":"unique","digger":false,"pusher":false,"size":[3,3],"attack":"missile","spells":["spawner"],"requiredWeapons":[8],"level":0,"exp":300,"magic":10,"burndown":[12,16],"items":[23]},
+  {"_id":8, "type":"blue-flutter","innerColor": BLACK,"secondaryColor": DARK_BLUE,"movable": false,"solid": false, "damage":0.2,"health":0.2,"speed":6,"rarity":4,"digger":false,"pusher":false,"size":[1,1],"attack":null,"level":0,"exp":3,"requiredWeapons":[4,7,8],"burndown":[12,16],"items":[23]},
+  {"_id":9, "type":"mad-bomber","innerColor": BLACK,"secondaryColor": DARK_BLUE,"tertiaryColor": DARKER_GRAY,"movable": false,"solid": false, "damage":1,"health":4,"speed":3,"rarity":100,"digger":true,"pusher":true,"size":[1,1],"attack":"bomb","level":0,"exp":7,"requiredWeapons":[4,7,8],"spells":["bomb"],"items":[23],"burndown":[12,16]},
+  {"_id":10, "type":"red-mage","innerColor": DARK_RED,"secondaryColor": BLACK,"tertiaryColor": DARKER_RED,"movable": true,"solid": true, "damage":0.1,"health":2,"speed":1,"rarity":5,"digger":false,"pusher":true,"size":[1,1],"attack":null,"level":0,"exp":8,"requiredWeapons":[4,7,8],"spells":["sleep","fireball","magic-missile"],"magic":4,"burndown":[1,3]},
+  {"_id":11, "type":"gray-mage","innerColor": DARK_GRAY,"secondaryColor": BLACK,"tertiaryColor": DARKER_GRAY,"movable": true,"solid": true, "damage":0.1,"health":4,"speed":2,"rarity":5,"digger":false,"pusher":true,"size":[1,1],"attack":null,"level":0,"exp":9,"requiredWeapons":[4,7,8],"spells":["poison","fireball","magic-missile"],"items":[26,23],"magic":8,"burndown":[3,5]},
+  {"_id":12, "type":"black-mage","innerColor": BLACK,"secondaryColor": DARKER_GRAY,"tertiaryColor": DARKER_GRAY,"movable": true,"solid": true, "damage":0.1,"health":6,"speed":2,"rarity":5,"digger":false,"pusher":true,"size":[1,1],"attack":null,"level":0,"exp":8,"requiredWeapons":[4,7,8],"spells":["sleep","fireball","magic-missile"],"items":[26,23],"magic":16,"burndown":[2,3]},
+  {"_id":13, "type":"white-mage","innerColor": WHITE,"secondaryColor": DARKER_RED,"tertiaryColor": OFF_WHITE,"movable": true,"solid": true, "damage":5,"health":10,"speed":4,"rarity":5,"digger":false,"pusher":true,"size":[1,1],"attack":null,"level":0,"exp":9,"requiredWeapons":[4,7,8],"spells":["heal","fireball","magic-missile"],"items":[14,23],"magic":3,"burndown":[5,10]},
+  {"_id":13, "type":"yellow-mage","innerColor": YELLOW,"secondaryColor": BROWN,"tertiaryColor": OFF_WHITE,"movable": true,"solid": true, "damage":1,"health":4,"speed":2,"rarity":5,"digger":false,"pusher":true,"size":[1,1],"attack":null,"level":0,"exp":8,"requiredWeapons":[4,7,8],"spells":["confuse","fireball","magic-missile"],"items":[24,23],"magic":10,"burndown":[3,5]},
 ];
 
 function Enemy(_id,_index,pos) {
@@ -59,6 +59,7 @@ function Enemy(_id,_index,pos) {
   this.isResting = false;
   this.restCount = 0;
   this.recoveryTime = 240;
+  this.exp = enemyTypes[this._id].exp;
 
   this.look = function() {
     noStroke();
@@ -264,9 +265,15 @@ function Enemy(_id,_index,pos) {
 
         // FIREBALL
         if (spell == "fireball") {
-          sleep.play();
           fire.play();
           loadedZone.missiles.enemy.push(new Missile(1, createVector(this.pos.x+blockSize,this.pos.y+blockSize), this.last_d, "enemy"));
+          this.magic -= 1;
+        }
+
+        // MAGIC MISSLE
+        if (spell == "magic-missile") {
+          magic_missle.play();
+          loadedZone.missiles.enemy.push(new Missile(0, createVector(this.pos.x+blockSize/2,this.pos.y+blockSize/2), this.last_d, "enemy"));
           this.magic -= 1;
         }
 
@@ -560,7 +567,7 @@ function createEnemies(numberOfEnemies) {
     if (enemyTypes[enemy_id].rarity != "unique" && enemyTypes[enemy_id].level <= level) {
       var diceRoll = randomInt(0,enemyTypes[enemy_id].rarity);
       if (diceRoll == randomInt(0,enemyTypes[enemy_id].rarity)) {
-        console.log(enemyTypes[enemy_id].type)
+        // console.log(enemyTypes[enemy_id].type)
         enemies.push(new Enemy(enemy_id,i,createVector(randomInt(blockSize*2,width-blockSize*2), randomInt(blockSize*2,height-blockSize*2))));
       }
     }
@@ -598,7 +605,6 @@ function createEnemies(numberOfEnemies) {
     // 26 = Medical Herb
     // console.log(enemies)
   }
-
   return enemies;
 }
 
@@ -647,7 +653,7 @@ function respawnEnemies() {
 
 function createEnemiesByCoins() {
   var enemyCount = 0;
-  while (world.coinsInWorld < 250*level) {
+  while (world.coinsInWorld < MIN_COINS_IN_WORLD*level) {
     var enemyZone = world.zones_index[randomInt(0,world.zones_index.length).toString().replace(',','-')];
     if (enemyZone == defaultCoords.toString().replace(',','-')) {} else {
       var newEnemies = createEnemies(randomInt(0,8));
@@ -668,8 +674,12 @@ function createEnemiesByCoins() {
   var enemiesFinalCount = 0;
   for (var i in world.zones) {
     if (world.zones[i].enemies == undefined) {} else {
-      enemiesFinalCount += world.zones[i].enemies.length;
+      world.enemiesInWorld += world.zones[i].enemies.length;
+      for (var j in world.zones[i].enemies) {
+        if (world.zones[i].enemies[j].type == undefined) {} else {
+          world.enemies.push(world.zones[i].enemies[j].type);
+        }
+      }
     }
   }
-  world.enemiesInWorld = enemiesFinalCount;
 }

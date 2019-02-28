@@ -39,6 +39,19 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 ---
 ## RELEASE FEATURES
 
+
+### 1.6.0
+- Fixes
+  - Game no longer crashes when bombing walls in hidden room
+  - Pause feature disabled when levels is complete
+  - When user has compass the key location is revealed in HUD
+  - What character has the master key the door location is revealed in the HUD
+- Features
+ - Character deaths are now counted during each session
+ - Experience points are accumulated and displayed as percentage to next level in HUD
+ - Character level ups - Increase to health
+
+
 ### 1.5.0
 - New Enemies
   - Yellow Mage
@@ -138,11 +151,19 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 
 
 ### BUGS
+- Maps for new levels appear to be the same layout
+- Game Pauses when pressing start after completing a level
+- Cant create new heat seeker _id tag is required
+- Sound effect for heat seeker continues when game is paused
+- Movement input lock.  Direction user is moving in gets locked - Not repeating input but character direction is continued after releasing the direction. *Happened after a confuse spell was cast*
 - Game crashes when attempting to bomb walls in hidden rooms
+- If characters dies in shop bugs out
+- If character is knocked though wall gets pushed to next room
 - Shop transition has delay
 - When mashing attack and directional sword direction is in correct
 - Blasting from single wall to double-thick wall.  Doesn't open passage completely.
 - Economy is needs to be based upon items in region.
+- If user dies from a spell they should not longer be poisoned, asleep, confused after respawn.
 <br><br>
 
 
@@ -290,14 +311,18 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 - Mace - Ball and chain Swing around 360 degree
 - Shovel
 - Shield
+- Bloog Fur - Can be traded for items or sold for coins
 <br><br>
 
 
+
 ###### LEVELS
-- THERE SHOULD BE LEVELS
-   - DUNGEONS THAT PLAY THE SAME WAY BUT HAVE A PALLET - EACH IS LARGER THAN THE LAST
-   - PARTS OF THE thing are there?
-   - WEAPONS ARE THERE
+- Smaller than the overworld
+- 8 in total hidden in overworld
+- DUNGEONS THAT PLAY THE SAME WAY BUT HAVE A PALLET - EACH IS LARGER THAN THE LAST
+- Bosses are in there guarding a secret item
+- Goal is to assemble all items
+- WEAPONS ARE THERE
 <br><br>
 
 
@@ -314,7 +339,7 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 
 
 ###### NPCs
-- Abilty to spam a talk button to speed up message time or cancel message
+- Ability to spam a talk button to speed up message time or cancel message
 - RANDOM NPCs are AROUND SELLING THINGS
 - More NPCs with More hints
 - Village 4 joined squares
@@ -402,16 +427,16 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 
 
 ###### STONES
-- Can only be pushed twice
+- Can only be pushed twice (if pushable)
 <br><br>
 
 
 ###### TOOLS
 - Rake - used to rake up bloog fur from previous locations to be traded for new items
-- Hammer - break things, walls
-- Shovel
-- Pick Axe
+- Shovel - Dig dirt or snow
+- Pick Axe - Break though walls
 - Pencil - for adding breadcrumbs to map
+- Spray Can - Tag a room
 <br><br>
 
 
@@ -425,4 +450,20 @@ The mad King Bloog has trapped you in his maze along with his bloogs. See if you
 
 ###### WEAPONS
 - Upgrade to get different types of laser sword: spread, giant circle.
+<br><br>
+
+
+###### PUZZLES
+- Rooms that require blocks to be moved in order to reveal a secret
+- Rooms that have missing blocks that can be filled in in order to reveal a secret
+<br><br>
+
+
+###### GUARDIANS
+- Each unique item has guardian enemies that protect item
+<br><br>
+
+
+###### SHOPS
+- Shops that sell more than 1 item, common items: heart, fairy etc...
 <br><br>

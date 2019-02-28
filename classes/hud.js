@@ -122,7 +122,7 @@ function Hud() {
 
     // KEY ZONE
     if (character.hasCompass && !character.hasMasterKey && !gameWon) {
-      fill([ORANGE,YELLOW][randomInt(0,2)]);
+      fill([PURPLE,BLUE][randomInt(0,2)]);
       rect(
         (world.keyZone.split('-')[0]*this.blockWidth*2)+this.offset,
         (world.keyZone.split('-')[1]*this.blockWidth*2)+this.offset,
@@ -132,15 +132,15 @@ function Hud() {
     }
 
     // DOOR ZONE
-    // if (character.hasCompass) {
-      // fill(COLORS[randomInt(0,COLORS.length)]);
-      // rect(
-      //   (world.doorZone[0]*this.blockWidth*2)+this.offset,
-      //   (world.doorZone[1]*this.blockWidth*2)+this.offset,
-      //   this.blockWidth*2,
-      //   this.blockWidth*2
-      // );
-    // }
+    if (character.hasCompass && character.hasMasterKey && !gameWon) {
+      fill(COLORS[randomInt(0,COLORS.length)]);
+      rect(
+        (world.doorZone.split('-')[0]*this.blockWidth*2)+this.offset,
+        (world.doorZone.split('-')[1]*this.blockWidth*2)+this.offset,
+        this.blockWidth*2,
+        this.blockWidth*2
+      );
+    }
 
     // COORDS
     // c = color(50, 50, 50, 100);
@@ -185,6 +185,79 @@ function Hud() {
     this.miniMap();
 
     var x_offset = appWidth-blockSize-15; // LEFT SIDE
+
+    // DEATH COUNT
+    var pos_x = 15;
+    var pos_y = blockSize*3-10;
+    c = color(50, 50, 50, 100)
+    fill(c);
+    rect(
+      pos_x, // appWidth-185,
+      pos_y-2,
+      blockSize,
+      blockSize+pixelSize+10+2
+    );
+    value = alpha(c);
+    fill(value);
+    fill(255, 255, 255);
+    textSize(16);
+    textAlign(CENTER);
+    var info = character.deathCount;
+    var scale = 2;
+    var offset = (pixelSize*scale)/2.5;
+    var pos_x = offset+pos_x+2;
+    var pos_y = offset+pos_y;
+    text(info, blockSize-10, blockSize+pixelSize*12);
+    fill(WHITE);
+    rect(pos_x,pos_y+(pixelSize/scale),(pixelSize/scale),(pixelSize/scale)*2);
+    rect(pos_x+(pixelSize/scale)*2,pos_y,(pixelSize/scale),(pixelSize/scale)*4);
+    rect(pos_x+(pixelSize/scale),pos_y,(pixelSize/scale),(pixelSize/scale)*4);
+    rect(pos_x+(pixelSize/scale)*3,pos_y+(pixelSize/scale),(pixelSize/scale),(pixelSize/scale)*2);
+    fill(OFF_WHITE);
+    rect(pos_x+(pixelSize/scale)*3,pos_y+(pixelSize/scale)*2,(pixelSize/scale),(pixelSize/scale));
+    rect(pos_x,pos_y+(pixelSize/scale)*2,(pixelSize/scale),(pixelSize/scale));
+    rect(pos_x+(pixelSize/scale),pos_y+(pixelSize/scale)*3,(pixelSize/scale),(pixelSize/scale));
+    fill(BLACK);
+    rect(pos_x+(pixelSize/scale)*.66,pos_y+(pixelSize/scale)*1,(pixelSize/scale),(pixelSize/scale));
+    rect(pos_x+(pixelSize/scale)*2.33,pos_y+(pixelSize/scale),(pixelSize/scale),(pixelSize/scale));
+    rect(pos_x+(pixelSize/scale)*1.75,pos_y+(pixelSize/scale)*2.25,(pixelSize/scale)/2,(pixelSize/scale)/2);
+    // rect(pos_x+(pixelSize/scale)*2,pos_y+(pixelSize/scale)*2.25,(pixelSize/scale)/2,(pixelSize/scale)/2);
+    rect(pos_x+(pixelSize/scale)*1.25,pos_y+(pixelSize/scale)*3.5,(pixelSize/scale)/2,(pixelSize/scale)/2);
+    rect(pos_x+(pixelSize/scale)*2.25,pos_y+(pixelSize/scale)*3.5,(pixelSize/scale)/2,(pixelSize/scale)/2);
+
+
+    // EXP
+    var pos_x = 15;
+    var pos_y = blockSize*4.5;
+    c = color(50, 50, 50, 100)
+    fill(c);
+    rect(
+      pos_x, // appWidth-185,
+      pos_y-2,
+      blockSize,
+      blockSize
+    );
+    value = alpha(c);
+    fill(value);
+    fill(200, 200, 200);
+    textSize(11);
+    textAlign(CENTER);
+    var info = "L-"+character.level;
+    var scale = 2;
+    var offset = (pixelSize*scale)/2.5;
+    var pos_x = offset+pos_x+2;
+    var pos_y = offset+pos_y;
+    text(info, blockSize-10, blockSize+pixelSize*15.5);
+    fill(255, 255, 255);
+    textSize(10);
+    var info = character.exp+'/'+character.next;
+    var info = round((character.exp/character.next)*100)+'%';
+    var scale = 2;
+    var offset = (pixelSize*scale)/2.5;
+    var pos_x = offset+pos_x+2;
+    var pos_y = offset+pos_y;
+    text(info, blockSize-9, blockSize+pixelSize*16.85);
+
 
     // COINS
     var pos_x = blockSize*5;
@@ -336,14 +409,14 @@ function drawHud() {
   hud.render();
   character.burndownBar.render();
   character.healthBar.render();
-  character.healthBar.update((character.health/totalHealth)*100);
+  character.healthBar.update((character.health/character.healthMax)*100);
   if (character.health <= 0) {
     character.isAlive = false;
   }
 }
 
 
-function updateMazeAfterWallDestroyed(zoneCoords,otherWallCoords,wallSide,otherWallSide) {
+function updateMazeAfterWallDestroyed(zoneCoords,otherWallCoords,wallSide,otherWallSide) { // THIS IS NOT WORKING
   var zoneIndex;
   var otherZoneIndex;
   for (var k=0;k<maze.length;k++) {
@@ -363,11 +436,15 @@ function updateMazeAfterWallDestroyed(zoneCoords,otherWallCoords,wallSide,otherW
   if (wallSide == "rightBorder") { wallIndex = 1; } else
   if (wallSide == "bottomBorder") { wallIndex = 2; } else
   if (wallSide == "leftBorder") { wallIndex = 3; }
-  maze[zoneIndex].walls[wallIndex] = false;
+  if (maze.has(zoneIndex)) {
+    maze[zoneIndex].walls[wallIndex] = false;
+  }
 
   if (otherWallSide == "topBorder") { wallIndex = 0; } else
   if (otherWallSide == "rightBorder") { wallIndex = 1; } else
   if (otherWallSide == "bottomBorder") { wallIndex = 2; } else
   if (otherWallSide == "leftBorder") { wallIndex = 3; }
-  maze[otherZoneIndex].walls[wallIndex] = false;
+  if (maze.has(zoneIndex)) {
+    maze[otherZoneIndex].walls[wallIndex] = false;
+  }
 }

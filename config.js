@@ -40,6 +40,9 @@ var COOL_BLUE = [150, 200, 255];
 var COLORS = [DARKER_GRAY,PURPLE,OFF_WHITE,LIGHT_GREEN,PINK,BLUE,WHITE,BROWN,GREEN,GRAY,TAN,BLACK,RED,ORANGE,YELLOW,WOOD_BROWN,DARK_GRAY,LIGHT_BLUE,LIGHT_TAN,DARK_RED,DARK_BLUE,GOLD,DARK_GREEN,DARKER_RED];
 
 
+var MIN_COINS_IN_WORLD = 500;
+
+
 var pixelSize = 12.5;
 var blockSize = 50;
 var appWidth = 960;
@@ -47,7 +50,7 @@ var appBlockWidth = appWidth/blockSize;
 var appHeight = 720;
 var appBlockHeight = appHeight/blockSize;
 
-var deathCount = 0;
+var deathTrack = 0;
 var level = 0;
 var worldWidth = 16; //4
 var worldHeight = 8; //8 //2
@@ -60,13 +63,13 @@ var startItems = [5,6,14,26]; // 5=HEART, 6=5-COIN, 14=FAIRY, 26=HERB
 var gameWon = false;
 var matrixTest = [];
 
-var startHealth = 6;
-var totalHealth = 12;
+var startHealth = 5;
+var totalHealth = 10;
 
 var maxCoins = 999;
 var maxBombs = 12;
 
-var progressBarWidth = blockSize*2+10;
+var progressBarWidth = blockSize*(2*totalHealth/10)+10;
 
 var defaultFont = "Helvetica";
 
@@ -87,6 +90,7 @@ var defaultZoneBlocks = {
   "items": []
 };
 
+var PREVIOUS_STATE = 'OVERWORLD'
 var STATE = 'OVERWORLD'
 
 SNES_UP     = 67; // c

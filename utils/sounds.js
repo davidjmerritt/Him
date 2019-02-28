@@ -1,6 +1,7 @@
 var LOZ = 'snd/loz/';
 var LOZLTTP = 'snd/loz-ltp/';
 var LOZOOT = 'snd/loz-oot/';
+var LOZLA = 'snd/loz-la/';
 var MINECRAFT = 'snd/minecraft/';
 var FFIV = 'snd/ff-iv/';
 var CONTRA = 'snd/contra/';
@@ -13,7 +14,7 @@ function preload() {
   overworldTrack = loadSound(LOZLTTP+'04-overworld.mp3');
   darkworldTrack = loadSound(LOZLTTP+'12-dark-world.mp3');
   selectTrack = loadSound(LOZLTTP+'11-select-screen.mp3');
-  deathTrack = loadSound(LOZ+'07-game-over.mp3');
+  gameOverTrack = loadSound(LOZ+'07-game-over.mp3');
   endingTrack = loadSound(LOZLTTP+'30-ending.mp3');
   shopTrack = loadSound(LOZLTTP+'21-fortune-teller.mp3');
   fairyTrack = loadSound(LOZLTTP+'24-the-goddess-appears.mp3');
@@ -51,6 +52,9 @@ function preload() {
   fanfare2 = loadSound(LOZOOT+'OOT_Fanfare_SmallItem.wav');
   pop1 = loadSound(LOZOOT+'OOT_Bottle_Pop.wav');
 
+  unpause = loadSound(LOZOOT+'OOT_PauseMenu_Close.wav');
+  pause = loadSound(LOZOOT+'OOT_PauseMenu_Open.wav');
+
   eat = loadSound(MINECRAFT+'eat.wav');
   eat1 = loadSound(MINECRAFT+'eat1.wav');
   eat2 = loadSound(MINECRAFT+'eat2.wav');
@@ -67,6 +71,8 @@ function preload() {
   creepyeggs = loadSound(METROIDII+'04-caverns-1.mp3');
 
   mushroom = loadSound(SMW+'smw_power-up.wav');
+
+  magic_missle = loadSound(LOZLA+'LA_TurtleRock_Blink1.wav')
 
 
   // LTTP_Boss_Fireball.wav
@@ -90,7 +96,7 @@ function stopAllSounds() {
   caveTrack.stop();
   overworldTrack.stop();
   selectTrack.stop();
-  deathTrack.stop();
+  gameOverTrack.stop();
   endingTrack.stop();
 }
 

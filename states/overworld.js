@@ -5,7 +5,7 @@ function overworldSetup() {
 
 
 function overworldReset() {
-  deathCount = 0;
+  deathTrack = 0;
   level += 1;
   gameWon = false;
   keyCodeMap = [];
@@ -31,20 +31,24 @@ function overworldDraw() {
   drawEnemies();
 
   if (character.isAlive) { drawCharacter(); } else {
-    if (deathCount == 0) {
+
+    if (deathTrack == 0) {
       stopAllSounds();
       stopAllLoops();
       character.explode();
       controlsEnabled = false;
-    } else if (deathCount == 1) {
-      deathTrack.play();
-    } else if (deathCount > 60*3) {
+      character.deathCount += 1;
+    } else if (deathTrack == 1) {
+      gameOverTrack.play();
+    } else if (deathTrack > 60*3) {
       drawMenu("GAMEOVER");
       controlsEnabled = true;
     }
-    deathCount += 1;
+    deathTrack += 1;
   }
+  
   if (gameWon) { drawMenu("WIN"); } else { gameCheck(); }
+
 
   checkCharacterMovement();
 
